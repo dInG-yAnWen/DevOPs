@@ -1,0 +1,21 @@
+{
+  "scope": "B14 E3 DRAFT sample container evidence",
+  "docker_build_executed": false,
+  "image_id": null,
+  "container_run_executed": false,
+  "source": "NOT_EXECUTED",
+  "reason": "运行环境未安装 docker，且无外网/无 registry 访问，无法拉取 python:3.13-slim 执行镜像构建。本次未产生真实镜像 ID 与容器运行结果，也未伪造；请在具备 Docker 与网络的环境按下述命令补齐后回填 image_id 与容器输出。",
+  "host_equivalent_evidence": {
+    "note": "本机以真实编译/运行作为等价证据（非容器）",
+    "build": "make -> exit 0, generated ./hello",
+    "verify": "./hello -> exit 0, stdout 'hello E3'",
+    "broken_run_reproduced": "/bin/sh -c make under empty PATH -> exit 127, 'make: not found'",
+    "evidence_dir": "e3/evidence/20260925-b14-e3/"
+  },
+  "reproduction_commands": [
+    "docker build -f e3/fixtures/draft/Dockerfile.broken    -t b14-e3-draft-broken:20260925    e3/fixtures/draft",
+    "docker build -f e3/fixtures/draft/Dockerfile.reference -t b14-e3-draft-reference:20260925 e3/fixtures/draft",
+    "docker images --no-trunc --format '{{.ID}}' b14-e3-draft-reference:20260925",
+    "docker run --rm b14-e3-draft-reference:20260925"
+  ]
+}

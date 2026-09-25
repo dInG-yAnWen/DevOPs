@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "provenance": "INSTRUCTOR_ORACLE",
+  "source": "MANUAL_FIXTURE",
+  "note": "Fixed human MD report for the B14 E3 MDFixer sample (course oracle form). The run record e3/evidence/<run-id>/md_report.bound.json adds the real baseline commit SHA and content hashes for that snapshot.",
+  "findings": [
+    {
+      "finding_id": "md-main-config",
+      "type": "MISSING",
+      "target": "main.o",
+      "dependency": "config.h",
+      "detector": "INSTRUCTOR_ORACLE",
+      "location": {
+        "path": "Makefile",
+        "line": 7
+      },
+      "evidence": {
+        "kind": "MANUAL_FIXTURE",
+        "description": "main.c includes config.h at compile time, but the main.o rule declares only main.c. Editing config.h alone does not trigger a rebuild; a clean build does."
+      }
+    }
+  ]
+}

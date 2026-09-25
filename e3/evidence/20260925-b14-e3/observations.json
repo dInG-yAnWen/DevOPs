@@ -1,0 +1,189 @@
+{
+  "run_id": "20260925-b14-e3",
+  "generated_at": "2026-09-25T18:09:00+08:00",
+  "duration_seconds": 2.337,
+  "environment": {
+    "make": "GNU Make 4.3",
+    "cc": "cc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0",
+    "git": "git version 2.34.1",
+    "python3": "Python 3.10.12",
+    "uname": "Linux 6.6.87.2-microsoft-standard-WSL2 x86_64 GNU/Linux",
+    "sh": "/usr/bin/dash"
+  },
+  "docker": {
+    "docker_binary": null,
+    "docker_available": false,
+    "docker_build_executed": false,
+    "image_id": null,
+    "container_run_executed": false,
+    "reason": "本机未安装 docker，且无外网/无 registry 访问，无法拉取 python:3.13-slim 执行镜像构建。因此本次未产生真实 image ID，也未伪造；Docker 证据留待有 Docker 的环境按 reproduction_commands 补齐。",
+    "reproduction_commands": [
+      "docker build -f e3/fixtures/draft/Dockerfile.broken    -t b14-e3-draft-broken:20260925    e3/fixtures/draft",
+      "docker build -f e3/fixtures/draft/Dockerfile.reference -t b14-e3-draft-reference:20260925 e3/fixtures/draft",
+      "docker images --no-trunc --format '{{.ID}}' b14-e3-draft-reference:20260925",
+      "docker run --rm b14-e3-draft-reference:20260925"
+    ]
+  },
+  "draft": {
+    "fixture": "draft",
+    "files": {
+      "main.c": "46793b04655fcdeeea70a05f057e84a8b12c009badbf43ecf64ef7f29fbf7ea0",
+      "Makefile": "31a1c6820f77605fa377379c1d832733c8fa756b3f483df8505913eb5a568971",
+      "Dockerfile.broken": "49efbacc1db1df230f484aacb27918b57c9c2008fb038460d6bc461ff24dbc06",
+      "Dockerfile.reference": "dcc9f8a5353b2a3d36809f0ab7cc696edc6f7c64b9b23a27f9bfe1b2c278d848"
+    },
+    "baseline_commit": "5bb9e757247b8fad2efa3fbbcd17a7ff6d47ebe3",
+    "build": {
+      "exit_code": 0,
+      "log": "draft_build.log"
+    },
+    "executable_created": true,
+    "verify": {
+      "exit_code": 0,
+      "stdout": "hello E3\\n",
+      "log": "draft_verify.log",
+      "expected_stdout": "hello E3\\n",
+      "expected_exit_code": 0
+    },
+    "draft_success": true,
+    "broken_candidate": {
+      "simulated_base_image": "python:3.13-slim (no make / no C toolchain)",
+      "reproduced_by": "在受限 PATH(空目录) 下真实执行 `sh -c make`（与该镜像的 RUN make 相同的调用形式）",
+      "exit_code": 127,
+      "stderr": "/bin/sh: 1: make: not found",
+      "log": "draft_broken_build.log",
+      "locatable": true
+    }
+  },
+  "mdfixer": {
+    "fixture": "mdfixer",
+    "files": {
+      "main.c": "c7cafc7691d426a6c5ab1987b5dc54079cd620a3bf1b755cf8b37a94ccbbdcfc",
+      "config.h": "8491c22fb1b864d12bae2e64fc95aa9972ad5cc7b2d738e446888c417814c818",
+      "Makefile.before": "7d1812618bad8bbd5d938d9e1a04f7a39e22c0df174114430e32a42c17532be4",
+      "Makefile.after": "e8ca57371473f2ced2692f64c93faf3f4f0857e7d4e7a423fa4e1e06f3a38daf",
+      "reference.patch": "133220f439f8680dfa9b3e8c9a62ae360024bf14bc84da3a6c565518f8c817f5",
+      "md_report.json": "6fe36b53536b30ed54b8e77fb05a949ac09a49b1a638e3a1c1512a49ec3ec02b"
+    },
+    "steps": [
+      {
+        "step": 1,
+        "name": "make_initial",
+        "note": "config.h VALUE=1，干净构建",
+        "cmd": "make",
+        "exit_code": 0,
+        "stdout": "cc -c main.c -o main.o\ncc main.o -o app\n",
+        "log": "mdfixer_01_make_initial.log"
+      },
+      {
+        "step": 2,
+        "name": "app_initial",
+        "note": "期望输出 1",
+        "cmd": "./app",
+        "exit_code": 0,
+        "stdout": "1\n",
+        "log": "mdfixer_02_app_initial.log"
+      },
+      {
+        "step": 3,
+        "name": "make_after_header_only",
+        "note": "只改 config.h=2，未声明依赖 -> 期望 make 不重编译",
+        "cmd": "make",
+        "exit_code": 0,
+        "stdout": "make: 'app' is up to date.\n",
+        "log": "mdfixer_03_make_after_header_only.log"
+      },
+      {
+        "step": 4,
+        "name": "app_after_header_only",
+        "note": "期望仍输出旧值 1（MD 的证据）",
+        "cmd": "./app",
+        "exit_code": 0,
+        "stdout": "1\n",
+        "log": "mdfixer_04_app_after_header_only.log"
+      },
+      {
+        "step": 5,
+        "name": "make_clean_rebuild",
+        "note": "clean 后完整重建",
+        "cmd": "make",
+        "exit_code": 0,
+        "stdout": "cc -c main.c -o main.o\ncc main.o -o app\n",
+        "log": "mdfixer_05_make_clean_rebuild.log"
+      },
+      {
+        "step": 6,
+        "name": "app_clean_rebuild",
+        "note": "期望输出 2",
+        "cmd": "./app",
+        "exit_code": 0,
+        "stdout": "2\n",
+        "log": "mdfixer_06_app_clean_rebuild.log"
+      },
+      {
+        "step": 9,
+        "name": "make_after_fix_header_only",
+        "note": "已声明 config.h -> 期望自动重编译",
+        "cmd": "make",
+        "exit_code": 0,
+        "stdout": "cc -c main.c -o main.o\ncc main.o -o app\n",
+        "log": "mdfixer_09_make_after_fix_header_only.log"
+      },
+      {
+        "step": 10,
+        "name": "app_after_fix_header_only",
+        "note": "期望输出 3",
+        "cmd": "./app",
+        "exit_code": 0,
+        "stdout": "3\n",
+        "log": "mdfixer_10_app_after_fix_header_only.log"
+      },
+      {
+        "step": 11,
+        "name": "make_invalid_candidate",
+        "note": "候选故意引用不存在的 does_not_exist.o -> 期望非零退出",
+        "cmd": "make",
+        "exit_code": 2,
+        "stdout": "cc -c main.c -o main.o\ncc does_not_exist.o -o app\n",
+        "log": "mdfixer_11_make_invalid_candidate.log"
+      },
+      {
+        "step": 12,
+        "name": "make_recovered",
+        "note": "恢复参考 Makefile -> 期望重新构建成功",
+        "cmd": "make",
+        "exit_code": 0,
+        "stdout": "cc -c main.c -o main.o\ncc main.o -o app\n",
+        "log": "mdfixer_12_make_recovered.log"
+      },
+      {
+        "step": 13,
+        "name": "app_recovered",
+        "note": "期望输出 3",
+        "cmd": "./app",
+        "exit_code": 0,
+        "stdout": "3\n",
+        "log": "mdfixer_13_app_recovered.log"
+      }
+    ],
+    "baseline_commit": "baf5f829073251b5e01e8af6af1b89314f3116c3",
+    "baseline_content_sha256": {
+      "main.c": "c7cafc7691d426a6c5ab1987b5dc54079cd620a3bf1b755cf8b37a94ccbbdcfc",
+      "config.h": "8491c22fb1b864d12bae2e64fc95aa9972ad5cc7b2d738e446888c417814c818",
+      "Makefile": "7d1812618bad8bbd5d938d9e1a04f7a39e22c0df174114430e32a42c17532be4"
+    },
+    "md_report_location": {
+      "path": "Makefile",
+      "line": 7,
+      "line_text": "main.o: main.c"
+    },
+    "patch": {
+      "check_exit_code": 0,
+      "apply_exit_code": 0,
+      "applied_makefile_sha256": "e8ca57371473f2ced2692f64c93faf3f4f0857e7d4e7a423fa4e1e06f3a38daf",
+      "expected_makefile_sha256": "e8ca57371473f2ced2692f64c93faf3f4f0857e7d4e7a423fa4e1e06f3a38daf",
+      "matches_reference": true
+    },
+    "md_report_bound": "md_report.bound.json"
+  }
+}

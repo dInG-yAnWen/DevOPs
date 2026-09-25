@@ -6,3 +6,6 @@
 /.venv/
 __pycache__/
 *.pyc
+
+# E3 scratch working copies (built binaries/objects); evidence is kept
+/e3/work/

@@ -1,0 +1,80 @@
+{
+  "draft": [
+    {
+      "exit_code": 0,
+      "log": "draft_build.log"
+    },
+    {
+      "exit_code": 0,
+      "stdout": "hello E3\\n",
+      "log": "draft_verify.log",
+      "expected_stdout": "hello E3\\n",
+      "expected_exit_code": 0
+    },
+    {
+      "simulated_base_image": "python:3.13-slim (no make / no C toolchain)",
+      "reproduced_by": "在受限 PATH(空目录) 下真实执行 `sh -c make`（与该镜像的 RUN make 相同的调用形式）",
+      "exit_code": 127,
+      "stderr": "/bin/sh: 1: make: not found",
+      "log": "draft_broken_build.log",
+      "locatable": true
+    }
+  ],
+  "mdfixer": [
+    {
+      "name": "make_initial",
+      "cmd": "make",
+      "exit_code": 0
+    },
+    {
+      "name": "app_initial",
+      "cmd": "./app",
+      "exit_code": 0
+    },
+    {
+      "name": "make_after_header_only",
+      "cmd": "make",
+      "exit_code": 0
+    },
+    {
+      "name": "app_after_header_only",
+      "cmd": "./app",
+      "exit_code": 0
+    },
+    {
+      "name": "make_clean_rebuild",
+      "cmd": "make",
+      "exit_code": 0
+    },
+    {
+      "name": "app_clean_rebuild",
+      "cmd": "./app",
+      "exit_code": 0
+    },
+    {
+      "name": "make_after_fix_header_only",
+      "cmd": "make",
+      "exit_code": 0
+    },
+    {
+      "name": "app_after_fix_header_only",
+      "cmd": "./app",
+      "exit_code": 0
+    },
+    {
+      "name": "make_invalid_candidate",
+      "cmd": "make",
+      "exit_code": 2
+    },
+    {
+      "name": "make_recovered",
+      "cmd": "make",
+      "exit_code": 0
+    },
+    {
+      "name": "app_recovered",
+      "cmd": "./app",
+      "exit_code": 0
+    }
+  ]
+}

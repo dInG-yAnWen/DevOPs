@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "provenance": "INSTRUCTOR_ORACLE",
+  "source": "MANUAL_FIXTURE",
+  "findings": [
+    {
+      "finding_id": "md-main-config",
+      "type": "MISSING",
+      "target": "main.o",
+      "dependency": "config.h",
+      "detector": "INSTRUCTOR_ORACLE",
+      "location": {
+        "path": "Makefile",
+        "line": 7
+      },
+      "evidence": {
+        "kind": "MANUAL_FIXTURE",
+        "description": "main.c includes config.h at compile time, but the main.o rule declares only main.c. Editing config.h alone does not trigger a rebuild; a clean build does."
+      },
+      "commit": "baf5f829073251b5e01e8af6af1b89314f3116c3"
+    }
+  ],
+  "binding": {
+    "baseline_commit": "baf5f829073251b5e01e8af6af1b89314f3116c3",
+    "snapshot_dir": "/home/bx/devops/projects/DevOPs/e3/work/20260925-b14-e3/mdfixer",
+    "configuration_id": "cfg-b14-e3-host-ubuntu2204-gcc11-make43",
+    "content_sha256": {
+      "main.c": "c7cafc7691d426a6c5ab1987b5dc54079cd620a3bf1b755cf8b37a94ccbbdcfc",
+      "config.h": "8491c22fb1b864d12bae2e64fc95aa9972ad5cc7b2d738e446888c417814c818",
+      "Makefile": "7d1812618bad8bbd5d938d9e1a04f7a39e22c0df174114430e32a42c17532be4"
+    },
+    "note": "E3 人工固定报告（INSTRUCTOR_ORACLE）。绑定本次真实 Git 基线提交与内容哈希；转成 E2 REPAIR 的 md.json 需要已发布的 repository.url 与同仓库 commit，留待 E12。"
+  }
+}

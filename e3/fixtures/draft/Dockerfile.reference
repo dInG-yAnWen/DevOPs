@@ -1,0 +1,13 @@
+# B14 E3 DRAFT reference fix for Dockerfile.broken.
+# Installs the C toolchain the broken candidate omitted, then builds the same
+# project. Expected: `docker build` exit code 0; running the image prints
+# "hello E3" and exits 0.
+FROM python:3.13-slim
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+      gcc make libc6-dev && \
+    rm -rf /var/lib/apt/lists/*
+WORKDIR /work
+COPY main.c Makefile ./
+RUN make
+CMD ["./hello"]

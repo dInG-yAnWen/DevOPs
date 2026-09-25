@@ -1,0 +1,13 @@
+# B14 E3 MDFixer fixture. Declaration style: Target (direct prerequisite list).
+CC ?= cc
+
+app: main.o
+	$(CC) main.o -o app
+
+main.o: main.c config.h
+	$(CC) -c main.c -o main.o
+
+clean:
+	rm -f main.o app
+
+.PHONY: clean
