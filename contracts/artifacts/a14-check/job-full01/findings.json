@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "repository": {
+    "url": "https://example.invalid/a14/make-demo.git",
+    "commit": "1111111111111111111111111111111111111111"
+  },
+  "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+  "producer_job_id": "job-full01",
+  "findings": [
+    {
+      "finding_id": "md-main-config",
+      "type": "MISSING",
+      "target": "main.o",
+      "dependency": "config.h",
+      "commit": "1111111111111111111111111111111111111111",
+      "detector": "MANUAL_FIXTURE",
+      "location": {
+        "path": "Makefile",
+        "line": 1
+      },
+      "evidence": {
+        "kind": "MANUAL_FIXTURE",
+        "description": "Synthetic example: main.c includes config.h; main.o declaration omits config.h."
+      }
+    },
+    {
+      "finding_id": "rd-main-unused",
+      "type": "REDUNDANT",
+      "target": "main.o",
+      "dependency": "unused.h",
+      "commit": "1111111111111111111111111111111111111111",
+      "detector": "MANUAL_FIXTURE",
+      "location": {
+        "path": "Makefile",
+        "line": 1
+      },
+      "evidence": {
+        "kind": "MANUAL_FIXTURE",
+        "description": "Synthetic example: unused.h is declared but not used in this configuration."
+      }
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "schema_version": "1.0",
+  "trace_id": "trace-pair14-demo",
+  "job_type": "INCREMENTAL_CHECK",
+  "execution": {
+    "timeout_seconds": 1800
+  },
+  "input": {
+    "repository": {
+      "url": "https://example.invalid/a14/make-demo.git",
+      "commit": "2222222222222222222222222222222222222222"
+    },
+    "build": {
+      "command": "make clean && make",
+      "verify_command": "make test",
+      "working_directory": "."
+    },
+    "environment": {
+      "image_ref": "registry.example.invalid/b14/make-demo@sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+      "dockerfile_uri": "artifact://b14-draft/job-draft01/Dockerfile",
+      "producer_job_id": "job-draft01"
+    },
+    "base_commit": "1111111111111111111111111111111111111111",
+    "baseline": {
+      "repository_url": "https://example.invalid/a14/make-demo.git",
+      "commit": "1111111111111111111111111111111111111111",
+      "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+      "actual_graph_uri": "artifact://a14-check/job-full01/actual.json",
+      "error_report_uri": "artifact://a14-check/job-full01/findings.json"
+    }
+  },
+  "job_id": "job-incremental01",
+  "status": "SUCCEEDED",
+  "output": {
+    "actual_graph_uri": "artifact://a14-check/job-incremental01/actual.json",
+    "declared_graph_uri": "artifact://a14-check/job-incremental01/declared.json",
+    "error_report_uri": "artifact://a14-check/job-incremental01/findings.json",
+    "artifacts": [
+      {
+        "artifact_id": "job-incremental01-actual.json",
+        "type": "ACTUAL_GRAPH",
+        "uri": "artifact://a14-check/job-incremental01/actual.json",
+        "media_type": "application/json",
+        "producer_job_id": "job-incremental01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "2222222222222222222222222222222222222222",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "3413dc17df040e3ff671dd2b7ca577d0e1fbe24a5d5d21bebda86dbd719d4d63"
+      },
+      {
+        "artifact_id": "job-incremental01-declared.json",
+        "type": "DECLARED_GRAPH",
+        "uri": "artifact://a14-check/job-incremental01/declared.json",
+        "media_type": "application/json",
+        "producer_job_id": "job-incremental01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "2222222222222222222222222222222222222222",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "2a251480d367333e364ff1b7df35a9005a2b1a709e5bce54d39c5ebf8e05d929"
+      },
+      {
+        "artifact_id": "job-incremental01-findings.json",
+        "type": "ERROR_REPORT",
+        "uri": "artifact://a14-check/job-incremental01/findings.json",
+        "media_type": "application/json",
+        "producer_job_id": "job-incremental01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "2222222222222222222222222222222222222222",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "acedd724cdff00a519355313fd0a20f5150c8dfe4ddd6a3ab3479566700f1c40"
+      }
+    ],
+    "findings_delta": {
+      "added": [],
+      "removed": []
+    }
+  },
+  "error": null
+}

@@ -1,0 +1,179 @@
+{
+  "schema_version": "1.0",
+  "trace_id": "trace-pair14-demo",
+  "job_type": "DRAFT",
+  "execution": {
+    "timeout_seconds": 1800,
+    "max_iterations": 3
+  },
+  "input": {
+    "repository": {
+      "url": "https://example.invalid/a14/make-demo.git",
+      "commit": "1111111111111111111111111111111111111111"
+    },
+    "build": {
+      "command": "make clean && make",
+      "verify_command": "make test",
+      "working_directory": "."
+    },
+    "requirements": {
+      "platform": "linux/amd64",
+      "language": "C (demo)",
+      "toolchain": [
+        "GCC 13",
+        "GNU Make"
+      ],
+      "base_image": "gcc:13",
+      "system_dependencies": [],
+      "network": "REQUIRED",
+      "environment_variables": {
+        "MODE": "0"
+      },
+      "ports": [],
+      "test_data": []
+    }
+  },
+  "job_id": "job-draft01",
+  "status": "FAILED",
+  "output": {
+    "environment": null,
+    "iterations": [
+      {
+        "index": 1,
+        "change_summary": "Simulated dependency adjustment",
+        "selection_reason": "Simulated unsuccessful attempt",
+        "patch_uri": null,
+        "build": {
+          "status": "FAILED",
+          "exit_code": 2,
+          "log_uri": "artifact://b14-draft/job-draft01/failed-1.log"
+        },
+        "verify": {
+          "status": "NOT_RUN",
+          "exit_code": null,
+          "log_uri": null
+        }
+      },
+      {
+        "index": 2,
+        "change_summary": "Simulated dependency adjustment",
+        "selection_reason": "Simulated unsuccessful attempt",
+        "patch_uri": null,
+        "build": {
+          "status": "FAILED",
+          "exit_code": 2,
+          "log_uri": "artifact://b14-draft/job-draft01/failed-2.log"
+        },
+        "verify": {
+          "status": "NOT_RUN",
+          "exit_code": null,
+          "log_uri": null
+        }
+      },
+      {
+        "index": 3,
+        "change_summary": "Simulated dependency adjustment",
+        "selection_reason": "Simulated unsuccessful attempt",
+        "patch_uri": null,
+        "build": {
+          "status": "FAILED",
+          "exit_code": 2,
+          "log_uri": "artifact://b14-draft/job-draft01/failed-3.log"
+        },
+        "verify": {
+          "status": "NOT_RUN",
+          "exit_code": null,
+          "log_uri": null
+        }
+      }
+    ],
+    "build": {
+      "status": "FAILED",
+      "exit_code": 2,
+      "log_uri": "artifact://b14-draft/job-draft01/failed-3.log"
+    },
+    "verify": {
+      "status": "NOT_RUN",
+      "exit_code": null,
+      "log_uri": null
+    },
+    "artifacts": [
+      {
+        "artifact_id": "job-draft01-Dockerfile",
+        "type": "DOCKERFILE",
+        "uri": "artifact://b14-draft/job-draft01/Dockerfile",
+        "media_type": "text/plain",
+        "producer_job_id": "job-draft01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "1111111111111111111111111111111111111111",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "1f8fa15049a61fe49dfd5befeb980dc4c749da88906ae558150156acd5b52ba5"
+      },
+      {
+        "artifact_id": "job-draft01-build.log",
+        "type": "BUILD_LOG",
+        "uri": "artifact://b14-draft/job-draft01/build.log",
+        "media_type": "text/plain",
+        "producer_job_id": "job-draft01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "1111111111111111111111111111111111111111",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "269a55c1fc44066375cabef596e59e531ebca1e3f2d41d08bebda61cf079d41a"
+      },
+      {
+        "artifact_id": "job-draft01-verify.log",
+        "type": "VERIFY_LOG",
+        "uri": "artifact://b14-draft/job-draft01/verify.log",
+        "media_type": "text/plain",
+        "producer_job_id": "job-draft01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "1111111111111111111111111111111111111111",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "6d9f52662ecf61988c0df0c7e02faf2dafa0909b09fc5af3bcb9f9a2688262dc"
+      },
+      {
+        "artifact_id": "job-draft01-failed-1.log",
+        "type": "BUILD_LOG",
+        "uri": "artifact://b14-draft/job-draft01/failed-1.log",
+        "media_type": "text/plain",
+        "producer_job_id": "job-draft01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "1111111111111111111111111111111111111111",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "b6344fa39be44b637278080222aff6323558c72ba50898cafd621ea8d8fd4d22"
+      },
+      {
+        "artifact_id": "job-draft01-failed-2.log",
+        "type": "BUILD_LOG",
+        "uri": "artifact://b14-draft/job-draft01/failed-2.log",
+        "media_type": "text/plain",
+        "producer_job_id": "job-draft01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "1111111111111111111111111111111111111111",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "229e6abd03393a55ee85c62d9a602ba3f18445b2a30d03e9f83f673b676a646d"
+      },
+      {
+        "artifact_id": "job-draft01-failed-3.log",
+        "type": "BUILD_LOG",
+        "uri": "artifact://b14-draft/job-draft01/failed-3.log",
+        "media_type": "text/plain",
+        "producer_job_id": "job-draft01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "1111111111111111111111111111111111111111",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "755e170017acee9af020ba90c324dcb67241f97b9368e8168232d769c6b85578"
+      }
+    ]
+  },
+  "error": {
+    "code": "ENV_3002",
+    "category": "GOAL_UNMET",
+    "message": "Maximum DRAFT attempts exhausted; no usable image produced.",
+    "retryable": false,
+    "details": {
+      "reason": "ITERATION_LIMIT",
+      "attempts": 3
+    }
+  }
+}

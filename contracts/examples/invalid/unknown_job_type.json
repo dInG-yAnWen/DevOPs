@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "trace_id": "trace-pair14-demo",
+  "job_type": "ABC",
+  "execution": {
+    "timeout_seconds": 1800,
+    "max_iterations": 3
+  },
+  "idempotency_key": "pair14-draft-001",
+  "input": {
+    "repository": {
+      "url": "https://example.invalid/a14/make-demo.git",
+      "commit": "1111111111111111111111111111111111111111"
+    },
+    "build": {
+      "command": "make clean && make",
+      "verify_command": "make test",
+      "working_directory": "."
+    },
+    "requirements": {
+      "platform": "linux/amd64",
+      "language": "C (demo)",
+      "toolchain": [
+        "GCC 13",
+        "GNU Make"
+      ],
+      "base_image": "gcc:13",
+      "system_dependencies": [],
+      "network": "REQUIRED",
+      "environment_variables": {
+        "MODE": "0"
+      },
+      "ports": [],
+      "test_data": []
+    }
+  }
+}

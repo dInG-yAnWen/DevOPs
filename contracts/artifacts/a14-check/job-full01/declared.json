@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "repository": {
+    "url": "https://example.invalid/a14/make-demo.git",
+    "commit": "1111111111111111111111111111111111111111"
+  },
+  "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+  "producer_job_id": "job-full01",
+  "kind": "DECLARED_GRAPH",
+  "nodes": [
+    "main.o",
+    "main.c",
+    "config.h",
+    "unused.h"
+  ],
+  "edges": [
+    {
+      "target": "main.o",
+      "dependency": "main.c"
+    },
+    {
+      "target": "main.o",
+      "dependency": "unused.h"
+    }
+  ],
+  "source": "MANUAL_FIXTURE"
+}

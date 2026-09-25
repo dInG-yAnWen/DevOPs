@@ -1,0 +1,272 @@
+{
+  "schema_version": "1.0",
+  "source": "MANUAL_FIXTURE",
+  "artifacts": {
+    "artifact://b14-draft/job-draft01/Dockerfile": {
+      "path": "contracts/artifacts/b14-draft/job-draft01/Dockerfile",
+      "artifact": {
+        "artifact_id": "job-draft01-Dockerfile",
+        "type": "DOCKERFILE",
+        "uri": "artifact://b14-draft/job-draft01/Dockerfile",
+        "media_type": "text/plain",
+        "producer_job_id": "job-draft01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "1111111111111111111111111111111111111111",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "1f8fa15049a61fe49dfd5befeb980dc4c749da88906ae558150156acd5b52ba5"
+      }
+    },
+    "artifact://b14-draft/job-draft01/image.json": {
+      "path": "contracts/artifacts/b14-draft/job-draft01/image.json",
+      "artifact": {
+        "artifact_id": "job-draft01-image.json",
+        "type": "IMAGE_METADATA",
+        "uri": "artifact://b14-draft/job-draft01/image.json",
+        "media_type": "application/json",
+        "producer_job_id": "job-draft01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "1111111111111111111111111111111111111111",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "844689f3f9ba9fb7da1d7527e5b1e1a5285aff41fe00117a59a50fb95fc1b3a5"
+      }
+    },
+    "artifact://b14-draft/job-draft01/build.log": {
+      "path": "contracts/artifacts/b14-draft/job-draft01/build.log",
+      "artifact": {
+        "artifact_id": "job-draft01-build.log",
+        "type": "BUILD_LOG",
+        "uri": "artifact://b14-draft/job-draft01/build.log",
+        "media_type": "text/plain",
+        "producer_job_id": "job-draft01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "1111111111111111111111111111111111111111",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "269a55c1fc44066375cabef596e59e531ebca1e3f2d41d08bebda61cf079d41a"
+      }
+    },
+    "artifact://b14-draft/job-draft01/verify.log": {
+      "path": "contracts/artifacts/b14-draft/job-draft01/verify.log",
+      "artifact": {
+        "artifact_id": "job-draft01-verify.log",
+        "type": "VERIFY_LOG",
+        "uri": "artifact://b14-draft/job-draft01/verify.log",
+        "media_type": "text/plain",
+        "producer_job_id": "job-draft01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "1111111111111111111111111111111111111111",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "6d9f52662ecf61988c0df0c7e02faf2dafa0909b09fc5af3bcb9f9a2688262dc"
+      }
+    },
+    "artifact://a14-check/job-full01/actual.json": {
+      "path": "contracts/artifacts/a14-check/job-full01/actual.json",
+      "artifact": {
+        "artifact_id": "job-full01-actual.json",
+        "type": "ACTUAL_GRAPH",
+        "uri": "artifact://a14-check/job-full01/actual.json",
+        "media_type": "application/json",
+        "producer_job_id": "job-full01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "1111111111111111111111111111111111111111",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "0f7f95c20243045fca993755abc9b219f2dfd798d4e01ddb639e640fac510b54"
+      }
+    },
+    "artifact://a14-check/job-full01/declared.json": {
+      "path": "contracts/artifacts/a14-check/job-full01/declared.json",
+      "artifact": {
+        "artifact_id": "job-full01-declared.json",
+        "type": "DECLARED_GRAPH",
+        "uri": "artifact://a14-check/job-full01/declared.json",
+        "media_type": "application/json",
+        "producer_job_id": "job-full01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "1111111111111111111111111111111111111111",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "947ca6fe0c6fc5f3213adb34f83fc3007c6d0611a78efb906b40e0f98ddd8948"
+      }
+    },
+    "artifact://a14-check/job-full01/findings.json": {
+      "path": "contracts/artifacts/a14-check/job-full01/findings.json",
+      "artifact": {
+        "artifact_id": "job-full01-findings.json",
+        "type": "ERROR_REPORT",
+        "uri": "artifact://a14-check/job-full01/findings.json",
+        "media_type": "application/json",
+        "producer_job_id": "job-full01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "1111111111111111111111111111111111111111",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "15542db7eafdb41e06fe83e449a2bb2bd949c538cde987cd750b497bae40096b"
+      }
+    },
+    "artifact://a14-check/job-incremental01/actual.json": {
+      "path": "contracts/artifacts/a14-check/job-incremental01/actual.json",
+      "artifact": {
+        "artifact_id": "job-incremental01-actual.json",
+        "type": "ACTUAL_GRAPH",
+        "uri": "artifact://a14-check/job-incremental01/actual.json",
+        "media_type": "application/json",
+        "producer_job_id": "job-incremental01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "2222222222222222222222222222222222222222",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "3413dc17df040e3ff671dd2b7ca577d0e1fbe24a5d5d21bebda86dbd719d4d63"
+      }
+    },
+    "artifact://a14-check/job-incremental01/declared.json": {
+      "path": "contracts/artifacts/a14-check/job-incremental01/declared.json",
+      "artifact": {
+        "artifact_id": "job-incremental01-declared.json",
+        "type": "DECLARED_GRAPH",
+        "uri": "artifact://a14-check/job-incremental01/declared.json",
+        "media_type": "application/json",
+        "producer_job_id": "job-incremental01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "2222222222222222222222222222222222222222",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "2a251480d367333e364ff1b7df35a9005a2b1a709e5bce54d39c5ebf8e05d929"
+      }
+    },
+    "artifact://a14-check/job-incremental01/findings.json": {
+      "path": "contracts/artifacts/a14-check/job-incremental01/findings.json",
+      "artifact": {
+        "artifact_id": "job-incremental01-findings.json",
+        "type": "ERROR_REPORT",
+        "uri": "artifact://a14-check/job-incremental01/findings.json",
+        "media_type": "application/json",
+        "producer_job_id": "job-incremental01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "2222222222222222222222222222222222222222",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "acedd724cdff00a519355313fd0a20f5150c8dfe4ddd6a3ab3479566700f1c40"
+      }
+    },
+    "artifact://a14-check/job-full01/md.json": {
+      "path": "contracts/artifacts/a14-check/job-full01/md.json",
+      "artifact": {
+        "artifact_id": "job-full01-md.json",
+        "type": "ERROR_REPORT",
+        "uri": "artifact://a14-check/job-full01/md.json",
+        "media_type": "application/json",
+        "producer_job_id": "job-full01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "1111111111111111111111111111111111111111",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "671b9d39a619c8cc199860de126aee804d47bd6e8ebae4b50019414a5c1a582f"
+      }
+    },
+    "artifact://b14-repair/job-repair01/build.log": {
+      "path": "contracts/artifacts/b14-repair/job-repair01/build.log",
+      "artifact": {
+        "artifact_id": "job-repair01-build.log",
+        "type": "BUILD_LOG",
+        "uri": "artifact://b14-repair/job-repair01/build.log",
+        "media_type": "text/plain",
+        "producer_job_id": "job-repair01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "1111111111111111111111111111111111111111",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "269a55c1fc44066375cabef596e59e531ebca1e3f2d41d08bebda61cf079d41a"
+      }
+    },
+    "artifact://b14-repair/job-repair01/verify.log": {
+      "path": "contracts/artifacts/b14-repair/job-repair01/verify.log",
+      "artifact": {
+        "artifact_id": "job-repair01-verify.log",
+        "type": "VERIFY_LOG",
+        "uri": "artifact://b14-repair/job-repair01/verify.log",
+        "media_type": "text/plain",
+        "producer_job_id": "job-repair01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "1111111111111111111111111111111111111111",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "6d9f52662ecf61988c0df0c7e02faf2dafa0909b09fc5af3bcb9f9a2688262dc"
+      }
+    },
+    "artifact://b14-repair/job-repair01/fix.patch": {
+      "path": "contracts/artifacts/b14-repair/job-repair01/fix.patch",
+      "artifact": {
+        "artifact_id": "job-repair01-fix.patch",
+        "type": "PATCH",
+        "uri": "artifact://b14-repair/job-repair01/fix.patch",
+        "media_type": "text/plain",
+        "producer_job_id": "job-repair01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "1111111111111111111111111111111111111111",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "6f1b7cd5eba78803973901c0d0c5502066d23a76cea5a20e3584f83c09c03d26"
+      }
+    },
+    "artifact://b14-repair/job-repair01/recheck.json": {
+      "path": "contracts/artifacts/b14-repair/job-repair01/recheck.json",
+      "artifact": {
+        "artifact_id": "job-repair01-recheck.json",
+        "type": "RECHECK_REPORT",
+        "uri": "artifact://b14-repair/job-repair01/recheck.json",
+        "media_type": "application/json",
+        "producer_job_id": "job-repair01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "1111111111111111111111111111111111111111",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "d938fb89f50212949fec399416892074a839cdaeba79756527e2273e9d2a38b1"
+      }
+    },
+    "artifact://b14-draft/job-draft01/failed-1.log": {
+      "path": "contracts/artifacts/b14-draft/job-draft01/failed-1.log",
+      "artifact": {
+        "artifact_id": "job-draft01-failed-1.log",
+        "type": "BUILD_LOG",
+        "uri": "artifact://b14-draft/job-draft01/failed-1.log",
+        "media_type": "text/plain",
+        "producer_job_id": "job-draft01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "1111111111111111111111111111111111111111",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "b6344fa39be44b637278080222aff6323558c72ba50898cafd621ea8d8fd4d22"
+      }
+    },
+    "artifact://b14-draft/job-draft01/failed-2.log": {
+      "path": "contracts/artifacts/b14-draft/job-draft01/failed-2.log",
+      "artifact": {
+        "artifact_id": "job-draft01-failed-2.log",
+        "type": "BUILD_LOG",
+        "uri": "artifact://b14-draft/job-draft01/failed-2.log",
+        "media_type": "text/plain",
+        "producer_job_id": "job-draft01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "1111111111111111111111111111111111111111",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "229e6abd03393a55ee85c62d9a602ba3f18445b2a30d03e9f83f673b676a646d"
+      }
+    },
+    "artifact://b14-draft/job-draft01/failed-3.log": {
+      "path": "contracts/artifacts/b14-draft/job-draft01/failed-3.log",
+      "artifact": {
+        "artifact_id": "job-draft01-failed-3.log",
+        "type": "BUILD_LOG",
+        "uri": "artifact://b14-draft/job-draft01/failed-3.log",
+        "media_type": "text/plain",
+        "producer_job_id": "job-draft01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "1111111111111111111111111111111111111111",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "755e170017acee9af020ba90c324dcb67241f97b9368e8168232d769c6b85578"
+      }
+    },
+    "artifact://b14-repair/job-repair01/rejected-verify.log": {
+      "path": "contracts/artifacts/b14-repair/job-repair01/rejected-verify.log",
+      "artifact": {
+        "artifact_id": "job-repair01-rejected-verify.log",
+        "type": "VERIFY_LOG",
+        "uri": "artifact://b14-repair/job-repair01/rejected-verify.log",
+        "media_type": "text/plain",
+        "producer_job_id": "job-repair01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "1111111111111111111111111111111111111111",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "3b1f90233b918129d9e21924f4a890db56622706e0971368dd732e2dd5e0358e"
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "date": "2026-09-25",
+  "scope": "B14 local review of user-provided A14 archive; no live service integration",
+  "archive_name": "A14_E2_仓库交付包.zip",
+  "archive_sha256": "d51f44b6a4f635648db0f664914835a569feed216b3e316c6a5188d02635ebf3",
+  "reply_file": "A14_接口确认回复_20260925.md",
+  "reply_sha256": "5839d2d3ad5d0a07dd2db8c873d1371158c8a8299c5bc903e1d848ed37808c9c",
+  "a14_validation_file": "A14_验证记录_20260925.md",
+  "a14_validation_sha256": "a88fb2d30e7ce0c7a70499d9526c3007a0a1fc92f50c638582cfa846d44b22c4",
+  "schema_rules_equal_excluding_title": true,
+  "artifacts_checked": 19,
+  "artifact_hashes_valid": true,
+  "artifact_bytes_equal_to_b14": true,
+  "valid_passed": 20,
+  "invalid_rejected": 7,
+  "backend": "offline subset (only keywords used by this contract)",
+  "remote_heads_checked": false
+}

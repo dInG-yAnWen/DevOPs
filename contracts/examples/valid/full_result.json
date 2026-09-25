@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0",
+  "trace_id": "trace-pair14-demo",
+  "job_type": "FULL_CHECK",
+  "execution": {
+    "timeout_seconds": 1800
+  },
+  "input": {
+    "repository": {
+      "url": "https://example.invalid/a14/make-demo.git",
+      "commit": "1111111111111111111111111111111111111111"
+    },
+    "build": {
+      "command": "make clean && make",
+      "verify_command": "make test",
+      "working_directory": "."
+    },
+    "environment": {
+      "image_ref": "registry.example.invalid/b14/make-demo@sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+      "dockerfile_uri": "artifact://b14-draft/job-draft01/Dockerfile",
+      "producer_job_id": "job-draft01"
+    }
+  },
+  "job_id": "job-full01",
+  "status": "SUCCEEDED",
+  "output": {
+    "actual_graph_uri": "artifact://a14-check/job-full01/actual.json",
+    "declared_graph_uri": "artifact://a14-check/job-full01/declared.json",
+    "error_report_uri": "artifact://a14-check/job-full01/findings.json",
+    "artifacts": [
+      {
+        "artifact_id": "job-full01-actual.json",
+        "type": "ACTUAL_GRAPH",
+        "uri": "artifact://a14-check/job-full01/actual.json",
+        "media_type": "application/json",
+        "producer_job_id": "job-full01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "1111111111111111111111111111111111111111",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "0f7f95c20243045fca993755abc9b219f2dfd798d4e01ddb639e640fac510b54"
+      },
+      {
+        "artifact_id": "job-full01-declared.json",
+        "type": "DECLARED_GRAPH",
+        "uri": "artifact://a14-check/job-full01/declared.json",
+        "media_type": "application/json",
+        "producer_job_id": "job-full01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "1111111111111111111111111111111111111111",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "947ca6fe0c6fc5f3213adb34f83fc3007c6d0611a78efb906b40e0f98ddd8948"
+      },
+      {
+        "artifact_id": "job-full01-findings.json",
+        "type": "ERROR_REPORT",
+        "uri": "artifact://a14-check/job-full01/findings.json",
+        "media_type": "application/json",
+        "producer_job_id": "job-full01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "1111111111111111111111111111111111111111",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "15542db7eafdb41e06fe83e449a2bb2bd949c538cde987cd750b497bae40096b"
+      }
+    ]
+  },
+  "error": null
+}

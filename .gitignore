@@ -1,0 +1,8 @@
+# Local coordination note (not part of the submitted contract)
+/A14_预设决定说明.md
+
+# Local validation dependencies and Python cache
+/.deps/
+/.venv/
+__pycache__/
+*.pyc

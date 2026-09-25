@@ -1,0 +1,7 @@
+{
+  "schema_version": "1.0",
+  "job_id": "job-repair01",
+  "trace_id": "trace-pair14-demo",
+  "status": "QUEUED",
+  "status_url": "/v1/jobs/job-repair01"
+}

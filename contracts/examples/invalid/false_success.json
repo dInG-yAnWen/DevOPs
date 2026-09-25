@@ -1,0 +1,121 @@
+{
+  "schema_version": "1.0",
+  "trace_id": "trace-pair14-demo",
+  "job_type": "DRAFT",
+  "execution": {
+    "timeout_seconds": 1800,
+    "max_iterations": 3
+  },
+  "input": {
+    "repository": {
+      "url": "https://example.invalid/a14/make-demo.git",
+      "commit": "1111111111111111111111111111111111111111"
+    },
+    "build": {
+      "command": "make clean && make",
+      "verify_command": "make test",
+      "working_directory": "."
+    },
+    "requirements": {
+      "platform": "linux/amd64",
+      "language": "C (demo)",
+      "toolchain": [
+        "GCC 13",
+        "GNU Make"
+      ],
+      "base_image": "gcc:13",
+      "system_dependencies": [],
+      "network": "REQUIRED",
+      "environment_variables": {
+        "MODE": "0"
+      },
+      "ports": [],
+      "test_data": []
+    }
+  },
+  "job_id": "job-draft01",
+  "status": "SUCCEEDED",
+  "output": {
+    "environment": {
+      "image_ref": "registry.example.invalid/b14/make-demo@sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+      "dockerfile_uri": "artifact://b14-draft/job-draft01/Dockerfile",
+      "producer_job_id": "job-draft01"
+    },
+    "iterations": [
+      {
+        "index": 1,
+        "change_summary": "Manual fixture for initial Dockerfile",
+        "selection_reason": "Demonstrate successful output structure",
+        "patch_uri": null,
+        "build": {
+          "status": "PASSED",
+          "exit_code": 0,
+          "log_uri": "artifact://b14-draft/job-draft01/build.log"
+        },
+        "verify": {
+          "status": "PASSED",
+          "exit_code": 0,
+          "log_uri": "artifact://b14-draft/job-draft01/verify.log"
+        }
+      }
+    ],
+    "build": {
+      "status": "PASSED",
+      "exit_code": 0,
+      "log_uri": "artifact://b14-draft/job-draft01/build.log"
+    },
+    "verify": {
+      "status": "PASSED",
+      "exit_code": 1,
+      "log_uri": "artifact://b14-draft/job-draft01/verify.log"
+    },
+    "artifacts": [
+      {
+        "artifact_id": "job-draft01-Dockerfile",
+        "type": "DOCKERFILE",
+        "uri": "artifact://b14-draft/job-draft01/Dockerfile",
+        "media_type": "text/plain",
+        "producer_job_id": "job-draft01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "1111111111111111111111111111111111111111",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "1f8fa15049a61fe49dfd5befeb980dc4c749da88906ae558150156acd5b52ba5"
+      },
+      {
+        "artifact_id": "job-draft01-image.json",
+        "type": "IMAGE_METADATA",
+        "uri": "artifact://b14-draft/job-draft01/image.json",
+        "media_type": "application/json",
+        "producer_job_id": "job-draft01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "1111111111111111111111111111111111111111",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "844689f3f9ba9fb7da1d7527e5b1e1a5285aff41fe00117a59a50fb95fc1b3a5"
+      },
+      {
+        "artifact_id": "job-draft01-build.log",
+        "type": "BUILD_LOG",
+        "uri": "artifact://b14-draft/job-draft01/build.log",
+        "media_type": "text/plain",
+        "producer_job_id": "job-draft01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "1111111111111111111111111111111111111111",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "269a55c1fc44066375cabef596e59e531ebca1e3f2d41d08bebda61cf079d41a"
+      },
+      {
+        "artifact_id": "job-draft01-verify.log",
+        "type": "VERIFY_LOG",
+        "uri": "artifact://b14-draft/job-draft01/verify.log",
+        "media_type": "text/plain",
+        "producer_job_id": "job-draft01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "1111111111111111111111111111111111111111",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "6d9f52662ecf61988c0df0c7e02faf2dafa0909b09fc5af3bcb9f9a2688262dc"
+      }
+    ]
+  },
+  "error": null
+}

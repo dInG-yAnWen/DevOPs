@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "trace_id": "trace-pair14-demo",
+  "job_type": "DRAFT",
+  "execution": {
+    "timeout_seconds": 1800,
+    "max_iterations": 3
+  },
+  "input": {
+    "repository": {
+      "url": "https://example.invalid/a14/make-demo.git",
+      "commit": "1111111111111111111111111111111111111111"
+    },
+    "build": {
+      "command": "make clean && make",
+      "verify_command": "make test",
+      "working_directory": "."
+    },
+    "requirements": {
+      "platform": "linux/amd64",
+      "language": "C (demo)",
+      "toolchain": [
+        "GCC 13",
+        "GNU Make"
+      ],
+      "base_image": "gcc:13",
+      "system_dependencies": [],
+      "network": "REQUIRED",
+      "environment_variables": {
+        "MODE": "0"
+      },
+      "ports": [],
+      "test_data": []
+    }
+  },
+  "job_id": "job-draft01",
+  "status": "TIMED_OUT",
+  "output": null,
+  "error": {
+    "code": "EXEC_4002",
+    "category": "SYSTEM",
+    "message": "Manual fixture: TIMED_OUT",
+    "retryable": true,
+    "details": {}
+  }
+}

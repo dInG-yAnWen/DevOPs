@@ -1,0 +1,106 @@
+{
+  "schema_version": "1.0",
+  "trace_id": "trace-pair14-demo",
+  "job_type": "REPAIR",
+  "execution": {
+    "timeout_seconds": 1800
+  },
+  "input": {
+    "repository": {
+      "url": "https://example.invalid/a14/make-demo.git",
+      "commit": "1111111111111111111111111111111111111111"
+    },
+    "build": {
+      "command": "make clean && make",
+      "verify_command": "make test",
+      "working_directory": "."
+    },
+    "environment": {
+      "image_ref": "registry.example.invalid/b14/make-demo@sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+      "dockerfile_uri": "artifact://b14-draft/job-draft01/Dockerfile",
+      "producer_job_id": "job-draft01"
+    },
+    "md_report_uri": "artifact://a14-check/job-full01/md.json",
+    "makefiles": [
+      "Makefile"
+    ]
+  },
+  "job_id": "job-repair01",
+  "status": "SUCCEEDED",
+  "output": {
+    "patch_uri": "artifact://b14-repair/job-repair01/fix.patch",
+    "candidates": [
+      {
+        "candidate_id": "candidate-1",
+        "patch_uri": "artifact://b14-repair/job-repair01/fix.patch",
+        "declaration_style": "ATOMIC",
+        "style_explanation": "Add an atomic prerequisite while preserving the existing declaration form.",
+        "decision": "ACCEPTED",
+        "reason": "Simulated build, test and missing-dependency recheck passed.",
+        "build": {
+          "status": "PASSED",
+          "exit_code": 0,
+          "log_uri": "artifact://b14-repair/job-repair01/build.log"
+        },
+        "verify": {
+          "status": "PASSED",
+          "exit_code": 0,
+          "log_uri": "artifact://b14-repair/job-repair01/verify.log"
+        },
+        "recheck": {
+          "status": "PASSED",
+          "remaining_missing": 0,
+          "report_uri": "artifact://b14-repair/job-repair01/recheck.json"
+        }
+      }
+    ],
+    "artifacts": [
+      {
+        "artifact_id": "job-repair01-fix.patch",
+        "type": "PATCH",
+        "uri": "artifact://b14-repair/job-repair01/fix.patch",
+        "media_type": "text/plain",
+        "producer_job_id": "job-repair01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "1111111111111111111111111111111111111111",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "6f1b7cd5eba78803973901c0d0c5502066d23a76cea5a20e3584f83c09c03d26"
+      },
+      {
+        "artifact_id": "job-repair01-build.log",
+        "type": "BUILD_LOG",
+        "uri": "artifact://b14-repair/job-repair01/build.log",
+        "media_type": "text/plain",
+        "producer_job_id": "job-repair01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "1111111111111111111111111111111111111111",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "269a55c1fc44066375cabef596e59e531ebca1e3f2d41d08bebda61cf079d41a"
+      },
+      {
+        "artifact_id": "job-repair01-verify.log",
+        "type": "VERIFY_LOG",
+        "uri": "artifact://b14-repair/job-repair01/verify.log",
+        "media_type": "text/plain",
+        "producer_job_id": "job-repair01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "1111111111111111111111111111111111111111",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "6d9f52662ecf61988c0df0c7e02faf2dafa0909b09fc5af3bcb9f9a2688262dc"
+      },
+      {
+        "artifact_id": "job-repair01-recheck.json",
+        "type": "RECHECK_REPORT",
+        "uri": "artifact://b14-repair/job-repair01/recheck.json",
+        "media_type": "application/json",
+        "producer_job_id": "job-repair01",
+        "repository_url": "https://example.invalid/a14/make-demo.git",
+        "commit": "1111111111111111111111111111111111111111",
+        "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+        "sha256": "d938fb89f50212949fec399416892074a839cdaeba79756527e2273e9d2a38b1"
+      }
+    ]
+  },
+  "error": null
+}

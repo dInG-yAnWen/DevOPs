@@ -1,0 +1,11 @@
+{
+  "repository": {
+    "url": "https://example.invalid/a14/make-demo.git",
+    "commit": "1111111111111111111111111111111111111111"
+  },
+  "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+  "producer_job_id": "job-repair01",
+  "patch_uri": "artifact://b14-repair/job-repair01/fix.patch",
+  "remaining_missing": 0,
+  "source": "MANUAL_FIXTURE"
+}

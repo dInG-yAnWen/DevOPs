@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "trace_id": "trace-pair14-demo",
+  "job_type": "REPAIR",
+  "execution": {
+    "timeout_seconds": 1800
+  },
+  "idempotency_key": "pair14-repair-001",
+  "input": {
+    "repository": {
+      "url": "https://example.invalid/a14/make-demo.git",
+      "commit": "1111111111111111111111111111111111111111"
+    },
+    "build": {
+      "command": "make clean && make",
+      "verify_command": "make test",
+      "working_directory": "."
+    },
+    "environment": {
+      "image_ref": "registry.example.invalid/b14/make-demo@sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "configuration_id": "cfg-demo-linux-amd64-gcc13-mode0",
+      "dockerfile_uri": "artifact://b14-draft/job-draft01/Dockerfile",
+      "producer_job_id": "job-draft01"
+    },
+    "md_report_uri": "artifact://a14-check/job-full01/md.json",
+    "makefiles": [
+      "Makefile"
+    ]
+  }
+}

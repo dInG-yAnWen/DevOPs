@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "trace_id": "trace-pair14-demo",
+  "http_status": 422,
+  "error": {
+    "code": "INPUT_1002",
+    "category": "INPUT",
+    "message": "INCREMENTAL_CHECK requires baseline.",
+    "retryable": false,
+    "details": {
+      "field": "input.baseline"
+    }
+  }
+}
