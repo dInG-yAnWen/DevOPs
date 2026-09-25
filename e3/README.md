@@ -66,8 +66,6 @@ python3 e3/scripts/run_b14_e3.py --run-id my-run # 使用固定 run-id，便于�
   本次未伪造该数据，改为：(1) 提交 `Dockerfile.broken` / `Dockerfile.reference`；
   (2) 在本机用受限 PATH 真实复现 `RUN make` 的失败语义（退出码 127）；
   (3) 给出完整 `docker build/run/images` 复现命令，供有 Docker 的环境补齐。
-- **未 commit、未 push**：沿用 E2 时的约定，保留工作区改动，不产生本次提交 SHA。
-  样本源码基线用固定作者/时间的真实本地 Git 提交记录 SHA，可复现但未推送。
 - **未做真实联调**：这些是 B14 自备的人工基线，尚未接入 A14 的真实检测数据（E12）。
 - **人工标签不入准确率**：MD 报告来源为 `INSTRUCTOR_ORACLE`，只作预期答案，不计入
   工具准确率。

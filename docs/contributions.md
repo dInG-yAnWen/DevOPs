@@ -34,7 +34,7 @@
 | 项目 | 内容 |
 | --- | --- |
 | 工作起点 HEAD | `689539119e60afd4b224d3163d1ba292992baa95`（E2 finished） |
-| 本次提交 SHA | 无。按用户约定保留工作区改动，不 commit、不 push |
+| 本次提交 SHA | 7d12146d678cf48c8202ecab3c8e8dd88055ae01 |
 | 新增目录 | `e3/`（fixtures、scripts、evidence、说明文档） |
 | 证据 run-id | `20260925-b14-e3` |
 | DRAFT 样本基线 commit | `5bb9e757247b8fad2efa3fbbcd17a7ff6d47ebe3`（本地真实 Git，可复现） |
