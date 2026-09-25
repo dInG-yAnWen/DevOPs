@@ -1,6 +1,6 @@
 # B14 / A14 E2 接口契约 1.0
 
-日期：2026-09-25。责任方：B14（DRAFT、REPAIR）；配对方：A14（FULL_CHECK、INCREMENTAL_CHECK）。状态：**A14 已接受 E2 1.0 契约，B14 已记录回复并完成本地交接校验；正式提交版本待发布**。依据见 [协作确认与交接记录](../docs/collaboration/交接确认.md)。本文件与 `task.schema.json`、`validator/validate.py` 共同组成约束。Schema 约束结构，校验器约束跨字段相等、产物内容与业务语义。
+日期：2026-09-25。责任方：B14（DRAFT、REPAIR）；配对方：A14（FULL_CHECK、INCREMENTAL_CHECK）。状态：**A14 已接受 E2 1.0 契约，B14 已记录回复并完成本地交接校验；B14 契约基线已发布（`689539119e60afd4b224d3163d1ba292992baa95`），A14 指定交付 SHA 待补充**。依据见 [协作确认与交接记录](../docs/collaboration/交接确认.md) 和 [已发布版本记录](../docs/release.md)。本文件与 `task.schema.json`、`validator/validate.py` 共同组成约束。Schema 约束结构，校验器约束跨字段相等、产物内容与业务语义。
 
 本仓库给出可离线验收的契约，未部署 HTTP 服务。所有 `example.invalid` 地址、重复数字 SHA、镜像 digest、构建和重检结果均为人工样例。可读取样例文件不等于可拉取真实镜像。
 

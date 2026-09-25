@@ -83,7 +83,7 @@ DEFS['Request'] = {'oneOf': requests}
 DEFS['Job'] = {'oneOf': jobs}
 DEFS['Accepted'] = obj({'schema_version': {'const': '1.0'}, 'job_id': S, 'trace_id': S, 'status': {'const': 'QUEUED'}, 'status_url': {'type': 'string', 'pattern': '^/v1/jobs/[A-Za-z0-9_-]+$'}})
 DEFS['ApiError'] = obj({'schema_version': {'const': '1.0'}, 'trace_id': S, 'http_status': enum(400, 404, 409, 422), 'error': ref('Error')})
-write(C/'task.schema.json', {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'title': 'B14 / A14 E2 contract 1.0 (A14 accepted; publication pending)', 'oneOf': [ref('Request'), ref('Job'), ref('Accepted'), ref('ApiError')], '$defs': DEFS})
+write(C/'task.schema.json', {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'title': 'B14 / A14 E2 contract 1.0 (A14 accepted)', 'oneOf': [ref('Request'), ref('Job'), ref('Accepted'), ref('ApiError')], '$defs': DEFS})
 
 # All project SHAs, image digests and execution results below are synthetic.
 repo = {'url': 'https://example.invalid/a14/make-demo.git', 'commit': '1'*40}

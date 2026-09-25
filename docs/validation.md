@@ -43,13 +43,15 @@ PASS: 69 checks (schema=1, artifacts=19, valid=20, invalid=7, mutations=20, reso
 
 ## Git 与交付检查
 
+以下是初次文档交付时的历史检查。用户后来已完成 E2 commit/push；当前发布核对见文末和 [版本记录](release.md)，不覆盖当时的验证事实。
+
 - `git diff --check`：通过；存在正常的 Git LF/CRLF 提示，无空白错误。
 - `git check-ignore -v -- A14_预设决定说明.md`：命中根 `.gitignore` 中的精确规则。
 - `git diff --cached --name-only`：空，未暂存。
 - HEAD 保持 `81ebd88445604956f045b0479054eb24bec72477`。
 - 仅保留工作区文件改动，未 commit、未 push。
 
-A14 已提供接口接受回复和其本地验证记录，B14 已完成交付包兼容性复核，详见下节。真实服务联调、个人审阅和正式版本发布仍保留在 Backlog。
+A14 已提供接口接受回复和其本地验证记录，B14 已完成交付包兼容性复核，详见下节。B14 基线已发布；真实服务联调、个人审阅、A14 版本互记和课程提交仍保留在 Backlog。
 
 ## 2026-09-25 A14 交付包复核
 
@@ -66,3 +68,9 @@ A14 已提供接口接受回复和其本地验证记录，B14 已完成交付包
 本次文档收尾未增加字段、修改错误码或样例。E2 1.0 不新增 baseline.build_commands_uri；历史命令内部存储属 A14 的 E3 待实现事项。E2 离线校验网络与 DRAFT 目标构建网络需求分开说明。
 
 文档更新后使用 `python -B validator/validate.py --suite` 复核，仍为 69 项通过。另行检查全部本地 Markdown 链接、存档原文 hash、Schema 与生成脚本标题一致性，以及原样例/产物字节未变，均通过；Git HEAD 与暂存区保持不变。
+
+## 用户提交后的发布核对
+
+2026-09-25 用户告知已 commit/push。本地 HEAD、origin/main 和 `git ls-remote origin refs/heads/main` 的实际远程查询均为 `689539119e60afd4b224d3163d1ba292992baa95`，提交说明 `E2 finished`。该提交包含完整 E2 契约和交接文档，已发布事实核验通过。
+
+本轮只补录版本记录和当前状态，Schema 仅移除标题中的 publication pending，规则与已发布基线相同。此次文档补录属于基线之后的工作区修改，尚未再次 commit/push；不把基线 SHA 当作这些补录文件自身的提交 SHA。A14 原始回复和原始验证记录未改写。

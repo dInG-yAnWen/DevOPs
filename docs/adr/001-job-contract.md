@@ -1,7 +1,7 @@
 # ADR-001：统一异步 Job 与严格版本
 
 - 日期：2026-09-25
-- 状态：A14 已接受 E2 1.0，回复已记录；正式版本发布待完成
+- 状态：A14 已接受 E2 1.0，回复已记录；B14 契约基线已发布，见 [版本记录](../release.md)
 - 责任：B14/A14 接口负责人
 
 ## Context
@@ -28,4 +28,4 @@ E3 需要任务/幂等存储、查询与终态一致性处理。本地 E2 样例
 
 ## Evidence
 
-contracts/API.md 第 1、2、4、6 节；四类请求、accepted 与结果样例；schema_version 和未知字段的拒绝检查。A14 的接受依据见 [协作记录](../collaboration/交接确认.md)；Backlog E2-08 已记录完成，正式 SHA 留待发布。
+contracts/API.md 第 1、2、4、6 节；四类请求、accepted 与结果样例；schema_version 和未知字段的拒绝检查。A14 的接受依据见 [协作记录](../collaboration/交接确认.md)；Backlog E2-08 已记录完成，B14 SHA 已记录，A14 指定交付 SHA 待其提供。

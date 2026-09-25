@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "B14 / A14 E2 contract 1.0 (A14 accepted; publication pending)",
+  "title": "B14 / A14 E2 contract 1.0 (A14 accepted)",
   "oneOf": [
     {
       "$ref": "#/$defs/Request"
