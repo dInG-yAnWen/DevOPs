@@ -2,6 +2,22 @@
 
 核对日期：2026-09-25。
 
+## 字节一致性修复（后续基线）
+
+**下面记录的 `689539119e60afd4b224d3163d1ba292992baa95` 为历史 E2 基线，已知其产物导出会受到 Git 换行配置影响，后续配对应改用包含本修复的新提交。** 接口版本仍为 1.0，Schema、样例字段、manifest 校验值及产物 Git 原始内容均未修改。
+
+本修复添加根目录 `.gitattributes`：
+
+```gitattributes
+/contracts/artifacts/** -text
+```
+
+新增 `validator/verify_git_export.py`，分别在 `core.autocrlf=true/false/input` 下调用 `git archive`，核验全部 19 份产物，并在临时解压目录运行契约套件。验证记录见 [产物字节修复](validation-artifact-bytes.md)。
+
+本节随修复提交一起发布。为避免在提交中循环引用自身 SHA，完整的新基线 SHA 通过本次 Git 记录和给 A14 的发布回复提供。任何“HEAD/origin/main 等于旧基线”的下文描述均为原发布时的历史核对结果。
+
+## 历史 E2 首次发布
+
 | 项目 | 已核实信息 |
 | --- | --- |
 | 仓库 | https://github.com/dInG-yAnWen/DevOPs |

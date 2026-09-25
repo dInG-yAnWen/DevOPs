@@ -1,0 +1,3 @@
+# Artifact SHA-256 values cover exact bytes. Do not convert line endings on
+# checkout or git archive, regardless of the consumer's core.autocrlf setting.
+/contracts/artifacts/** -text

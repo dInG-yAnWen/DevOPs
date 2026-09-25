@@ -19,6 +19,8 @@ E3 自备基线见 [B14 E3 交付说明](e3/B14_E3交付说明.md) 与 [E3 真�
 
 ## 复现契约验收
 
+产物按原始字节计算 SHA-256，`.gitattributes` 对 `contracts/artifacts/**` 禁用换行转换。旧 E2 提交 `6895391` 的导出在部分 Git 配置下会改变产物字节；跨组消费请使用包含此修复的新提交，详见 [发布记录](docs/release.md)。有 Git 的环境还可执行 `python validator/verify_git_export.py --ref HEAD`，验证三种换行配置下的导出包。
+
 需要 Python 3.10+，无需网络即可校验。在仓库根目录运行：
 
 ```sh
