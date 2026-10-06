@@ -9,3 +9,9 @@ __pycache__/
 
 # E3 scratch working copies (built binaries/objects); evidence is kept
 /e3/work/
+
+# E4 local credentials, generated evidence, caches and build output
+/.env
+/work/
+/__pycache__/
+/**/*.pyc

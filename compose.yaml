@@ -1,0 +1,20 @@
+# 用法：make build / make test / make smoke（Makefile 会设置 STUDENT_ID、DOCKER_GID 和项目名）
+services:
+  draft:
+    build:
+      context: .                              # 仓库根目录，Dockerfile 需要 fixtures/
+      dockerfile: services/draft/Dockerfile
+    image: e4-draft:${STUDENT_ID:-local}
+    volumes:
+      # 把宿主机 Docker 的入口交给容器：容器里的 docker 命令实际由宿主机执行。
+      # 风险：能访问这个文件就等于拥有宿主机 root 权限（见 README 第 5 节）
+      - /var/run/docker.sock:/var/run/docker.sock
+    group_add:
+      # docker.sock 属于宿主机的 docker 组；把这个组号加给容器内的 app 用户
+      - "${DOCKER_GID:?请用 make 运行，或先执行 export DOCKER_GID=$(stat -c %g /var/run/docker.sock)}"
+    env_file: .env                            # 自己的 LLM API Key 等，只在运行时注入
+    cpus: 2                                   # 只限制 DRAFT 容器本身；
+    mem_limit: 1g                             # 它让宿主机执行的 docker build 不受这里的限制
+    pids_limit: 256
+    security_opt:
+      - no-new-privileges:true
