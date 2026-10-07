@@ -2,7 +2,7 @@
 # The python:3.13-slim base image ships no make and no C toolchain, so
 # `RUN make` exits non-zero and `docker build` fails at this layer.
 # Expected failure is locatable in the build log as: "make: not found".
-FROM python:3.13-slim
+FROM m.daocloud.io/docker.io/library/python@sha256:f82c96458eedc847b233e582eb31336f4954b39cae020b6dcf5b3ed0e5cbcd74
 WORKDIR /work
 COPY main.c Makefile ./
 RUN make
