@@ -1,0 +1,66 @@
+{
+  "collected_at_utc": "2026-10-08T07:43:08Z",
+  "member": {
+    "name": "徐梓航",
+    "student_id": "241880273"
+  },
+  "remote_repository": "https://github.com/dInG-yAnWen/DevOPs.git",
+  "remote_clone": "/root/241880273/draft",
+  "remote_evidence": "/root/241880273/draft/work/20261007-175642",
+  "source_sha": "eb2c62c9a3222cbcb25a8bc204348ce91b3c9ba8",
+  "source_version_evidence": {
+    "member_delivery_record_sha": "eb2c62c9a3222cbcb25a8bc204348ce91b3c9ba8",
+    "clone_reflog": "eb2c62c9a3222cbcb25a8bc204348ce91b3c9ba8 HEAD@{2026-10-07 17:56:22 +0800} clone: from https://github.com/dInG-yAnWen/DevOPs.git",
+    "env_time": "2026-10-07T09:56:42.037537+00:00",
+    "current_head_at_collection": "eb2c62c9a3222cbcb25a8bc204348ce91b3c9ba8"
+  },
+  "worktree_clean_at_collection": true,
+  "make_all_exit": {
+    "value": 0,
+    "source": "member delivery record",
+    "standalone_exit_code_file_present": false
+  },
+  "fake_key_exercise": {
+    "performed": false,
+    "source": "member delivery record"
+  },
+  "raw_server_file_count": 7,
+  "checksums": [
+    {
+      "file": "env.json",
+      "sha256": "edb74f7b14e72eb769dd4d2448ab38cfb9410d4d7f42f080e925f5860abb2048",
+      "local_matches_server": true
+    },
+    {
+      "file": "build.log",
+      "sha256": "15c9e9b1bb5c1daa9687a285383032b30e6937bbad084f642d7c4ae6fe405304",
+      "local_matches_server": true
+    },
+    {
+      "file": "image.json",
+      "sha256": "fced92338c1cdf279f9e49e4c470ac89bacaa111646ddb0171c0d43cb9436123",
+      "local_matches_server": true
+    },
+    {
+      "file": "toolchain.lock",
+      "sha256": "42f79c804c8c8d6a676d82f31f37aef804fce367381ee014461c7d772fa5f15c",
+      "local_matches_server": true
+    },
+    {
+      "file": "test.log",
+      "sha256": "4250d1f2029068ddc50a143f438d48c0e151e05c734fe713ffea94436ecf9381",
+      "local_matches_server": true
+    },
+    {
+      "file": "smoke.json",
+      "sha256": "4afcc36b4e611e7e007659fa0473ae90ae2330c5f57bce839a9dad83fae287c5",
+      "local_matches_server": true
+    },
+    {
+      "file": "secret-scan.txt",
+      "sha256": "28f0847988eede75b5d468fa0f6d8cd75bd55e14686ccbb84cf1d3fc3c9b58c5",
+      "local_matches_server": true
+    }
+  ],
+  "manifest_scope": "Seven server files collected on 2026-10-08. SHA256SUMS.txt and collection.json are collection-time records."
+}

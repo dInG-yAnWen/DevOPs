@@ -1,0 +1,151 @@
+python3 scripts/doctor.py --out work/20261007-241880284-e4/env.json
+{
+  "time": "2026-10-07T09:13:16.126448+00:00",
+  "hostname": "iZbp106a3t3mzz3nfabuapZ",
+  "os": "Ubuntu 22.04.5 LTS",
+  "kernel": "5.15.0-191-generic",
+  "arch": "x86_64",
+  "spec": {
+    "cpus": 2,
+    "mem_gib": 3.5,
+    "disk_gib": 69.9
+  },
+  "tools": {
+    "docker": "29.1.3",
+    "compose": "2.40.3+ds1-0ubuntu1~22.04.1",
+    "buildx": "github.com/docker/buildx 0.30.1 0.30.1-0ubuntu1~22.04.1",
+    "git": "git version 2.34.1",
+    "make": "GNU Make 4.3",
+    "python3": "Python 3.10.12"
+  },
+  "problems": [],
+  "warnings": [
+    "cpus=2 低于建议值 4",
+    "mem_gib=3.5 低于建议值 8",
+    "disk_gib=69.9 低于建议值 100",
+    "Docker 未配置镜像加速，拉取基础镜像可能很慢（见 setup/bootstrap_ubuntu.sh）"
+  ],
+  "docker_sock_gid": 121,
+  "registry_mirrors": [],
+  "git": {
+    "user.name": "241880284",
+    "user.email": "241880284@localhost"
+  }
+}
+
+环境自检：通过
+cp .env.example .env && chmod 600 .env
+已从 .env.example 生成 .env（权限 600），需要时再填写。
+docker compose -p e4-draft-241880284 build --progress=plain 2>&1 | tee work/20261007-241880284-e4/build.log; test ${PIPESTATUS[0]} -eq 0
+--progress is a global compose flag, better use `docker compose --progress xx build ...
+#1 [internal] load local bake definitions
+#1 reading from stdin 522B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 2.60kB done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for m.daocloud.io/docker.io/library/docker@sha256:9190b0613792e658a7783cf14b2d5ace5941bb68ede7276922ea36ee457d76ad
+#3 DONE 0.8s
+
+#4 [internal] load metadata for m.daocloud.io/docker.io/library/python@sha256:f82c96458eedc847b233e582eb31336f4954b39cae020b6dcf5b3ed0e5cbcd74
+#4 DONE 0.8s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 106B done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 10.18kB done
+#6 DONE 0.0s
+
+#7 [stage-1  1/10] FROM m.daocloud.io/docker.io/library/python@sha256:f82c96458eedc847b233e582eb31336f4954b39cae020b6dcf5b3ed0e5cbcd74
+#7 resolve m.daocloud.io/docker.io/library/python@sha256:f82c96458eedc847b233e582eb31336f4954b39cae020b6dcf5b3ed0e5cbcd74 0.0s done
+#7 DONE 0.0s
+
+#8 [docker-cli 1/1] FROM m.daocloud.io/docker.io/library/docker@sha256:9190b0613792e658a7783cf14b2d5ace5941bb68ede7276922ea36ee457d76ad
+#8 resolve m.daocloud.io/docker.io/library/docker@sha256:9190b0613792e658a7783cf14b2d5ace5941bb68ede7276922ea36ee457d76ad 0.0s done
+#8 DONE 0.0s
+
+#9 [stage-1  6/10] RUN pip install --no-cache-dir --require-hashes -r /tmp/requirements-dev.lock  && pip freeze | sed 's/^/pip:/' >> /opt/toolchain.lock
+#9 CACHED
+
+#10 [stage-1  7/10] RUN useradd --create-home --uid 10001 app && install -d -o app -g app /app
+#10 CACHED
+
+#11 [stage-1  8/10] WORKDIR /app
+#11 CACHED
+
+#12 [stage-1  3/10] COPY --from=docker-cli /usr/local/libexec/docker/cli-plugins/docker-buildx /usr/local/libexec/docker/cli-plugins/docker-buildx
+#12 CACHED
+
+#13 [stage-1  2/10] COPY --from=docker-cli /usr/local/bin/docker /usr/local/bin/docker
+#13 CACHED
+
+#14 [stage-1  9/10] COPY --chown=app:app services/draft/ /app/
+#14 CACHED
+
+#15 [stage-1  4/10] RUN if [ -f /etc/apt/sources.list.d/debian.sources ]; then       sed -i         -e 's|deb.debian.org/debian-security|mirrors.aliyun.com/debian-security|g'         -e 's|deb.debian.org/debian|mirrors.aliyun.com/debian|g'         /etc/apt/sources.list.d/debian.sources;     fi  && apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout=60 update  && apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout=60       install -y --no-install-recommends git  && rm -rf /var/lib/apt/lists/*  && dpkg-query -W -f='${Package}=${Version}\n' git > /opt/toolchain.lock  && echo "docker-cli=$(docker --version)" >> /opt/toolchain.lock  && echo "python3=$(python3 -c 'import platform; print(platform.python_version())')" >> /opt/toolchain.lock  && echo "arch=$(dpkg --print-architecture)" >> /opt/toolchain.lock
+#15 CACHED
+
+#16 [stage-1  5/10] COPY requirements-dev.lock /tmp/requirements-dev.lock
+#16 CACHED
+
+#17 [stage-1 10/10] COPY --chown=app:app fixtures/ /app/fixtures/
+#17 CACHED
+
+#18 exporting to image
+#18 exporting layers done
+#18 exporting manifest sha256:fa453b00d0fe0de1c5053fe73a40173ff8df825f332fa80ef86bb00d98bb24cc done
+#18 exporting config sha256:632f20280eecbe59b64163efd72a70ee1a01cd69bfa3e48fd79ca0c833a1e574 done
+#18 exporting attestation manifest sha256:80ad2eeebfeb8697f4391decba5d14908882fc6d7ac5c9625197f2e352d30827 0.0s done
+#18 exporting manifest list sha256:3cb07fb9b1052fe0e4abefea97a069ab9b88cf4eb26018a105f30707efb6df39 done
+#18 naming to docker.io/library/e4-draft:241880284 done
+#18 unpacking to docker.io/library/e4-draft:241880284 done
+#18 DONE 0.1s
+
+#19 resolving provenance for metadata file
+#19 DONE 0.0s
+ e4-draft:241880284  Built
+docker image inspect e4-draft:241880284 --format '{"image":"e4-draft:241880284","id":"{{.Id}}","arch":"{{.Architecture}}","created":"{{.Created}}"}' | tee work/20261007-241880284-e4/image.json
+{"image":"e4-draft:241880284","id":"sha256:3cb07fb9b1052fe0e4abefea97a069ab9b88cf4eb26018a105f30707efb6df39","arch":"amd64","created":"2026-10-06T23:40:55.387971559+08:00"}
+docker compose -p e4-draft-241880284 run --rm --no-deps draft cat /opt/toolchain.lock | tee work/20261007-241880284-e4/toolchain.lock
+ Network e4-draft-241880284_default  Creating
+ Network e4-draft-241880284_default  Created
+git=1:2.47.3-0+deb13u1
+docker-cli=Docker version 28.5.1, build e180ab8
+python3=3.13.14
+arch=amd64
+pip:iniconfig==2.3.0
+pip:packaging==26.3
+pip:pluggy==1.6.0
+pip:Pygments==2.21.0
+pip:pytest==8.4.2
+timeout 600 docker compose -p e4-draft-241880284 run --rm -T --interactive=false draft pytest 2>&1 | tee work/20261007-241880284-e4/test.log; test ${PIPESTATUS[0]} -eq 0
+....                                                                     [100%]
+4 passed in 0.01s
+timeout 600 docker compose -p e4-draft-241880284 run --rm -T --interactive=false draft python3 -m draft smoke | tee work/20261007-241880284-e4/smoke.json; test ${PIPESTATUS[0]} -eq 0
+{
+  "fixture": "fixtures/draft",
+  "docker_server": "29.1.3",
+  "build_exit_code": 1,
+  "build_seconds": 0.3,
+  "log_tail": [
+    "--------------------",
+    "   2 |     WORKDIR /work",
+    "   3 |     COPY main.c Makefile ./",
+    "   4 | >>> RUN make",
+    "   5 |     CMD [\"./hello\"]",
+    "   6 |     ",
+    "--------------------",
+    "ERROR: failed to build: failed to solve: process \"/bin/sh -c make\" did not complete successfully: exit code: 127"
+  ],
+  "make_error_line": "#8 0.116 /bin/sh: 1: make: not found",
+  "make_not_found": true,
+  "passed": true,
+  "note": "E4 只验证构建链路；E5 须重新保存完整原始构建日志及退出码"
+}
+python3 scripts/secret_scan.py . --history --image e4-draft:241880284 | tee work/20261007-241880284-e4/secret-scan.txt; test ${PIPESTATUS[0]} -eq 0
+密钥检查：未发现问题（文件 138 个，含 Git 历史，含镜像 e4-draft:241880284）
+证据目录：work/20261007-241880284-e4

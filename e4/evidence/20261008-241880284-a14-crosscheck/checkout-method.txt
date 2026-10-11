@@ -1,0 +1,1 @@
+GitHub clone timed out after 40 seconds; cloned the verified complete A14 Git bundle and restored the official origin URL.

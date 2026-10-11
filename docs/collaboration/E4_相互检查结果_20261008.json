@@ -1,0 +1,59 @@
+{
+  "date": "2026-10-08",
+  "direction": "B14 checks A14",
+  "student_id": "241880284",
+  "source_sha": "0a23b30d5c1e6eef118ce8d422c4a5b0444215f5",
+  "delivery_sha": "f810e8fa70b750c8fce2355baea9cc6d5fd043a6",
+  "repository_url": "https://github.com/oVLVo11/DevOps_A14.git",
+  "started_utc": "2026-10-08T06:26:35Z",
+  "finished_utc": "2026-10-08T06:35:16Z",
+  "evidence_path": "e4/evidence/20261008-241880284-a14-crosscheck",
+  "server_record": [
+    "student_id=241880284",
+    "clone_path=/root/241880284/a14-e4-crosscheck-20261008-1420/buildchecker-bundle",
+    "evidence_path=/root/241880284/a14-e4-crosscheck-20261008-1420/buildchecker-bundle/work/20261008-241880284-a14"
+  ],
+  "command": "timeout --kill-after=30s 1200s make -j1 RUN=work/20261008-241880284-a14 all",
+  "status": "PASSED",
+  "make_all_exit": 0,
+  "unit_tests": "3 passed",
+  "smoke_passed": true,
+  "app_output": "1",
+  "config_h_read": true,
+  "unused_h_read": false,
+  "secret_scan": "PASS",
+  "env_problems": [],
+  "env_warnings": [
+    "cpus=2 低于建议值 4",
+    "mem_gib=3.5 低于建议值 8",
+    "disk_gib=69.9 低于建议值 100",
+    "Docker 未配置镜像加速，拉取基础镜像可能很慢"
+  ],
+  "image": {
+    "image": "e4-buildchecker:241880284",
+    "id": "sha256:29e2b1b7c4d120a7ba5db69b9516340a927422a7b10b288276204e297cb8b919",
+    "arch": "amd64",
+    "created": "2026-10-08T14:35:01.252399108+08:00"
+  },
+  "image_user": "app",
+  "source_files_verified": 6,
+  "evidence_checksums_verified": 27,
+  "env_mode": "600",
+  "env_tracked": false,
+  "git_worktree_clean": true,
+  "remaining_containers": 0,
+  "comparison_with_a14": {
+    "baseline": "e4/evidence/20261008-a14-e4/run-1",
+    "toolchain_exactly_equal": true,
+    "toolchain_sha256_current": "bc70f4e9e436d2567c88588171d7fd4575a614c442874baa089407106bbf9358",
+    "toolchain_sha256_a14": "bc70f4e9e436d2567c88588171d7fd4575a614c442874baa089407106bbf9358",
+    "both_tests_3_passed": true,
+    "smoke_outcomes_equal": true,
+    "image_id_equal": false
+  },
+  "checkout": {
+    "github_clone_exit": 124,
+    "method": "verified full Git bundle; official origin restored"
+  },
+  "a14_checks_b14_status": "awaiting A14 result"
+}

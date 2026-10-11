@@ -1,3 +1,10 @@
 # Artifact SHA-256 values cover exact bytes. Do not convert line endings on
 # checkout or git archive, regardless of the consumer's core.autocrlf setting.
 /contracts/artifacts/** -text
+
+# Evidence manifests hash original bytes, including any original mixed line endings.
+/e3/evidence/** -text
+/e4/evidence/** -text
+
+# Preserve the received A14 reply byte-for-byte for the handoff receipt hash.
+/docs/collaboration/A14_回复B14_E3E4资料说明_20261008.md -text

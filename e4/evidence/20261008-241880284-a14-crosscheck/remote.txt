@@ -1,0 +1,2 @@
+origin	https://github.com/oVLVo11/DevOps_A14.git (fetch)
+origin	https://github.com/oVLVo11/DevOps_A14.git (push)

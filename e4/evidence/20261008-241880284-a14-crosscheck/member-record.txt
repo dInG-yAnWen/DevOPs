@@ -1,0 +1,3 @@
+student_id=241880284
+clone_path=/root/241880284/a14-e4-crosscheck-20261008-1420/buildchecker-bundle
+evidence_path=/root/241880284/a14-e4-crosscheck-20261008-1420/buildchecker-bundle/work/20261008-241880284-a14

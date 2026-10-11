@@ -1,21 +1,31 @@
 {
   "scope": "B14 E3 DRAFT sample container evidence",
-  "docker_build_executed": false,
-  "image_id": null,
-  "container_run_executed": false,
-  "source": "NOT_EXECUTED",
-  "reason": "运行环境未安装 docker，且无外网/无 registry 访问，无法拉取 python:3.13-slim 执行镜像构建。本次未产生真实镜像 ID 与容器运行结果，也未伪造；请在具备 Docker 与网络的环境按下述命令补齐后回填 image_id 与容器输出。",
+  "docker_build_executed": true,
+  "image_id": "sha256:e21f3cbc2e958d337c95606f9624c103d6157bf634255c8c2d783484e2067093",
+  "container_run_executed": true,
+  "source": "EXISTING_DOCKER_EVIDENCE",
+  "verification_date": "2026-10-07",
+  "verification_record": "e3/验证记录_20261007.md",
+  "evidence_dir": "e3/evidence/20261007-b14-e3/",
+  "image": "b14-e3-draft-reference:20261007",
+  "arch": "amd64",
+  "broken_build_exit_code": 1,
+  "reference_build_exit_code": 0,
+  "container_stdout": "hello E3",
+  "container_exit_code": 0,
+  "container_exit_code_source": "e3/验证记录_20261007.md",
+  "reason": "2026-09-25 因无 Docker/网络未执行容器验证；2026-10-07 已在 B14 服务器补齐。当前字段依据仓库已有补测说明、构建日志、镜像 JSON 与运行日志同步，不代表本轮状态整理重新执行了 E3 实验。9 月 25 日原始日志和 observations.json 保留不变。",
   "host_equivalent_evidence": {
-    "note": "本机以真实编译/运行作为等价证据（非容器）",
+    "note": "2026-09-25 历史记录：本机真实编译/运行证据（非容器）",
     "build": "make -> exit 0, generated ./hello",
     "verify": "./hello -> exit 0, stdout 'hello E3'",
     "broken_run_reproduced": "/bin/sh -c make under empty PATH -> exit 127, 'make: not found'",
     "evidence_dir": "e3/evidence/20260925-b14-e3/"
   },
   "reproduction_commands": [
-    "docker build -f e3/fixtures/draft/Dockerfile.broken    -t b14-e3-draft-broken:20260925    e3/fixtures/draft",
-    "docker build -f e3/fixtures/draft/Dockerfile.reference -t b14-e3-draft-reference:20260925 e3/fixtures/draft",
-    "docker images --no-trunc --format '{{.ID}}' b14-e3-draft-reference:20260925",
-    "docker run --rm b14-e3-draft-reference:20260925"
+    "docker build -f e3/fixtures/draft/Dockerfile.broken    -t b14-e3-draft-broken:20261007    e3/fixtures/draft",
+    "docker build -f e3/fixtures/draft/Dockerfile.reference -t b14-e3-draft-reference:20261007 e3/fixtures/draft",
+    "docker images --no-trunc --format '{{.ID}}' b14-e3-draft-reference:20261007",
+    "docker run --rm b14-e3-draft-reference:20261007"
   ]
 }

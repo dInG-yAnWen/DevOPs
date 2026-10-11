@@ -4,23 +4,27 @@
 两类可直接让别人复现的测试基线：**DRAFT 环境生成样本**与 **MDFixer 缺失依赖修复样本**。
 配对组 A14 负责 BuildChecker（FULL_CHECK）与 EChecker（INCREMENTAL_CHECK）。
 
-主交付说明：[B14 E3 交付说明](B14_E3交付说明.md)。真实运行记录：[验证记录](验证记录_20260925.md)。
+主交付说明：[B14 E3 交付说明](B14_E3交付说明.md)。真实运行记录：[2026-09-25 基线记录](验证记录_20260925.md)、[2026-10-07 Docker 补测](验证记录_20261007.md)。
+
+**当前状态**：仓库已有 2026-10-07 Docker 补测证据，失败样例准确报告 `make: not found`，参考镜像构建成功并输出 `hello E3`。本页同步已有结果；下文 9 月 25 日环境限制属于历史状态。
 
 ## 交付物一览
 
 | 路径 | 内容 |
 | --- | --- |
 | [`B14_E3交付说明.md`](B14_E3交付说明.md) | 主文档：需求对照、样本说明、证据与限制 |
-| [`验证记录_20260925.md`](验证记录_20260925.md) | 本次真实执行的命令、退出码与观察结果 |
+| [`验证记录_20260925.md`](验证记录_20260925.md) | 9 月 25 日真实执行的命令、退出码与观察结果 |
+| [`验证记录_20261007.md`](验证记录_20261007.md) | 10 月 7 日 Docker 失败定位、参考构建与容器运行补测 |
 | [`fixtures/draft/`](fixtures/draft/README.md) | DRAFT 样本：TinyGreeting 源码、Makefile、失败/参考 Dockerfile |
 | [`fixtures/mdfixer/`](fixtures/mdfixer/README.md) | MDFixer 样本：缺 `config.h` 的 Makefile、参考补丁、固定 MD 报告 |
 | [`scripts/run_b14_e3.py`](scripts/run_b14_e3.py) | 一键真实执行脚本，按运行时间写入证据目录 |
-| [`evidence/20260925-b14-e3/`](evidence/20260925-b14-e3/observations.json) | 本次真实证据：日志、退出码、观察、绑定报告 |
+| [`evidence/20260925-b14-e3/`](evidence/20260925-b14-e3/observations.json) | 9 月 25 日真实证据：日志、退出码、观察、绑定报告 |
+| [`evidence/20261007-b14-e3/`](evidence/20261007-b14-e3/) | Docker 补测日志、镜像 ID、容器输出与校验清单 |
 
 ## 一键复现
 
 需要 Linux + GNU Make + `cc`/`gcc` + Git + Python 3.8+。无需网络，无需 Docker
-（Docker 部分见“未完成与限制”）。
+（此脚本不执行 Docker；容器补测结果见“Docker 状态与限制”）。
 
 ```sh
 cd <仓库根目录>
@@ -31,7 +35,7 @@ python3 e3/scripts/run_b14_e3.py --run-id my-run # 使用固定 run-id，便于�
 脚本每次新建 `e3/evidence/<run-id>/`，不覆盖历史证据；`e3/work/` 为临时构建目录
 （已在 `.gitignore` 中忽略）。
 
-## 本次实测环境
+## 2026-09-25 实测环境（历史记录）
 
 | 项目 | 值 |
 | --- | --- |
@@ -44,7 +48,7 @@ python3 e3/scripts/run_b14_e3.py --run-id my-run # 使用固定 run-id，便于�
 | Shell | `/bin/sh` → dash |
 | Docker | 未安装，无网络（因此未产生真实镜像 ID） |
 
-## 本次真实结论速览（run-id `20260925-b14-e3`）
+## 2026-09-25 真实结论速览（run-id `20260925-b14-e3`）
 
 | 场景 | 实际观察 | 含义 |
 | --- | --- | --- |
@@ -59,13 +63,9 @@ python3 e3/scripts/run_b14_e3.py --run-id my-run # 使用固定 run-id，便于�
 | MDFixer 无效候选 | 故意失败命令使 `make` 退出码 2 | 候选应被拒绝 |
 | MDFixer 恢复 | 恢复参考 Makefile 后 `make` 退出码 0，`./app` 输出 `3` | 副本可恢复 |
 
-## 未完成与限制（如实记录）
+## Docker 状态与限制
 
-- **Docker 镜像证据缺失**：本机无 `docker`、无外网/registry 访问，无法拉取
-  `python:3.13-slim` 执行镜像构建，因此**没有真实 image ID 与容器运行结果**。
-  本次未伪造该数据，改为：(1) 提交 `Dockerfile.broken` / `Dockerfile.reference`；
-  (2) 在本机用受限 PATH 真实复现 `RUN make` 的失败语义（退出码 127）；
-  (3) 给出完整 `docker build/run/images` 复现命令，供有 Docker 的环境补齐。
+- **Docker 证据已于 2026-10-07 补齐**：9 月 25 日环境无 Docker/网络，当时仅保存宿主机编译和受限 PATH 失败证据；这些历史日志及 `observations.json` 保留不变。后续在 B14 服务器完成真实 Docker 补测：失败构建退出码 1、参考构建退出码 0、容器输出 `hello E3`，补测说明记录容器退出码 0。镜像 ID 为 `sha256:e21f3cbc2e958d337c95606f9624c103d6157bf634255c8c2d783484e2067093`（amd64）。详见 [补测记录](验证记录_20261007.md) 与 [当前 Docker 状态](fixtures/draft/docker_status.json)。
 - **未做真实联调**：这些是 B14 自备的人工基线，尚未接入 A14 的真实检测数据（E12）。
 - **人工标签不入准确率**：MD 报告来源为 `INSTRUCTOR_ORACLE`，只作预期答案，不计入
   工具准确率。

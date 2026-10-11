@@ -1,0 +1,55 @@
+{
+  "date": "2026-10-08",
+  "source_sha": "eb2c62c9a3222cbcb25a8bc204348ce91b3c9ba8",
+  "members": [
+    {
+      "student_id": "241880284",
+      "clone": "/root/241880284/draft",
+      "server_evidence": "/root/241880284/draft/work/20261007-241880284-e4",
+      "local_evidence": "e4/evidence/20261007-241880284-e4",
+      "make_all_exit": 0,
+      "make_all_exit_evidence": "exit-codes.tsv",
+      "fake_key_exercise_performed": true
+    },
+    {
+      "name": "徐梓航",
+      "student_id": "241880273",
+      "clone": "/root/241880273/draft",
+      "server_evidence": "/root/241880273/draft/work/20261007-175642",
+      "local_evidence": "e4/evidence/20261007-241880273-e4",
+      "make_all_exit": 0,
+      "make_all_exit_evidence": "member delivery record; all seven standard logs checked",
+      "fake_key_exercise_performed": false
+    }
+  ],
+  "checks": {
+    "same_source_sha": true,
+    "source_273_basis": {
+      "member_delivery_record_sha": "eb2c62c9a3222cbcb25a8bc204348ce91b3c9ba8",
+      "clone_reflog": "eb2c62c9a3222cbcb25a8bc204348ce91b3c9ba8 HEAD@{2026-10-07 17:56:22 +0800} clone: from https://github.com/dInG-yAnWen/DevOPs.git",
+      "env_time": "2026-10-07T09:56:42.037537+00:00",
+      "current_head_at_collection": "eb2c62c9a3222cbcb25a8bc204348ce91b3c9ba8"
+    },
+    "same_host_tools": true,
+    "toolchain_exactly_equal": true,
+    "toolchain_sha256": "42f79c804c8c8d6a676d82f31f37aef804fce367381ee014461c7d772fa5f15c",
+    "both_doctor_passed": true,
+    "both_tests_4_passed": true,
+    "both_smoke_passed": true,
+    "both_expected_build_exit_1": true,
+    "both_make_not_found": true,
+    "both_secret_scan_passed": true,
+    "image_ids_equal": false
+  },
+  "result": "Same-source independent-clone toolchain and runtime results agree",
+  "scope": "Same B14 server with shared Docker cache",
+  "remaining": {
+    "241880273_fake_key_exercise": "not performed"
+  },
+  "previous_20261006_evidence": "Preserved separately; its unknown source SHA is not retroactively replaced.",
+  "subsequent_member_record": {
+    "student_id": "241880272",
+    "status": "archived",
+    "comparison": "成员复跑对照_20261008.json"
+  }
+}

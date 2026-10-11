@@ -12,7 +12,7 @@
 | `Makefile` | 目标 `hello`；`make test` 运行程序 |
 | `Dockerfile.broken` | 故意缺少工具链的失败候选 |
 | `Dockerfile.reference` | 人工参考修复，安装工具链后构建 |
-| `docker_status.json` | Docker 未执行的原因、等价证据与补齐命令（本机无 Docker） |
+| `docker_status.json` | 当前 Docker 补测状态、证据入口与复现命令；保留早期环境限制的说明 |
 
 ## 构建与验证命令
 

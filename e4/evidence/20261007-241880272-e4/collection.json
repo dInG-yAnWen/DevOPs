@@ -1,0 +1,96 @@
+{
+  "collected_at_utc": "2026-10-08T10:49:32Z",
+  "member": {
+    "student_id": "241880272"
+  },
+  "remote_repository": "https://github.com/dInG-yAnWen/DevOPs.git",
+  "remote_clone": "/root/241880272/draft",
+  "remote_evidence": "/root/241880272/draft/work/20261007-193940",
+  "source_sha": "eb2c62c9a3222cbcb25a8bc204348ce91b3c9ba8",
+  "source_version_evidence": {
+    "member_delivery_record_sha": "eb2c62c9a3222cbcb25a8bc204348ce91b3c9ba8",
+    "clone_reflog": "eb2c62c9a3222cbcb25a8bc204348ce91b3c9ba8 HEAD@{2026-10-07 17:49:39 +0800} clone: from https://github.com/dInG-yAnWen/DevOPs.git",
+    "env_time": "2026-10-07T11:39:40.050921+00:00",
+    "current_head_at_collection": "eb2c62c9a3222cbcb25a8bc204348ce91b3c9ba8"
+  },
+  "worktree_clean_at_collection": true,
+  "make_all_exit": {
+    "value": 0,
+    "source": "member-delivery-record.md",
+    "standalone_exit_code_file_present": false,
+    "complete_output_file": "make-all.log"
+  },
+  "fake_key_exercise": {
+    "performed_per_member_record": true,
+    "negative_original_log_present": false,
+    "negative_original_log_missing_reason": "Member record states both scans wrote the same file; the first output was not saved separately.",
+    "negative_result_per_member_record": "2 suspected leaks and make scan Error 1; no independently recorded make process exit code",
+    "cleanup_scan_passed": true,
+    "cleanup_scan_log": "fake-key-cleaned/secret-scan.txt",
+    "evidence_complete": false
+  },
+  "raw_server_file_count": 9,
+  "checksums": [
+    {
+      "file": "env.json",
+      "remote_path": "/root/241880272/draft/work/20261007-193940/env.json",
+      "sha256": "c2bb0b893b67cc89f463299db8ac4be1a37a026da88d4c6f4dd58acd5afe4643",
+      "local_matches_server": true
+    },
+    {
+      "file": "build.log",
+      "remote_path": "/root/241880272/draft/work/20261007-193940/build.log",
+      "sha256": "e4169baaf50b88992710fc23d257508b99d0b9a65732df9707cc8befc4c012ad",
+      "local_matches_server": true
+    },
+    {
+      "file": "image.json",
+      "remote_path": "/root/241880272/draft/work/20261007-193940/image.json",
+      "sha256": "cf115686c34f662cdef026a6bc7d14775f97049a1407663601addb32bd8d52f9",
+      "local_matches_server": true
+    },
+    {
+      "file": "toolchain.lock",
+      "remote_path": "/root/241880272/draft/work/20261007-193940/toolchain.lock",
+      "sha256": "42f79c804c8c8d6a676d82f31f37aef804fce367381ee014461c7d772fa5f15c",
+      "local_matches_server": true
+    },
+    {
+      "file": "test.log",
+      "remote_path": "/root/241880272/draft/work/20261007-193940/test.log",
+      "sha256": "4250d1f2029068ddc50a143f438d48c0e151e05c734fe713ffea94436ecf9381",
+      "local_matches_server": true
+    },
+    {
+      "file": "smoke.json",
+      "remote_path": "/root/241880272/draft/work/20261007-193940/smoke.json",
+      "sha256": "eef943c94b8950417bce4a8224b5caf19d5ac0d169727b088c32e2e3b58f6daa",
+      "local_matches_server": true
+    },
+    {
+      "file": "secret-scan.txt",
+      "remote_path": "/root/241880272/draft/work/20261007-193940/secret-scan.txt",
+      "sha256": "2298e2f0e0e7e3e657c8794b4c355afb62e3d2ffc02821cf986094e9bc3be05a",
+      "local_matches_server": true
+    },
+    {
+      "file": "make-all.log",
+      "remote_path": "/root/241880272/make-all.log",
+      "sha256": "ffc30bdd54dea4ef7887f03726343186646bf588cc753e4a4a777884507293de",
+      "local_matches_server": true
+    },
+    {
+      "file": "fake-key-cleaned/secret-scan.txt",
+      "remote_path": "/root/241880272/draft/work/20261007-194311/secret-scan.txt",
+      "sha256": "2298e2f0e0e7e3e657c8794b4c355afb62e3d2ffc02821cf986094e9bc3be05a",
+      "local_matches_server": true
+    }
+  ],
+  "received_record": {
+    "file": "member-delivery-record.md",
+    "source_filename": "E4_提交记录_241880272.md",
+    "sha256": "e715182f0b2bb4bf59d2b8277aa7470c8063700e9bd48b1eae3b9f9e396cd08d",
+    "byte_identical_to_attachment": true
+  },
+  "manifest_scope": "Nine server files and the received member record. SHA256SUMS.txt and collection.json are collection-time records."
+}

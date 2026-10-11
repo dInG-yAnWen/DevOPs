@@ -1,6 +1,6 @@
 # E2 产物 Git 导出字节一致性修复
 
-日期：2026-09-25。来源：A14 核验原 E2 基线后，经用户转达发现产物摘要不一致。
+日期：2026-09-25。问题来源：A14 核验原 E2 基线时发现产物摘要不一致。
 
 ## 复现与原因
 
@@ -13,7 +13,7 @@
 | Git blob / 本地工作区，LF | 138 | `1f8fa15049a61fe49dfd5befeb980dc4c749da88906ae558150156acd5b52ba5` |
 | 修复前 `git archive`，CRLF | 144 | `333674d0286d38d31fb6f002ba3d29099637ebec3b93d5771512311b6bb4952f` |
 
-manifest 对应第一行。因此确认是换行转换造成的字节差异；在本次复现中转换发生于导出端，并非 Git blob 本身已损坏。无需重算 manifest 或改变协议字段。
+manifest 对应第一行。字节差异由导出端的换行转换造成，Git blob 内容完整。修复保留原 manifest 摘要与协议字段。
 
 ## 修复
 
@@ -29,8 +29,8 @@ python validator/verify_git_export.py --ref HEAD
 
 旧提交回归检查预期失败，且实际首先报告 19 份不匹配。
 
-提交前先对原 HEAD 使用 `git archive --worktree-attributes` 读取新工作区字节保护规则，在 true/false/input 三种配置下均得到 19/19 摘要一致；每个临时解压目录中的 69 项契约检查也全部通过。这是新属性规则的预验证，不冒充已发布提交的验证。提交后还需用上面的普通导出命令确认新基线。
+提交前对原 HEAD 使用 `git archive --worktree-attributes` 读取新工作区字节保护规则，在 true/false/input 三种配置下均得到 19/19 摘要一致；每个临时解压目录中的 69 项契约检查也全部通过。该结果对应工作区属性规则的预验证。修复已包含在 `ef50c0f6a64ce74d6f2cca5a9b968aedbb0b5856`；普通导出的复核入口为上面的 `verify_git_export.py --ref HEAD`。
 
 ## 范围
 
-本次只修复 E2 产物传递的字节稳定性，不重新运行 E3 构建、不修改 A14 原回复、不代替 A14 对新基线的独立核验。A14 新的正式交付 SHA 仍待其回复。
+本项修复范围为 E2 产物传递的字节稳定性。E3 构建结果另见 E3 运行记录；A14 确认与版本见 [E2 交接记录](collaboration/交接确认.md) 及 [E3/E4 交接记录](collaboration/E3E4_交接记录_20261008.md)。

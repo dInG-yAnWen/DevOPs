@@ -1,0 +1,70 @@
+{
+  "date": "2026-10-08",
+  "source_sha": "eb2c62c9a3222cbcb25a8bc204348ce91b3c9ba8",
+  "members": [
+    {
+      "student_id": "241880284",
+      "clone": "/root/241880284/draft",
+      "server_evidence": "/root/241880284/draft/work/20261007-241880284-e4",
+      "local_evidence": "e4/evidence/20261007-241880284-e4",
+      "make_all_exit": 0,
+      "make_all_exit_evidence": "exit-codes.tsv",
+      "fake_key_exercise_performed": true
+    },
+    {
+      "name": "徐梓航",
+      "student_id": "241880273",
+      "clone": "/root/241880273/draft",
+      "server_evidence": "/root/241880273/draft/work/20261007-175642",
+      "local_evidence": "e4/evidence/20261007-241880273-e4",
+      "make_all_exit": 0,
+      "make_all_exit_evidence": "member delivery record; all seven standard logs checked",
+      "fake_key_exercise_performed": false
+    },
+    {
+      "student_id": "241880272",
+      "clone": "/root/241880272/draft",
+      "server_evidence": "/root/241880272/draft/work/20261007-193940",
+      "local_evidence": "e4/evidence/20261007-241880272-e4",
+      "make_all_exit": 0,
+      "make_all_exit_evidence": "member-delivery-record.md; complete make-all.log and seven standard logs checked",
+      "fake_key_exercise_performed_per_member_record": true,
+      "fake_key_negative_original_log_present": false,
+      "fake_key_cleanup_scan_passed": true
+    }
+  ],
+  "source_version_evidence_273": {
+    "member_delivery_record_sha": "eb2c62c9a3222cbcb25a8bc204348ce91b3c9ba8",
+    "clone_reflog": "eb2c62c9a3222cbcb25a8bc204348ce91b3c9ba8 HEAD@{2026-10-07 17:56:22 +0800} clone: from https://github.com/dInG-yAnWen/DevOPs.git",
+    "env_time": "2026-10-07T09:56:42.037537+00:00",
+    "current_head_at_collection": "eb2c62c9a3222cbcb25a8bc204348ce91b3c9ba8"
+  },
+  "source_version_evidence_272": {
+    "member_delivery_record_sha": "eb2c62c9a3222cbcb25a8bc204348ce91b3c9ba8",
+    "clone_reflog": "eb2c62c9a3222cbcb25a8bc204348ce91b3c9ba8 HEAD@{2026-10-07 17:49:39 +0800} clone: from https://github.com/dInG-yAnWen/DevOPs.git",
+    "env_time": "2026-10-07T11:39:40.050921+00:00",
+    "current_head_at_collection": "eb2c62c9a3222cbcb25a8bc204348ce91b3c9ba8"
+  },
+  "checks": {
+    "same_source_sha": true,
+    "same_host_tools": true,
+    "toolchain_exactly_equal": true,
+    "toolchain_sha256": "42f79c804c8c8d6a676d82f31f37aef804fce367381ee014461c7d772fa5f15c",
+    "all_doctor_passed": true,
+    "all_tests_4_passed": true,
+    "all_smoke_passed": true,
+    "all_expected_build_exit_1": true,
+    "all_make_not_found": true,
+    "all_secret_scan_passed": true,
+    "image_ids_equal": false
+  },
+  "result": "Three same-source independent clones have matching toolchains and standard runtime results",
+  "scope": "Same B14 server with shared Docker cache",
+  "remaining": {
+    "241880273_fake_key_exercise": "not performed",
+    "241880272_fake_key_evidence": "negative original log missing; cleanup log verified",
+    "standard_member_records": "all three archived"
+  },
+  "previous_two_member_comparison": "双人复跑对照_20261008.json",
+  "previous_20261006_evidence": "Preserved separately; its unknown source SHA is not retroactively replaced."
+}

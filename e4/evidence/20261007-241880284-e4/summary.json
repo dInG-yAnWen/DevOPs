@@ -1,0 +1,38 @@
+{
+  "student_id": "241880284",
+  "execution": "user-authorized; commands executed by Codex",
+  "human_review": "not yet recorded",
+  "source_sha": "eb2c62c9a3222cbcb25a8bc204348ce91b3c9ba8",
+  "repository_url": "https://github.com/dInG-yAnWen/DevOPs.git",
+  "clone_path": "/root/241880284/draft",
+  "evidence_path": "/root/241880284/draft/work/20261007-241880284-e4",
+  "command": "make -j1 RUN=work/20261007-241880284-e4 all",
+  "started_utc": "2026-10-07T09:13:16Z",
+  "finished_utc": "2026-10-07T09:13:19.769744+00:00",
+  "exit_codes": {
+    "make-all": 0,
+    "scan-reject": 2,
+    "scan-cleaned": 0
+  },
+  "env_problems": [],
+  "env_warnings": [
+    "cpus=2 低于建议值 4",
+    "mem_gib=3.5 低于建议值 8",
+    "disk_gib=69.9 低于建议值 100",
+    "Docker 未配置镜像加速，拉取基础镜像可能很慢（见 setup/bootstrap_ubuntu.sh）"
+  ],
+  "unit_tests": "4 passed",
+  "smoke_passed": true,
+  "expected_fixture_build_exit": 1,
+  "image": {
+    "image": "e4-draft:241880284",
+    "id": "sha256:3cb07fb9b1052fe0e4abefea97a069ab9b88cf4eb26018a105f30707efb6df39",
+    "arch": "amd64",
+    "created": "2026-10-06T23:40:55.387971559+08:00"
+  },
+  "env_file_mode": "600",
+  "env_not_tracked": true,
+  "fake_key_removed": true,
+  "git_worktree_clean": true,
+  "cache_note": "Service build reused existing Docker cache; fresh dependency downloads not tested."
+}

@@ -1,0 +1,378 @@
+{
+  "date": "2026-10-08",
+  "method": "Offline archive checksum, log and Git-object verification",
+  "source_package": {
+    "filename": "A14_给B14_E3E4交接包.zip",
+    "sha256": "e76f15c96ce14e60f06c906c5a22aba7da0fb0d6a941bafcb11435a06c8cb930"
+  },
+  "outer_manifest": [
+    {
+      "path": "A14_E4_交付包.zip",
+      "expected_sha256": "2c82e18e13829a7b6eeddb8a9a5a4e75d3dfb04d6b9ef897959705e58984ebdc",
+      "actual_sha256": "2c82e18e13829a7b6eeddb8a9a5a4e75d3dfb04d6b9ef897959705e58984ebdc",
+      "matches": true
+    },
+    {
+      "path": "A14_E4_服务器原始证据.tar.gz",
+      "expected_sha256": "d87237265488a3784c252acc112531b39f1f27f88ad40c42634f76da19c776c1",
+      "actual_sha256": "d87237265488a3784c252acc112531b39f1f27f88ad40c42634f76da19c776c1",
+      "matches": true
+    },
+    {
+      "path": "241880230-e4-rerun-evidence.tar.gz",
+      "expected_sha256": "1ab60a44aa00c5db7d956545f6cc7226602da27e29e1de32982d1caa0b34cca5",
+      "actual_sha256": "1ab60a44aa00c5db7d956545f6cc7226602da27e29e1de32982d1caa0b34cca5",
+      "matches": true
+    },
+    {
+      "path": "241880230-e4-rerun-evidence.tar.gz.sha256",
+      "expected_sha256": "88f210b6274ca07fb086e2454286b57f1fb67da7a417345616d74bcad90cc684",
+      "actual_sha256": "88f210b6274ca07fb086e2454286b57f1fb67da7a417345616d74bcad90cc684",
+      "matches": true
+    },
+    {
+      "path": "DevOps_A14_完整Git记录.bundle",
+      "expected_sha256": "2b42e1ccd79a6479c0d91ae535bbfd833b619368a1fad37902d997a960244dec",
+      "actual_sha256": "2b42e1ccd79a6479c0d91ae535bbfd833b619368a1fad37902d997a960244dec",
+      "matches": true
+    },
+    {
+      "path": "A14_Git完整记录.md",
+      "expected_sha256": "deb2089b7889c2bbf01bc346706c362ea3f8408a5a68d9b6496bda1235094cd0",
+      "actual_sha256": "deb2089b7889c2bbf01bc346706c362ea3f8408a5a68d9b6496bda1235094cd0",
+      "matches": true
+    }
+  ],
+  "standalone_reply_matches_packaged_reply": true,
+  "reply_sha256": "74b2229337388f1d8fae0e9016164dbd9f0bb45f5a6d26796452dde51e72cfdf",
+  "code_archive": {
+    "git_archive_comment": "f810e8fa70b750c8fce2355baea9cc6d5fd043a6",
+    "files": 225,
+    "sha256": "2c82e18e13829a7b6eeddb8a9a5a4e75d3dfb04d6b9ef897959705e58984ebdc",
+    "git_tree_path_count": 225,
+    "missing_git_tree_paths": [],
+    "git_exact_byte_matches": 157,
+    "git_crlf_lf_only_difference_count": 68,
+    "git_content_mismatches_after_line_ending_normalization": []
+  },
+  "evidence_manifests": [
+    {
+      "manifest": "e3/evidence/20261008-a14-e3/SHA256SUMS.txt",
+      "count": 46,
+      "passed": true
+    },
+    {
+      "manifest": "e4/evidence/20261008-a14-e4-member-241880230/SHA256SUMS.txt",
+      "count": 32,
+      "passed": true
+    },
+    {
+      "manifest": "e4/evidence/20261008-a14-e4/SHA256SUMS.txt",
+      "count": 32,
+      "passed": true
+    },
+    {
+      "manifest": "e4/evidence/20261008-a14-e4/run-1/SHA256SUMS.txt",
+      "count": 13,
+      "passed": true
+    },
+    {
+      "manifest": "e4/evidence/20261008-a14-e4/run-2/SHA256SUMS.txt",
+      "count": 13,
+      "passed": true
+    }
+  ],
+  "git": {
+    "bundle_complete_history_verified": true,
+    "fsck_passed": true,
+    "main": "f810e8fa70b750c8fce2355baea9cc6d5fd043a6",
+    "tags": {
+      "a14-e3-c0": "4445e4be50af6683b75017e7fa65c4f8212ea80e",
+      "a14-e3-c1": "37fcadb1eced8d2504b1d5e0bd96f3b8091568b1",
+      "a14-e3-c2": "59a3ce2b47461505143d020703e81bd8f68dd667",
+      "a14-e4": "37efecffae5b0f01fb605f10e29506a25752ac0d",
+      "a14-e4-env": "0a23b30d5c1e6eef118ce8d422c4a5b0444215f5",
+      "a14-e4-member-confirmed": "f810e8fa70b750c8fce2355baea9cc6d5fd043a6"
+    },
+    "changed_paths_from_tested_to_delivery": [
+      "README.md",
+      "docs/AI_USAGE.md",
+      "docs/backlog.md",
+      "docs/contributions.md",
+      "docs/validation.md",
+      "e4/A14_E4交付说明.md",
+      "e4/README.md",
+      "e4/evidence/20261008-a14-e4-member-241880230/IMPORT_NOTES.md",
+      "e4/evidence/20261008-a14-e4-member-241880230/SHA256SUMS.txt",
+      "e4/evidence/20261008-a14-e4-member-241880230/attempts/01-preflight-sigpipe/preflight.log",
+      "e4/evidence/20261008-a14-e4-member-241880230/attempts/01-preflight-sigpipe/runtime-status.txt",
+      "e4/evidence/20261008-a14-e4-member-241880230/attempts/01-preflight-sigpipe/session.log",
+      "e4/evidence/20261008-a14-e4-member-241880230/build.log",
+      "e4/evidence/20261008-a14-e4-member-241880230/compose-config.yaml",
+      "e4/evidence/20261008-a14-e4-member-241880230/env-permissions.txt",
+      "e4/evidence/20261008-a14-e4-member-241880230/env.json",
+      "e4/evidence/20261008-a14-e4-member-241880230/execution-notes.txt",
+      "e4/evidence/20261008-a14-e4-member-241880230/finished-at.txt",
+      "e4/evidence/20261008-a14-e4-member-241880230/git-status.txt",
+      "e4/evidence/20261008-a14-e4-member-241880230/human-confirmation.txt",
+      "e4/evidence/20261008-a14-e4-member-241880230/image-runtime.json",
+      "e4/evidence/20261008-a14-e4-member-241880230/image.json",
+      "e4/evidence/20261008-a14-e4-member-241880230/make-all-exit.txt",
+      "e4/evidence/20261008-a14-e4-member-241880230/make-all.log",
+      "e4/evidence/20261008-a14-e4-member-241880230/negative-scan-exit.txt",
+      "e4/evidence/20261008-a14-e4-member-241880230/operator-attestation.txt",
+      "e4/evidence/20261008-a14-e4-member-241880230/original-archive.sha256",
+      "e4/evidence/20261008-a14-e4-member-241880230/preflight.log",
+      "e4/evidence/20261008-a14-e4-member-241880230/reproduction-report.txt",
+      "e4/evidence/20261008-a14-e4-member-241880230/secret-scan-clean.txt",
+      "e4/evidence/20261008-a14-e4-member-241880230/secret-scan-negative.txt",
+      "e4/evidence/20261008-a14-e4-member-241880230/secret-scan.txt",
+      "e4/evidence/20261008-a14-e4-member-241880230/setup.log",
+      "e4/evidence/20261008-a14-e4-member-241880230/smoke.json",
+      "e4/evidence/20261008-a14-e4-member-241880230/source-sha.txt",
+      "e4/evidence/20261008-a14-e4-member-241880230/started-at.txt",
+      "e4/evidence/20261008-a14-e4-member-241880230/test.log",
+      "e4/evidence/20261008-a14-e4-member-241880230/toolchain.lock",
+      "e4/evidence/20261008-a14-e4-member-241880230/tracked-env.txt",
+      "e4/evidence/20261008-a14-e4-member-241880230/verification-summary.json",
+      "e4/evidence/20261008-a14-e4/SHA256SUMS.txt",
+      "e4/evidence/20261008-a14-e4/run-1/SHA256SUMS.txt",
+      "e4/evidence/20261008-a14-e4/run-1/build.log",
+      "e4/evidence/20261008-a14-e4/run-1/compose-config.yaml",
+      "e4/evidence/20261008-a14-e4/run-1/env-permissions.txt",
+      "e4/evidence/20261008-a14-e4/run-1/env.json",
+      "e4/evidence/20261008-a14-e4/run-1/git-status.txt",
+      "e4/evidence/20261008-a14-e4/run-1/image-runtime.json",
+      "e4/evidence/20261008-a14-e4/run-1/image.json",
+      "e4/evidence/20261008-a14-e4/run-1/secret-scan.txt",
+      "e4/evidence/20261008-a14-e4/run-1/smoke.json",
+      "e4/evidence/20261008-a14-e4/run-1/source-sha.txt",
+      "e4/evidence/20261008-a14-e4/run-1/test.log",
+      "e4/evidence/20261008-a14-e4/run-1/toolchain.lock",
+      "e4/evidence/20261008-a14-e4/run-1/tracked-env.txt",
+      "e4/evidence/20261008-a14-e4/run-2/SHA256SUMS.txt",
+      "e4/evidence/20261008-a14-e4/run-2/build.log",
+      "e4/evidence/20261008-a14-e4/run-2/compose-config.yaml",
+      "e4/evidence/20261008-a14-e4/run-2/env-permissions.txt",
+      "e4/evidence/20261008-a14-e4/run-2/env.json",
+      "e4/evidence/20261008-a14-e4/run-2/git-status.txt",
+      "e4/evidence/20261008-a14-e4/run-2/image-runtime.json",
+      "e4/evidence/20261008-a14-e4/run-2/image.json",
+      "e4/evidence/20261008-a14-e4/run-2/secret-scan.txt",
+      "e4/evidence/20261008-a14-e4/run-2/smoke.json",
+      "e4/evidence/20261008-a14-e4/run-2/source-sha.txt",
+      "e4/evidence/20261008-a14-e4/run-2/test.log",
+      "e4/evidence/20261008-a14-e4/run-2/toolchain.lock",
+      "e4/evidence/20261008-a14-e4/run-2/tracked-env.txt",
+      "e4/evidence/20261008-a14-e4/secret-scan-clean.txt",
+      "e4/evidence/20261008-a14-e4/secret-scan-negative.txt",
+      "e4/evidence/20261008-a14-e4/toolchain.diff",
+      "e4/evidence/20261008-a14-e4/troubleshooting/01-official-debian-source-stall.log",
+      "e4/evidence/20261008-a14-e4/troubleshooting/02-official-debian-source-stall.log",
+      "e4/evidence/20261008-a14-e4/troubleshooting/03-pytest-console-entry-failure.log",
+      "e4/scripts/verify_evidence.py",
+      "e4/scripts/verify_member_evidence.py",
+      "e4/验证记录_20261008.md"
+    ],
+    "runtime_changed_paths": [],
+    "runtime_comparison_scope": [
+      "Makefile",
+      "compose.yaml",
+      ".dockerignore",
+      ".env.example",
+      "requirements-dev.in",
+      "requirements-dev.lock",
+      "services/",
+      "scripts/",
+      "fixtures/"
+    ],
+    "comparison_base": "0a23b30d5c1e6eef118ce8d422c4a5b0444215f5",
+    "comparison_delivery": "f810e8fa70b750c8fce2355baea9cc6d5fd043a6",
+    "remote_head_independently_checked_this_round": false
+  },
+  "a14_raw_archive_checks": [
+    {
+      "archive": "A14_E4_服务器原始证据.tar.gz",
+      "sha256": "d87237265488a3784c252acc112531b39f1f27f88ad40c42634f76da19c776c1",
+      "checksum_manifests": [
+        {
+          "manifest": "e4-evidence-export/run-2/SHA256SUMS.txt",
+          "entries": 13,
+          "all_match": true
+        },
+        {
+          "manifest": "e4-evidence-export/SHA256SUMS.txt",
+          "entries": 32,
+          "all_match": true
+        },
+        {
+          "manifest": "e4-evidence-export/run-1/SHA256SUMS.txt",
+          "entries": 13,
+          "all_match": true
+        }
+      ]
+    },
+    {
+      "archive": "241880230-e4-rerun-evidence.tar.gz",
+      "sha256": "1ab60a44aa00c5db7d956545f6cc7226602da27e29e1de32982d1caa0b34cca5",
+      "checksum_manifests": [
+        {
+          "manifest": "20261008-130807/SHA256SUMS.txt",
+          "entries": 29,
+          "all_match": true
+        }
+      ]
+    }
+  ],
+  "received_reply_file": "A14_回复B14_E3E4资料说明_20261008.md",
+  "recorded_by": "B14",
+  "a14_e4_run_records": [
+    {
+      "path": "e4/evidence/20261008-a14-e4/run-1/",
+      "source_sha": "0a23b30d5c1e6eef118ce8d422c4a5b0444215f5",
+      "env_problems": [],
+      "test_log_contains_3_passed": true,
+      "smoke": {
+        "fixture": "fixtures/md-rd",
+        "tools": {
+          "make": "GNU Make 4.4.1",
+          "gcc": "gcc (Debian 14.2.0-19) 14.2.0",
+          "strace": "strace -- version 6.13"
+        },
+        "make_exit_code": 0,
+        "make_output": [
+          "cc -c main.c -o main.o",
+          "cc main.o -o app"
+        ],
+        "app_output": "1",
+        "trace_lines": 1206,
+        "config_h_opened": [
+          "15    openat(AT_FDCWD, \"config.h\", O_RDONLY|O_NOCTTY) = 4"
+        ],
+        "unused_h_opened": [],
+        "passed": true,
+        "note": "只说明环境可用；config.h / unused.h 的结论留到 E5 由各组自己推导"
+      },
+      "toolchain_sha256": "bc70f4e9e436d2567c88588171d7fd4575a614c442874baa089407106bbf9358"
+    },
+    {
+      "path": "e4/evidence/20261008-a14-e4/run-2/",
+      "source_sha": "0a23b30d5c1e6eef118ce8d422c4a5b0444215f5",
+      "env_problems": [],
+      "test_log_contains_3_passed": true,
+      "smoke": {
+        "fixture": "fixtures/md-rd",
+        "tools": {
+          "make": "GNU Make 4.4.1",
+          "gcc": "gcc (Debian 14.2.0-19) 14.2.0",
+          "strace": "strace -- version 6.13"
+        },
+        "make_exit_code": 0,
+        "make_output": [
+          "cc -c main.c -o main.o",
+          "cc main.o -o app"
+        ],
+        "app_output": "1",
+        "trace_lines": 1206,
+        "config_h_opened": [
+          "15    openat(AT_FDCWD, \"config.h\", O_RDONLY|O_NOCTTY) = 4"
+        ],
+        "unused_h_opened": [],
+        "passed": true,
+        "note": "只说明环境可用；config.h / unused.h 的结论留到 E5 由各组自己推导"
+      },
+      "toolchain_sha256": "bc70f4e9e436d2567c88588171d7fd4575a614c442874baa089407106bbf9358"
+    },
+    {
+      "path": "e4/evidence/20261008-a14-e4-member-241880230/",
+      "source_sha": "0a23b30d5c1e6eef118ce8d422c4a5b0444215f5",
+      "env_problems": [],
+      "test_log_contains_3_passed": true,
+      "smoke": {
+        "fixture": "fixtures/md-rd",
+        "tools": {
+          "make": "GNU Make 4.4.1",
+          "gcc": "gcc (Debian 14.2.0-19) 14.2.0",
+          "strace": "strace -- version 6.13"
+        },
+        "make_exit_code": 0,
+        "make_output": [
+          "cc -c main.c -o main.o",
+          "cc main.o -o app"
+        ],
+        "app_output": "1",
+        "trace_lines": 1206,
+        "config_h_opened": [
+          "15    openat(AT_FDCWD, \"config.h\", O_RDONLY|O_NOCTTY) = 4"
+        ],
+        "unused_h_opened": [],
+        "passed": true,
+        "note": "只说明环境可用；config.h / unused.h 的结论留到 E5 由各组自己推导"
+      },
+      "toolchain_sha256": "bc70f4e9e436d2567c88588171d7fd4575a614c442874baa089407106bbf9358"
+    }
+  ],
+  "a14_e3_observations": {
+    "source": "supplied command logs and observations.json, statically inspected",
+    "oracle_source": "INSTRUCTOR_ORACLE",
+    "MD": {
+      "incremental_stdout": "1",
+      "clean_stdout": "2"
+    },
+    "RD": "unused.h change triggers compile and link",
+    "missing_header_make_exit": 2,
+    "C0_clean_stdout": "10",
+    "C1": {
+      "initial": "12",
+      "after_feature_change_incremental": "12",
+      "clean": "15"
+    },
+    "C2": {
+      "inherited_original_C1_incremental": "12",
+      "clean": "19"
+    }
+  },
+  "interpretation": {
+    "a14_information_sufficient_for_reproduction": true,
+    "additional_a14_information_required_now": [],
+    "bit_identical_image_rebuild_proven": false,
+    "clean_cache_rebuild_proven": false,
+    "b14_peer_rerun": "All three personal runs (241880284, 241880273, 241880272) are archived; server evidence verified; same-source toolchains and standard runtime results agree. 241880273 Fake Key exercise not performed; 241880272 negative original log missing, cleanup scan verified.",
+    "cross_group_server_rerun_performed_during_package_audit": false
+  },
+  "publication": {
+    "b14_source_commit": "eb2c62c9a3222cbcb25a8bc204348ce91b3c9ba8",
+    "new_handoff_documents_and_241880284_evidence": "local working tree, not committed or pushed"
+  },
+  "b14_evidence_checks": [
+    {
+      "manifest": "e3/evidence/20261007-b14-e3/SHA256SUMS.txt",
+      "entries": 4,
+      "all_match": true
+    },
+    {
+      "manifest": "e4/evidence/20261007-241880284-e4/SHA256SUMS.txt",
+      "entries": 20,
+      "all_match": true
+    }
+  ],
+  "subsequent_crosscheck": {
+    "direction": "B14 checks A14",
+    "status": "PASSED",
+    "record": "E4_相互检查结果_20261008.json",
+    "student_id": "241880284",
+    "a14_checks_b14": "awaiting result"
+  },
+  "b14_member_comparison": {
+    "record": "../../e4/成员复跑对照_20261008.json",
+    "members": [
+      "241880284",
+      "241880273",
+      "241880272"
+    ],
+    "source_sha": "eb2c62c9a3222cbcb25a8bc204348ce91b3c9ba8",
+    "standard_runtime_results": "consistent",
+    "241880273_fake_key_exercise": "not performed",
+    "241880272_fake_key_evidence": "negative original log missing; cleanup scan verified"
+  }
+}

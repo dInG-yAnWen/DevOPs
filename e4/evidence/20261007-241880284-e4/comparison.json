@@ -1,0 +1,12 @@
+{
+  "previous_evidence_path": "/root/e4-group-setup/b14-current/work/20261006-233422",
+  "previous_student_id": "241880273",
+  "previous_source_sha": "not recorded in the inspected evidence; not inferred from current HEAD",
+  "current_student_id": "241880284",
+  "current_source_sha": "eb2c62c9a3222cbcb25a8bc204348ce91b3c9ba8",
+  "same_toolchain_lock": true,
+  "same_host_tool_versions": true,
+  "both_unit_tests_4_passed": true,
+  "both_smoke_passed": true,
+  "limitation": "Same host and Docker cache; prior run SHA is unconfirmed, so this is a result comparison rather than proof of two runs on the same commit."
+}
