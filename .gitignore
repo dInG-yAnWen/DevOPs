@@ -15,3 +15,6 @@ __pycache__/
 /work/
 /__pycache__/
 /**/*.pyc
+
+# Exported submission archives; sources and evidence are tracked separately.
+/deliverables/

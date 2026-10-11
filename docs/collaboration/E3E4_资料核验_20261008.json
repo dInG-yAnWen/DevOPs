@@ -342,7 +342,8 @@
   },
   "publication": {
     "b14_source_commit": "eb2c62c9a3222cbcb25a8bc204348ce91b3c9ba8",
-    "new_handoff_documents_and_241880284_evidence": "local working tree, not committed or pushed"
+    "new_handoff_documents_and_241880284_evidence": "committed locally; not pushed",
+    "archive_commit": "2ab392a81a95f88d438087258c8226f99b6e1f2a"
   },
   "b14_evidence_checks": [
     {

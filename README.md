@@ -2,9 +2,9 @@
 
 B14 负责 DRAFT 环境生成与 MDFixer（REPAIR），配对组为 A14。
 
-主交付文件：[B14 E2 交付说明](docs/B14_E2交付说明.md)。包括需求、接口、验收结果和未决事项索引。
+本轮主交付文件：[B14 E3/E4 提交说明](docs/B14_E3E4_提交说明.md)。成员贡献见 [contributions.md](docs/contributions.md)，包含徐梓航的框架工作、丁彦文的文档与交付物整理，以及丁彦文、徐梓航、杨王旭三人的独立测试。
 
-当前版本为 **A14 已接受的 E2 1.0 契约交付包**。2026-09-25 已收到回复并完成 B14 本地交接校验，详见 [协作确认与交接记录](docs/collaboration/交接确认.md)。示例仍为人工协议数据，不代表真实构建、算法复现或真实服务联调结果。B14 已 commit/push，已发布契约基线为 `689539119e60afd4b224d3163d1ba292992baa95`，详见 [版本记录](docs/release.md)。个人贡献审阅和课程平台提交仍待完成；本轮版本信息补录留在工作区。
+E2 契约基线已获 A14 接受。2026-09-25 已收到回复并完成 B14 本地交接校验，详见 [协作确认与交接记录](docs/collaboration/交接确认.md)。示例仍为人工协议数据，不代表真实构建、算法复现或真实服务联调结果。B14 已 commit/push，已发布契约基线为 `689539119e60afd4b224d3163d1ba292992baa95`，详见 [版本记录](docs/release.md)。本轮 E3/E4 材料归档提交为 `2ab392a81a95f88d438087258c8226f99b6e1f2a`；最终交付提交见提交包的版本信息。
 
 E3 自备基线见 [B14 E3 交付说明](e3/B14_E3交付说明.md) 与 [2026-09-25 基线运行记录](e3/验证记录_20260925.md)：DRAFT 样本（TinyGreeting，真实构建/验证 + 失败候选 + 参考 Dockerfile）与 MDFixer 样本（缺 `config.h` 的固定 MD 报告 + 参考补丁 + 修复前行为证据），可一键复现。9 月 25 日因环境限制未执行 Docker 的部分，已在 [2026-10-07 Docker 补测记录](e3/验证记录_20261007.md) 中补齐失败定位、成功构建、真实镜像 ID 与容器 `hello E3` 输出。此处同步仓库已有成果，历史记录保留。
 
@@ -16,7 +16,7 @@ E3 自备基线见 [B14 E3 交付说明](e3/B14_E3交付说明.md) 与 [2026-09-
 - [产物索引](contracts/artifact-manifest.json) 与 [人工产物样例](contracts/artifacts/)。
 - [E3 测试基线](e3/README.md)：DRAFT / MDFixer 样本、执行脚本与真实证据。
 - [E4 工程环境与验证记录](docs/E4_B14.md)：DRAFT 服务环境、一键检查与复现证据入口。
-- [A14/B14 E3、E4 交接记录](docs/collaboration/E3E4_交接记录_20261008.md)：A14 来件核验、双方固定版本及 B14 回传资料；本轮新增记录尚未提交。
+- [A14/B14 E3、E4 交接记录](docs/collaboration/E3E4_交接记录_20261008.md)：A14 来件核验、双方固定版本及 B14 回传资料；材料归档提交为 `2ab392a81a95f88d438087258c8226f99b6e1f2a`。
 - [Backlog](docs/backlog.md)、[ADR](docs/adr/)、[AI 使用记录](docs/AI_USAGE.md)、[验证记录](docs/validation.md)。
 
 ## 复现契约验收

@@ -9,7 +9,8 @@
       "local_evidence": "e4/evidence/20261007-241880284-e4",
       "make_all_exit": 0,
       "make_all_exit_evidence": "exit-codes.tsv",
-      "fake_key_exercise_performed": true
+      "fake_key_exercise_performed": true,
+      "name": "丁彦文"
     },
     {
       "name": "徐梓航",
@@ -30,7 +31,8 @@
       "make_all_exit_evidence": "member-delivery-record.md; complete make-all.log and seven standard logs checked",
       "fake_key_exercise_performed_per_member_record": true,
       "fake_key_negative_original_log_present": false,
-      "fake_key_cleanup_scan_passed": true
+      "fake_key_cleanup_scan_passed": true,
+      "name": "杨王旭"
     }
   ],
   "source_version_evidence_273": {
@@ -63,7 +65,8 @@
   "remaining": {
     "241880273_fake_key_exercise": "not performed",
     "241880272_fake_key_evidence": "negative original log missing; cleanup log verified",
-    "standard_member_records": "all three archived"
+    "standard_member_records": "all three archived",
+    "submission_treatment": "Known individual Fake Key gaps retained; all three standard run records archived."
   },
   "previous_two_member_comparison": "双人复跑对照_20261008.json",
   "previous_20261006_evidence": "Preserved separately; its unknown source SHA is not retroactively replaced."
