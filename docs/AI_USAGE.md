@@ -194,3 +194,13 @@
 - 本地 E5-7 清单中的实验报告与验收 CSV 尚未填写，按用户要求本轮不补，留待 E5–E7 统一整理。
 
 边界：只读访问他人归档与 241880273 目录；未修改归档证据、E5 驱动或候选；复跑镜像用完即删，无残留容器；本轮只改文档。
+
+## 2026-10-30 徐梓航（241880273）E5 B 轨道个人复跑
+
+- 用户在 Codex 协助下，使用个人克隆 `/root/241880273/e5-reproduction` 的 `e5-reproduction` 分支执行 E5；运行源码 SHA 为 `9b0076fe1a176c1453a2adae6f3dfa7cbbe1fd4c`。服务器运行目录为 `work/e5-20261030-163629-241880273`，run ID `42ba31358e7f4a81`。
+- 真实基线构建得到预期失败 `EXPECTED_MISSING_MAKE`：Docker 构建退出 1，原始日志包含 `make: not found`，容器内命令退出 127；采集驱动正常结束。
+- 记录 `error-driven` 与 `context-driven` 两份候选 Dockerfile、提示、回复及来源信息。两者在 600 秒构建预算内均因从默认 Debian 源下载软件包而超时，不能计为成功候选。
+- 在原始 `context-driven` 候选上只增加获准的 Debian 阿里云镜像重写，作为人工环境适配版本 `context-mirror`。该版本构建与运行验证退出码均为 0，输出精确为 `hello E3\n`，临时容器已清理；选择来源标记为 `ENVIRONMENT_ADAPTATION`。构建镜像 ID 为 `sha256:477bafa241a02e3b16daec8f359d5f391a43290c3f405c2cfb5ce240ff36bbf5`。
+- 通过 SCP 将已封存运行目录复制到本地个人分支的 `e5/evidence/20261030-241880273-e5/`；对传输副本和仓库副本运行 `run_e5.py verify` 均通过，清单覆盖 67 个证据文件，`e5_records_complete=true`，`pending=[]`。服务器原始运行目录未修改。
+- 提示与回复来源记录为 Codex 桌面对话；精确模型标识未记录。实验驱动不调用模型或 API；人工镜像适配明确与模型候选区分。该运行是 TinyGreeting 教学样例，不是原论文完整基准。
+- 本地另运行 `python -m unittest discover -s e5/tests -v`，22 项通过，作为代码复核而非服务器运行步骤。E5 驱动和测试用例由丁彦文实现；本记录不将框架开发归于徐梓航，也不登记 E6/E7 工作。
