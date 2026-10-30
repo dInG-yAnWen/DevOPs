@@ -168,3 +168,29 @@
 - 首次 fetch 确认远程 origin/main 为 eb2c62c9a3222cbcb25a8bc204348ce91b3c9ba8，本地有两笔待推送提交，远程无额外提交。更新交付说明，明确文本 Git 记录、完整历史 bundle 与交付物 ZIP 分开提供。
 - 导出采用最终提交的源码快照；Git 文本记录和 bundle 以推送后再次 fetch 并核对的 origin/main 生成，远程 SHA 与包内版本需一致。实际发布结果写入单独的发布记录 JSON。
 - 保留原始实验日志、已有提交作者和贡献分工；本轮不重跑实验，不将本地打包写作 GitLab 流水线制品。
+
+## 2026-10-30 E5 独立复跑与审查
+
+- 用户请求：按本地 E5-7 课件、B 轨道操作指南与验收清单复核 E5 提交，在本人学号目录独立复跑并审查；随后要求把本轮工作登记为 E5 的 AI 使用与贡献记录。实验报告按用户要求留待 E5–E7 全部完成后统一整理。
+- 工具与身份：Codex 经 SSH 密钥登录 B14 ECS，在 `/root/241880272/draft` 执行；仓库本地身份为 `241880272 <241880272@localhost>`。E5 实现与首轮证据由丁彦文（241880284）完成，本记录只登记本人的独立复跑与审查，不改写他人成果。
+- 分工参考：另一位组员提供的 `AI对话.txt` 建议把 E5 拆为失败基线、候选生成与选择、独立验证三类角色；本轮按其中的“独立验证”角色登记本人工作。
+- 取码：服务器直连 GitHub 超时（HTTP/2 与 TLS 均失败），改用固定镜像代理抓取 `e5-reproduction` 到本地引用后在本人克隆检出，未修改 `origin` 地址。分支 HEAD 为 `dbfcbe55d2f370751142c337fb9f7c1cf6a657be`。
+
+| 项目 | 命令 / 证据 | 结果 |
+| --- | --- | --- |
+| E5 单元测试 | `python3 -m unittest discover -s e5/tests -v` | 22 项通过 |
+| 基线真实失败 | `run_e5.py baseline --out work/e5-20261030-140131-recheck --build-timeout 600` | `EXPECTED_MISSING_MAKE`；Docker 退出 1；日志含 `make: not found`、命令退出 127；采集脚本退出 0 |
+| 候选重建 | 归档 `context-mirror` Dockerfile，`docker build --no-cache --progress=plain` | 退出 0；候选 SHA-256 `e0a47332…dbd76` 与归档一致 |
+| 同镜像运行 | 按该次 image ID，`--network none --cpus 1 --memory 256m --pids-limit 64` | 退出 0；stdout 精确为 `hello E3\n` |
+| 归档自检 | `run_e5.py verify --run-dir e5/evidence/20261030-241880284-e5` | `verified: true`，87 个文件，`e5_records_complete: true`，`pending: []` |
+
+审查结论与发现：
+
+- B 轨道验收的 B01（真实缺失 make 与候选来源）成立：两类提示、原始回复、候选 Dockerfile、来源哈希与选择理由齐全。
+- 原始 error-driven 与 context-driven 候选均在 240 秒预算内因 Debian 默认源下载超时而未完成；成功结果来自标注为 `ENVIRONMENT_ADAPTATION` 的人工适配版本，记录没有把适配版冒充为模型候选直接成功。
+- 两个原始候选除 `RUN` 的续行写法外指令一致，归一化后等价，与记录中的 R1 判断相符。
+- 镜像 ID 跨运行不可复现：基础镜像虽固定 digest，但 apt 安装包未锁定版本。本次重建得到的 image ID 与归档不同，仍按本次构建产生的 ID 运行并验证输出。
+- 归档保存了基线运行时的驱动 `0c652bf3…`、提交中间版 `9735437…` 与最终校验版 `5077c4bb…`；最终版对归档执行 `verify` 通过。
+- 本地 E5-7 清单中的实验报告与验收 CSV 尚未填写，按用户要求本轮不补，留待 E5–E7 统一整理。
+
+边界：只读访问他人归档与 241880273 目录；未修改归档证据、E5 驱动或候选；复跑镜像用完即删，无残留容器；本轮只改文档。
