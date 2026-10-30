@@ -4,6 +4,8 @@ B14 负责 DRAFT 环境生成与 MDFixer（REPAIR），配对组为 A14。
 
 E5 DRAFT 技术入口：[操作说明](e5/README.md)、[脚本](e5/scripts/run_e5.py)、[测试](e5/tests/test_run_e5.py)。
 
+E6 DRAFT 技术入口：[操作说明](e6/README.md)、[CLI](e6/scripts/run_e6.py)、[服务实现](services/draft/draft/autobuild.py)。
+
 本轮主交付文件：[B14 E3/E4 提交说明](docs/B14_E3E4_提交说明.md)。成员贡献见 [contributions.md](docs/contributions.md)，包含徐梓航的框架工作、丁彦文的文档与交付物整理，以及丁彦文、徐梓航、杨王旭三人的独立测试。
 
 E2 契约基线已获 A14 接受。2026-09-25 已收到回复并完成 B14 本地交接校验，详见 [协作确认与交接记录](docs/collaboration/交接确认.md)。示例仍为人工协议数据，不代表真实构建、算法复现或真实服务联调结果。B14 已 commit/push，已发布契约基线为 `689539119e60afd4b224d3163d1ba292992baa95`，详见 [版本记录](docs/release.md)。本轮 E3/E4 材料归档提交为 `2ab392a81a95f88d438087258c8226f99b6e1f2a`；最终交付提交见提交包的版本信息。

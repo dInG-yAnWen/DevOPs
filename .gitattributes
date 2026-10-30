@@ -13,5 +13,12 @@
 /e5/scripts/*.py text eol=lf
 /e5/tests/*.py text eol=lf
 
+# E6 build evidence and saved candidate sources are hashed as exact bytes.
+/e6/evidence/** -text
+/e6/candidates/** -text
+/e6/scripts/*.py text eol=lf
+/services/draft/draft/*.py text eol=lf
+/services/draft/tests/*.py text eol=lf
+
 # Preserve the received A14 reply byte-for-byte for the handoff receipt hash.
 /docs/collaboration/A14_回复B14_E3E4资料说明_20261008.md -text
