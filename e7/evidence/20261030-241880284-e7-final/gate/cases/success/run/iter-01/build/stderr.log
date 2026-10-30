@@ -1,0 +1,43 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 218B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for m.daocloud.io/docker.io/library/python@sha256:f82c96458eedc847b233e582eb31336f4954b39cae020b6dcf5b3ed0e5cbcd74
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 57B done
+#3 DONE 0.0s
+
+#4 [1/4] FROM m.daocloud.io/docker.io/library/python@sha256:f82c96458eedc847b233e582eb31336f4954b39cae020b6dcf5b3ed0e5cbcd74
+#4 resolve m.daocloud.io/docker.io/library/python@sha256:f82c96458eedc847b233e582eb31336f4954b39cae020b6dcf5b3ed0e5cbcd74 0.0s done
+#4 DONE 0.0s
+
+#5 [2/4] WORKDIR /work
+#5 CACHED
+
+#6 [internal] load build context
+#6 transferring context: 245B done
+#6 DONE 0.0s
+
+#7 [3/4] COPY main.c Makefile ./
+#7 DONE 0.0s
+
+#8 [4/4] RUN make
+#8 0.137 /bin/sh: 1: make: not found
+#8 ERROR: process "/bin/sh -c make" did not complete successfully: exit code: 127
+------
+ > [4/4] RUN make:
+0.137 /bin/sh: 1: make: not found
+------
+Dockerfile:4
+--------------------
+   2 |     WORKDIR /work
+   3 |     COPY main.c Makefile ./
+   4 | >>> RUN make
+   5 |     CMD ["./hello"]
+   6 |     
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/sh -c make" did not complete successfully: exit code: 127

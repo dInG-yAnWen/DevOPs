@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "case": "invalid-candidate",
+  "changes": [
+    {
+      "path": "candidate.Dockerfile",
+      "before_sha256": "e0a47332ae920e9372a583abd44a2d2841c9622e0ed736fbd98b79db6acdbd76",
+      "after_sha256": "d55274fec5ac72fcac1ce56dab9bb064467dac2d7c9898c84dceace50850ef3c"
+    }
+  ],
+  "expected_output": "hello E3",
+  "verify_timeout": 30,
+  "source_kind": "REPLAY_WITH_EXPLICIT_FAULT_INJECTION",
+  "model_call_in_e7": false
+}

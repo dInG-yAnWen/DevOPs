@@ -1,0 +1,27 @@
+{
+  "argv": [
+    "docker",
+    "run",
+    "--rm",
+    "--name",
+    "e6-draft-cf16b3c5b7784db9ba486b7be22c6609",
+    "--network",
+    "none",
+    "--cpus",
+    "1",
+    "--memory",
+    "256m",
+    "--pids-limit",
+    "64",
+    "sha256:3a59c28f45c4776f2d305a6090bbdf0018172d6bc423556164cf95fb6f786dfd"
+  ],
+  "cwd": "/evidence/gate/cases/wrong-output/run",
+  "started_utc": "2026-10-30T06:21:29.454084+00:00",
+  "timeout_seconds": 30,
+  "exit_code": 0,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-10-30T06:21:30.903094+00:00",
+  "stdout_sha256": "8e4e09b0c3458c9c59e691c847d4d7484995403e663549d919fac7c2a5823548",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

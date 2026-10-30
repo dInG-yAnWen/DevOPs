@@ -40,6 +40,14 @@ python3 e7/scripts/run_e7.py quality-gate \
 
 `--case` 可重复指定场景用于排错。部分场景不构成完整 E7 门禁通过。`verify-gate` 只读核对封存文件、命令绑定、每个场景的实际行为和汇总结果，不重新执行 Docker。失败结果保留，重跑使用新目录。
 
+完整云端归档的只读校验入口：
+
+```bash
+python3 e7/scripts/run_e7.py verify-gate --run-dir e7/evidence/20261030-241880284-e7-final/gate
+```
+
+`evidence/` 同时保留先前失败轮次和同镜像诊断，各目录的原始文件由独立摘要清单覆盖。采集器内的错误断言演示标为 `github_proof=false`；GitHub 端证据需另行取得。
+
 ## CI 与分支保护
 
 `.github/workflows/e7-quality-gate.yml` 在 E7 分支及 main 的 push、main 的 PR 和手动触发时运行。必需检查名为 `e7-b-quality-gate`；Actions 依赖固定到经过核对的官方提交。失败时仍上传 `work/ci/`，保留14天，应及时下载备份。

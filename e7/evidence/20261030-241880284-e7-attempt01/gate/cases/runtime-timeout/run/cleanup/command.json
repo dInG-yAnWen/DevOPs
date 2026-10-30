@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "docker",
+    "container",
+    "rm",
+    "--force",
+    "e6-draft-f3d6fc36305e447cbde1270d9718b9ee"
+  ],
+  "cwd": "/evidence/gate/cases/runtime-timeout/run",
+  "started_utc": "2026-10-30T06:07:53.271539+00:00",
+  "timeout_seconds": 30,
+  "exit_code": 0,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-10-30T06:07:53.281624+00:00",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "61737d789ceaeb5538d4bc425a476cb879d7fb45604812f46f49f6e66cb0a918"
+}

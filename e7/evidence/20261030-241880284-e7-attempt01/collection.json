@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "status": "FAILED",
+  "service_tag": "b14-e7-service:c8d213bc001042818af57ccd3163703d",
+  "service_image_id": "sha256:aefb574130ea365f517cda1e84de52443c68f2039e574ca037790aa06252ca5f",
+  "source_revision": "818fc335d17e467c1f928d2864b103c7e6efbefe",
+  "source_kind": "E7_SAVED_CANDIDATE_VALIDATION",
+  "gate": {
+    "verified": true,
+    "passed": false,
+    "workflow_succeeded": false,
+    "status": "FAILED",
+    "complete": true,
+    "cases": [
+      {
+        "case": "success",
+        "passed": true,
+        "expected_workflow_status": "SUCCEEDED",
+        "workflow_exit_code": 0,
+        "e6_verified": true,
+        "observed_workflow_status": "SUCCEEDED",
+        "reason": "EXPECTED_BEHAVIOR_VERIFIED"
+      },
+      {
+        "case": "wrong-output",
+        "passed": true,
+        "expected_workflow_status": "FAILED",
+        "workflow_exit_code": 1,
+        "e6_verified": true,
+        "observed_workflow_status": "FAILED",
+        "reason": "EXPECTED_BEHAVIOR_VERIFIED"
+      },
+      {
+        "case": "invalid-candidate",
+        "passed": true,
+        "expected_workflow_status": "PREFLIGHT_REJECTED",
+        "workflow_exit_code": 1,
+        "e6_verified": false,
+        "observed_workflow_status": "PREFLIGHT_REJECTED",
+        "reason": "INVALID_CMD_REJECTED_BEFORE_OUTPUT_AND_DOCKER"
+      },
+      {
+        "case": "build-failed",
+        "passed": true,
+        "expected_workflow_status": "FAILED",
+        "workflow_exit_code": 1,
+        "e6_verified": true,
+        "observed_workflow_status": "FAILED",
+        "reason": "EXPECTED_BEHAVIOR_VERIFIED"
+      },
+      {
+        "case": "runtime-timeout",
+        "passed": false,
+        "expected_workflow_status": "TIMED_OUT",
+        "workflow_exit_code": 1,
+        "e6_verified": true,
+        "observed_workflow_status": "TIMED_OUT",
+        "reason": "EXPECTED_BEHAVIOR_NOT_PROVEN"
+      },
+      {
+        "case": "runtime-nonzero",
+        "passed": true,
+        "expected_workflow_status": "FAILED",
+        "workflow_exit_code": 1,
+        "e6_verified": true,
+        "observed_workflow_status": "FAILED",
+        "reason": "EXPECTED_BEHAVIOR_VERIFIED"
+      }
+    ],
+    "files_checked": 236,
+    "trace_id": "e7-g-f499ada1aab84f3baf8ba6f5b2e9c249",
+    "source_kind": "REPLAY",
+    "scope": "Offline saved evidence consistency; no Docker or model commands executed"
+  },
+  "gate_timeout_seconds": 8460,
+  "candidate": "e6/candidates/context-mirror/Dockerfile",
+  "provenance": "e6/candidates/context-mirror/provenance.json",
+  "service_tests_passed": 64,
+  "error": "E7 quality gate did not pass; retain the failed evidence",
+  "collector_absence_confirmed": true,
+  "emergency_child_cleanup": [
+    {
+      "metadata": "gate/cases/build-failed/run/run.json",
+      "absence_confirmed": true,
+      "container_name": "e6-draft-93b9b56194fa493796dfc35d9e81a910",
+      "already_finalized": true
+    },
+    {
+      "metadata": "gate/cases/runtime-nonzero/run/run.json",
+      "absence_confirmed": true,
+      "container_name": "e6-draft-8cad8e8875a54508819bfa9237821a2f",
+      "already_finalized": true
+    },
+    {
+      "metadata": "gate/cases/runtime-timeout/run/run.json",
+      "absence_confirmed": true,
+      "container_name": "e6-draft-f3d6fc36305e447cbde1270d9718b9ee",
+      "already_finalized": true
+    },
+    {
+      "metadata": "gate/cases/success/run/run.json",
+      "absence_confirmed": true,
+      "container_name": "e6-draft-0d1528f42ba84f2aac777d067edb7463",
+      "already_finalized": true
+    },
+    {
+      "metadata": "gate/cases/wrong-output/run/run.json",
+      "absence_confirmed": true,
+      "container_name": "e6-draft-9a6d6af0d8db4ce781773fdb9dd1fdc6",
+      "already_finalized": true
+    }
+  ]
+}

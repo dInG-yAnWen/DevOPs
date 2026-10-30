@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "docker",
+    "container",
+    "inspect",
+    "e7-timeout-diagnostic-f3139f88f27d4a908d79e8c9ce80047b"
+  ],
+  "cwd": "/root/241880284/e7-20261030-run01",
+  "started_utc": "2026-10-30T06:15:10.125014+00:00",
+  "timeout_seconds": 30,
+  "exit_code": 1,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-10-30T06:15:10.132869+00:00",
+  "stdout_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "stderr_sha256": "009c057668e4436c08d66686c96520a7b244055d0cf1b1ad085f8a79a508c85c"
+}

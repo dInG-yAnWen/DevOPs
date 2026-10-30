@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "case": "wrong-output",
+  "changes": [],
+  "expected_output": "E7 intentionally incorrect expected output",
+  "verify_timeout": 30,
+  "source_kind": "REPLAY_WITH_EXPLICIT_FAULT_INJECTION",
+  "model_call_in_e7": false
+}

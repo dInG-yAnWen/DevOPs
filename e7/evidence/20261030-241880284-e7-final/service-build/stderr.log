@@ -1,0 +1,65 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 2.60kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for m.daocloud.io/docker.io/library/docker@sha256:9190b0613792e658a7783cf14b2d5ace5941bb68ede7276922ea36ee457d76ad
+#2 DONE 0.2s
+
+#3 [internal] load metadata for m.daocloud.io/docker.io/library/python@sha256:f82c96458eedc847b233e582eb31336f4954b39cae020b6dcf5b3ed0e5cbcd74
+#3 DONE 2.9s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 106B done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 117.36kB done
+#5 DONE 0.0s
+
+#6 [stage-1  1/10] FROM m.daocloud.io/docker.io/library/python@sha256:f82c96458eedc847b233e582eb31336f4954b39cae020b6dcf5b3ed0e5cbcd74
+#6 resolve m.daocloud.io/docker.io/library/python@sha256:f82c96458eedc847b233e582eb31336f4954b39cae020b6dcf5b3ed0e5cbcd74 0.0s done
+#6 DONE 0.0s
+
+#7 [docker-cli 1/1] FROM m.daocloud.io/docker.io/library/docker@sha256:9190b0613792e658a7783cf14b2d5ace5941bb68ede7276922ea36ee457d76ad
+#7 resolve m.daocloud.io/docker.io/library/docker@sha256:9190b0613792e658a7783cf14b2d5ace5941bb68ede7276922ea36ee457d76ad 0.0s done
+#7 DONE 0.0s
+
+#8 [stage-1  3/10] COPY --from=docker-cli /usr/local/libexec/docker/cli-plugins/docker-buildx /usr/local/libexec/docker/cli-plugins/docker-buildx
+#8 CACHED
+
+#9 [stage-1  4/10] RUN if [ -f /etc/apt/sources.list.d/debian.sources ]; then       sed -i         -e 's|deb.debian.org/debian-security|mirrors.aliyun.com/debian-security|g'         -e 's|deb.debian.org/debian|mirrors.aliyun.com/debian|g'         /etc/apt/sources.list.d/debian.sources;     fi  && apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout=60 update  && apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout=60       install -y --no-install-recommends git  && rm -rf /var/lib/apt/lists/*  && dpkg-query -W -f='${Package}=${Version}\n' git > /opt/toolchain.lock  && echo "docker-cli=$(docker --version)" >> /opt/toolchain.lock  && echo "python3=$(python3 -c 'import platform; print(platform.python_version())')" >> /opt/toolchain.lock  && echo "arch=$(dpkg --print-architecture)" >> /opt/toolchain.lock
+#9 CACHED
+
+#10 [stage-1  5/10] COPY requirements-dev.lock /tmp/requirements-dev.lock
+#10 CACHED
+
+#11 [stage-1  7/10] RUN useradd --create-home --uid 10001 app && install -d -o app -g app /app
+#11 CACHED
+
+#12 [stage-1  6/10] RUN pip install --no-cache-dir --require-hashes -r /tmp/requirements-dev.lock  && pip freeze | sed 's/^/pip:/' >> /opt/toolchain.lock
+#12 CACHED
+
+#13 [stage-1  2/10] COPY --from=docker-cli /usr/local/bin/docker /usr/local/bin/docker
+#13 CACHED
+
+#14 [stage-1  8/10] WORKDIR /app
+#14 CACHED
+
+#15 [stage-1  9/10] COPY --chown=app:app services/draft/ /app/
+#15 DONE 0.0s
+
+#16 [stage-1 10/10] COPY --chown=app:app fixtures/ /app/fixtures/
+#16 DONE 0.0s
+
+#17 exporting to image
+#17 exporting layers 0.0s done
+#17 exporting manifest sha256:10ba9ee217b0e1d32074ca249e0ef4a9aee0f24b12c269a98bc236d54a34a163 done
+#17 exporting config sha256:9ccb13656b533ceb1921b4af1712ed3e387438ad1ba7f7a35ae80fa5ae328401 done
+#17 exporting attestation manifest sha256:10c533fa14e3388192b9bb1a0c5772737fe642e85b2937361fc4f29f0c69d17d 0.0s done
+#17 exporting manifest list sha256:37d496eb1efd4cae6eaf5822fb170b5c04d429f7c21e8437a7cf36b774eb35e2 done
+#17 naming to docker.io/library/b14-e7-service:17cb93b65bb04426a69470777fa97e05 done
+#17 unpacking to docker.io/library/b14-e7-service:17cb93b65bb04426a69470777fa97e05
+#17 unpacking to docker.io/library/b14-e7-service:17cb93b65bb04426a69470777fa97e05 0.0s done
+#17 DONE 0.1s

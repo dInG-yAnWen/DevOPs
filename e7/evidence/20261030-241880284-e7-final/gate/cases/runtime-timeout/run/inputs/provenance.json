@@ -1,0 +1,12 @@
+{
+  "generation_mode": "REPLAY_EXISTING_ENVIRONMENT_ADAPTATION",
+  "source_kind": "E5_SAVED_CANDIDATE",
+  "source_commit": "dbfcbe5",
+  "source_path": "e5/candidates/context-mirror/Dockerfile",
+  "source_evidence": "e5/evidence/20261030-241880284-e5",
+  "candidate_sha256": "e0a47332ae920e9372a583abd44a2d2841c9622e0ed736fbd98b79db6acdbd76",
+  "parent_candidate": "context-driven",
+  "original_generation_mode": "MANUAL_ENVIRONMENT_ADAPTATION",
+  "adaptation": "Existing Aliyun Debian mirror and bounded apt network options; build-essential dependency install.",
+  "model_call_in_e6": false
+}

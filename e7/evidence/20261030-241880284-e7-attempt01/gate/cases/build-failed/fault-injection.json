@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "case": "build-failed",
+  "changes": [
+    {
+      "path": "fixture/main.c",
+      "before_sha256": "05f3bcbf50c51513eb01dd78b3a9a4ae0a01115140fed7d1030cc47451807bc1",
+      "after_sha256": "690d9c61ed24dbf937293e9228c819bfc5b67f6f73989091303704abdd46c15e"
+    }
+  ],
+  "expected_output": "hello E3",
+  "verify_timeout": 30,
+  "source_kind": "REPLAY_WITH_EXPLICIT_FAULT_INJECTION",
+  "model_call_in_e7": false
+}

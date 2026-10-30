@@ -1,0 +1,33 @@
+{
+  "argv": [
+    "docker",
+    "run",
+    "--rm",
+    "--name",
+    "b14-e7-collector-17cb93b65bb04426a69470777fa97e05-service-toolchain",
+    "--network",
+    "none",
+    "--user",
+    "0:0",
+    "--env",
+    "HOME=/tmp",
+    "--cpus",
+    "1",
+    "--memory",
+    "512m",
+    "--pids-limit",
+    "128",
+    "sha256:37d496eb1efd4cae6eaf5822fb170b5c04d429f7c21e8437a7cf36b774eb35e2",
+    "cat",
+    "/opt/toolchain.lock"
+  ],
+  "cwd": "/root/241880284/e7-20261030-run02",
+  "started_utc": "2026-10-30T06:18:03.217997+00:00",
+  "timeout_seconds": 30,
+  "exit_code": 0,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-10-30T06:18:03.374027+00:00",
+  "stdout_sha256": "42f79c804c8c8d6a676d82f31f37aef804fce367381ee014461c7d772fa5f15c",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

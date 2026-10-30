@@ -1,0 +1,31 @@
+{
+  "argv": [
+    "/usr/local/bin/python3.13",
+    "-m",
+    "draft",
+    "auto-build",
+    "--fixture",
+    "/evidence/gate/cases/wrong-output/fixture",
+    "--candidate",
+    "/evidence/gate/cases/wrong-output/candidate.Dockerfile",
+    "--out",
+    "/evidence/gate/cases/wrong-output/run",
+    "--expected-output",
+    "E7 intentionally incorrect expected output",
+    "--timeout",
+    "600",
+    "--verify-timeout",
+    "30",
+    "--provenance",
+    "/evidence/gate/inputs/provenance.json"
+  ],
+  "cwd": "/app",
+  "started_utc": "2026-10-30T06:19:20.935361+00:00",
+  "timeout_seconds": 1380,
+  "exit_code": 1,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-10-30T06:21:30.931660+00:00",
+  "stdout_sha256": "f675f7cab30b92a85055429f04650448d2d9841266c792c86b4edb7e1712829a",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}
