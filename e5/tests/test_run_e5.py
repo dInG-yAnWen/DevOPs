@@ -14,7 +14,7 @@ SPEC.loader.exec_module(e5)
 IMAGE = "sha256:" + "a" * 64
 BROKEN = (f"FROM {e5.PINNED_FROM}\nWORKDIR /work\nCOPY main.c Makefile ./\n"
           'RUN make\nCMD ["./hello"]\n')
-VALID = BROKEN.replace("WORKDIR /work", "RUN apt-get update && apt-get install -y gcc make libc6-dev\nWORKDIR /work")
+VALID = BROKEN.replace("WORKDIR /work", "RUN apt-get update && apt-get install -y --no-install-recommends gcc make libc6-dev && rm -rf /var/lib/apt/lists/*\nWORKDIR /work")
 FAILURE = b'/bin/sh: 1: make: not found\nprocess "/bin/sh -c make" did not complete successfully: exit code: 127\n'
 
 
@@ -192,11 +192,11 @@ class EvidenceTests(unittest.TestCase):
         self.assertEqual(result["status"], "TIMED_OUT")
         self.assertFalse(any(cmd[:2] == ["docker", "run"] for cmd in fake.commands))
 
-    def add_model_candidate(self, fake, name, strategy):
+    def add_model_candidate(self, fake, name, strategy, mode="fresh response to the saved prompt"):
         response = self.root / f"{name}-response.txt"
         response.write_bytes(b"```dockerfile\n" + self.dockerfile.read_bytes() + b"```\n")
         provenance = self.root / f"{name}-provenance.json"
-        provenance.write_text(json.dumps({"strategy": strategy,
+        provenance.write_text(json.dumps({"strategy": strategy, "generation_mode": mode,
                                          "prompt_sha256": e5.sha256(self.run_dir / "baseline" / f"prompt-{strategy}.txt")}))
         with patch.object(e5.subprocess, "run", fake):
             return e5.candidate(self.run_dir, self.dockerfile, name, response, provenance)
@@ -257,6 +257,83 @@ class EvidenceTests(unittest.TestCase):
             result = e5.candidate(self.run_dir, self.dockerfile, "cleanup-failure")
         self.assertFalse(result["passed"])
         self.assertEqual(result["status"], "CLEANUP_UNCONFIRMED")
+
+    def test_replay_cannot_satisfy_fresh_dual_strategy_requirement(self):
+        fake = self.start()
+        self.add_model_candidate(fake, "error", "error-driven")
+        self.add_model_candidate(fake, "context", "context-driven", "replay of a saved course response")
+        result = e5.finalize(self.run_dir, "error", "Actual output passed; other strategy is replay")
+        self.assertFalse(result["e5_records_complete"])
+        self.assertEqual(result["fresh_strategies"], ["error-driven"])
+
+    def test_finalize_rejects_stream_changed_before_manifest(self):
+        fake = self.start()
+        with patch.object(e5.subprocess, "run", fake):
+            e5.candidate(self.run_dir, self.dockerfile, "one")
+        (self.run_dir / "candidates/one/build/stderr.log").write_bytes(b"accidentally overwritten")
+        with self.assertRaisesRegex(ValueError, "command hash mismatch"):
+            e5.finalize(self.run_dir, "one", "Output was correct")
+
+    def test_finalize_rejects_changed_network_mode(self):
+        fake = self.start()
+        with patch.object(e5.subprocess, "run", fake):
+            e5.candidate(self.run_dir, self.dockerfile, "one")
+        path = self.run_dir / "candidates/one/verify/command.json"
+        record = e5.read_json(path)
+        record["argv"][record["argv"].index("--network") + 1] = "host"
+        path.write_text(json.dumps(record))
+        with self.assertRaisesRegex(ValueError, "success unsupported"):
+            e5.finalize(self.run_dir, "one", "Output was correct")
+
+    def test_dependency_run_whitelist_allows_only_fixed_adaptations(self):
+        install = ("apt-get -o Acquire::ForceIPv4=true -o Acquire::Retries=2 "
+                   "-o Acquire::http::Timeout=30 update && "
+                   "apt-get -o Acquire::ForceIPv4=true install -y --no-install-recommends build-essential "
+                   "&& rm -rf /var/lib/apt/lists/*")
+        e5.validate_dependency_run(install)
+        e5.validate_dependency_run("sed -i 's|deb.debian.org|mirrors.aliyun.com|g' /etc/apt/sources.list.d/debian.sources")
+        for command in ("mkdir -p /work && printf fake > /work/hello && chmod +x /work/hello",
+                        install + " && ln -s /bin/true /usr/local/bin/make",
+                        install.replace("Acquire::Retries=2", "Acquire::Retries=999"),
+                        "sed -i 's|deb.debian.org|evil.example|g' /etc/apt/sources.list.d/debian.sources"):
+            with self.assertRaises(ValueError):
+                e5.validate_dependency_run(command)
+
+    def add_adaptation(self, fake, text, parent_hash=None):
+        self.dockerfile.write_text(text)
+        provenance = self.root / "adaptation-provenance.json"
+        provenance.write_text(json.dumps({"generation_mode": "MANUAL_ENVIRONMENT_ADAPTATION",
+                                         "parent_candidate_name": "context",
+                                         "parent_sha256": parent_hash or e5.sha256(self.run_dir / "candidates/context/Dockerfile"),
+                                         "reason": "Use the course server's reachable Debian mirror"}))
+        with patch.object(e5.subprocess, "run", fake):
+            return e5.candidate(self.run_dir, self.dockerfile, "adapted", provenance=provenance)
+
+    def test_manual_mirror_adaptation_preserves_original_fresh_lineage(self):
+        fake = self.start()
+        self.add_model_candidate(fake, "error", "error-driven")
+        self.add_model_candidate(fake, "context", "context-driven")
+        adapted = VALID.replace("RUN apt-get update", "RUN sed -i 's|deb.debian.org|mirrors.aliyun.com|g' /etc/apt/sources.list.d/debian.sources\nRUN apt-get -o Acquire::ForceIPv4=true update")
+        self.assertTrue(self.add_adaptation(fake, adapted)["passed"])
+        result = e5.finalize(self.run_dir, "adapted", "Original model dependency fix plus recorded network adaptation")
+        self.assertTrue(result["e5_records_complete"])
+        self.assertEqual(result["selected_source_kind"], "ENVIRONMENT_ADAPTATION")
+        self.assertEqual(result["selected_source"]["parent_candidate_name"], "context")
+        self.assertTrue(e5.verify_run(self.run_dir)["verified"])
+
+    def test_adaptation_cannot_change_install_packages_or_parent_hash(self):
+        fake = self.start()
+        self.add_model_candidate(fake, "error", "error-driven")
+        self.add_model_candidate(fake, "context", "context-driven")
+        self.add_adaptation(fake, VALID.replace("gcc make libc6-dev", "build-essential"))
+        with self.assertRaisesRegex(ValueError, "changes more than"):
+            e5.finalize(self.run_dir, "adapted", "Changed package set is outside environment adaptation")
+        path = self.run_dir / "candidates/adapted/provenance.json"
+        metadata = e5.read_json(path)
+        metadata["parent_sha256"] = "0" * 64
+        path.write_text(json.dumps(metadata))
+        with self.assertRaisesRegex(ValueError, "parent_sha256"):
+            e5.finalize(self.run_dir, "adapted", "Wrong parent hash must be rejected")
 
 
 if __name__ == "__main__":

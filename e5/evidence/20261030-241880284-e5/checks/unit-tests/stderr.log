@@ -1,0 +1,27 @@
+test_adaptation_cannot_change_install_packages_or_parent_hash (test_run_e5.EvidenceTests) ... ok
+test_added_nested_manifest_is_detected (test_run_e5.EvidenceTests) ... ok
+test_baseline_requires_actual_missing_make_and_shell_127 (test_run_e5.EvidenceTests) ... ok
+test_build_timeout_is_not_success_and_skips_program_execution (test_run_e5.EvidenceTests) ... ok
+test_candidate_core_instructions_cannot_be_bypassed (test_run_e5.EvidenceTests) ... ok
+test_cleanup_daemon_failure_cannot_be_reported_as_absence (test_run_e5.EvidenceTests) ... ok
+test_dependency_run_whitelist_allows_only_fixed_adaptations (test_run_e5.EvidenceTests) ... ok
+test_duplicate_strategy_cannot_complete (test_run_e5.EvidenceTests) ... ok
+test_existing_baseline_directory_never_overwritten (test_run_e5.EvidenceTests) ... ok
+test_existing_candidate_never_overwritten (test_run_e5.EvidenceTests) ... ok
+test_finalize_integrity_and_missing_generation_records_are_explicit (test_run_e5.EvidenceTests) ... ok
+test_finalize_rejects_changed_network_mode (test_run_e5.EvidenceTests) ... ok
+test_finalize_rejects_stream_changed_before_manifest (test_run_e5.EvidenceTests) ... ok
+test_invalid_candidate_rejected_before_docker (test_run_e5.EvidenceTests) ... ok
+test_manual_mirror_adaptation_preserves_original_fresh_lineage (test_run_e5.EvidenceTests) ... ok
+test_missing_docker_records_infrastructure_and_no_prompt (test_run_e5.EvidenceTests) ... ok
+test_replay_cannot_satisfy_fresh_dual_strategy_requirement (test_run_e5.EvidenceTests) ... ok
+test_source_hash_change_rejected_before_candidate_execution (test_run_e5.EvidenceTests) ... ok
+test_timeout_preserves_streams_and_only_cleans_named_container (test_run_e5.EvidenceTests) ... ok
+test_two_actual_strategies_complete_and_negative_case_need_not_pass (test_run_e5.EvidenceTests) ... ok
+test_wrong_output_rejected_and_actual_image_id_used (test_run_e5.EvidenceTests) ... ok
+test_wrong_prompt_hash_and_edited_candidate_do_not_count_as_model_records (test_run_e5.EvidenceTests) ... ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 0.174s
+
+OK

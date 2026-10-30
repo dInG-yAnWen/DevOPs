@@ -1,0 +1,78 @@
+#0 building with "default" instance using docker driver
+
+#1 [1/5] FROM m.daocloud.io/docker.io/library/python@sha256:f82c96458eedc847b233e582eb31336f4954b39cae020b6dcf5b3ed0e5cbcd74
+#1 resolve m.daocloud.io/docker.io/library/python@sha256:f82c96458eedc847b233e582eb31336f4954b39cae020b6dcf5b3ed0e5cbcd74 0.0s done
+#1 CACHED
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 342B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for m.daocloud.io/docker.io/library/python@sha256:f82c96458eedc847b233e582eb31336f4954b39cae020b6dcf5b3ed0e5cbcd74
+#3 DONE 0.0s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 57B done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 245B done
+#5 DONE 0.0s
+
+#6 [2/5] RUN apt-get update     && apt-get install -y --no-install-recommends build-essential     && rm -rf /var/lib/apt/lists/*
+#6 0.555 Get:1 http://deb.debian.org/debian trixie InRelease [140 kB]
+#6 1.192 Get:2 http://deb.debian.org/debian trixie-updates InRelease [47.3 kB]
+#6 1.422 Get:3 http://deb.debian.org/debian-security trixie-security InRelease [43.4 kB]
+#6 1.881 Get:4 http://deb.debian.org/debian trixie/main amd64 Packages [9678 kB]
+#6 90.73 Get:5 http://deb.debian.org/debian trixie-updates/main amd64 Packages [720 B]
+#6 90.90 Get:6 http://deb.debian.org/debian-security trixie-security/main amd64 Packages [270 kB]
+#6 94.55 Fetched 10.2 MB in 1min 34s (108 kB/s)
+#6 94.55 Reading package lists...
+#6 94.93 Reading package lists...
+#6 95.30 Building dependency tree...
+#6 95.37 Reading state information...
+#6 95.50 The following additional packages will be installed:
+#6 95.50   binutils binutils-common binutils-x86-64-linux-gnu bzip2 cpp cpp-14
+#6 95.50   cpp-14-x86-64-linux-gnu cpp-x86-64-linux-gnu dpkg-dev g++ g++-14
+#6 95.50   g++-14-x86-64-linux-gnu g++-x86-64-linux-gnu gcc gcc-14
+#6 95.50   gcc-14-x86-64-linux-gnu gcc-x86-64-linux-gnu libasan8 libatomic1 libbinutils
+#6 95.50   libc-bin libc-dev-bin libc6 libc6-dev libcc1-0 libcrypt-dev libctf-nobfd0
+#6 95.50   libctf0 libdpkg-perl libgcc-14-dev libgdbm-compat4t64 libgomp1 libgprofng0
+#6 95.50   libhwasan0 libisl23 libitm1 libjansson4 liblsan0 liblzma5 libmpc3 libmpfr6
+#6 95.50   libperl5.40 libquadmath0 libsframe1 libstdc++-14-dev libtsan2 libubsan1
+#6 95.50   linux-libc-dev make patch perl perl-base perl-modules-5.40 rpcsvc-proto
+#6 95.50   xz-utils
+#6 95.51 Suggested packages:
+#6 95.51   binutils-doc gprofng-gui binutils-gold bzip2-doc cpp-doc gcc-14-locales
+#6 95.51   cpp-14-doc debian-keyring debian-tag2upload-keyring g++-multilib
+#6 95.51   g++-14-multilib gcc-14-doc gcc-multilib manpages-dev autoconf automake
+#6 95.51   libtool flex bison gdb gcc-doc gcc-14-multilib gdb-x86-64-linux-gnu
+#6 95.51   libc-devtools glibc-doc sq | sqop | rsop | gosop | pgpainless-cli | gpg-sq
+#6 95.51   | gnupg sensible-utils git bzr libstdc++-14-doc make-doc ed diffutils-doc
+#6 95.51   perl-doc libterm-readline-gnu-perl | libterm-readline-perl-perl
+#6 95.51   libtap-harness-archive-perl
+#6 95.51 Recommended packages:
+#6 95.51   fakeroot sq | sqop | rsop | gosop | pgpainless-cli | gpg-sq | gnupg
+#6 95.51   libalgorithm-merge-perl manpages manpages-dev libfile-fcntllock-perl
+#6 95.51   liblocale-gettext-perl
+#6 95.65 The following NEW packages will be installed:
+#6 95.65   binutils binutils-common binutils-x86-64-linux-gnu build-essential bzip2 cpp
+#6 95.65   cpp-14 cpp-14-x86-64-linux-gnu cpp-x86-64-linux-gnu dpkg-dev g++ g++-14
+#6 95.65   g++-14-x86-64-linux-gnu g++-x86-64-linux-gnu gcc gcc-14
+#6 95.65   gcc-14-x86-64-linux-gnu gcc-x86-64-linux-gnu libasan8 libatomic1 libbinutils
+#6 95.65   libc-dev-bin libc6-dev libcc1-0 libcrypt-dev libctf-nobfd0 libctf0
+#6 95.65   libdpkg-perl libgcc-14-dev libgdbm-compat4t64 libgomp1 libgprofng0
+#6 95.65   libhwasan0 libisl23 libitm1 libjansson4 liblsan0 libmpc3 libmpfr6
+#6 95.65   libperl5.40 libquadmath0 libsframe1 libstdc++-14-dev libtsan2 libubsan1
+#6 95.65   linux-libc-dev make patch perl perl-modules-5.40 rpcsvc-proto xz-utils
+#6 95.65 The following packages will be upgraded:
+#6 95.65   libc-bin libc6 liblzma5 perl-base
+#6 97.09 4 upgraded, 52 newly installed, 0 to remove and 22 not upgraded.
+#6 97.09 Need to get 88.1 MB of archives.
+#6 97.09 After this operation, 336 MB of additional disk space will be used.
+#6 97.09 Get:1 http://deb.debian.org/debian trixie/main amd64 perl-base amd64 5.40.1-6+deb13u1 [1666 kB]
+#6 123.6 Get:2 http://deb.debian.org/debian trixie/main amd64 libc6 amd64 2.41-12+deb13u4 [2847 kB]
+#6 205.5 Get:3 http://deb.debian.org/debian trixie/main amd64 libc-bin amd64 2.41-12+deb13u4 [638 kB]
+#6 230.7 Get:4 http://deb.debian.org/debian-security trixie-security/main amd64 liblzma5 amd64 5.8.1-1+deb13u2 [310 kB]
+#6 237.7 Get:5 http://deb.debian.org/debian trixie/main amd64 bzip2 amd64 1.0.8-6 [40.5 kB]
+#6 238.5 Get:6 http://deb.debian.org/debian trixie/main amd64 perl-modules-5.40 all 5.40.1-6+deb13u1 [3014 kB]

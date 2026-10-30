@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "docker",
+    "container",
+    "rm",
+    "--force",
+    "e5-4786d30309734570-context-mirror"
+  ],
+  "cwd": "/root/241880284/e5-20261030-run01/work/e5-20261030-run01",
+  "started_utc": "2026-10-30T01:29:50.385185+00:00",
+  "timeout_seconds": 30,
+  "exit_code": 0,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-10-30T01:29:50.394678+00:00",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "ab99d762a2e89a2dcdd42cb930a10e759efe5896aad8eeb8e07650226b537b24"
+}

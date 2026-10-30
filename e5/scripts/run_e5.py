@@ -19,6 +19,7 @@ import json
 import os
 import platform
 import re
+import shlex
 import subprocess
 import sys
 import uuid
@@ -95,6 +96,40 @@ def command_log(directory):
             (Path(directory) / "stderr.log").read_bytes()).decode("utf-8", errors="replace")
 
 
+def checked_command(directory):
+    directory = Path(directory)
+    record = read_json(directory / "command.json")
+    for stream in ("stdout", "stderr"):
+        if record.get(f"{stream}_sha256") != sha256(directory / f"{stream}.log"):
+            raise ValueError(f"Original {stream} command hash mismatch: {directory.name}")
+    return record
+
+
+def check_command_tree(root):
+    records = list(root.rglob("command.json"))
+    if not records:
+        raise ValueError("No original command evidence found")
+    for path in records:
+        checked_command(path.parent)
+
+
+def normalized_path(value):
+    return str(value).replace("\\", "/").rstrip("/")
+
+
+def cleanup_absence(directory, container_name):
+    record = checked_command(directory / "cleanup")
+    inspect = checked_command(directory / "cleanup-inspect")
+    if record.get("argv") != ["docker", "container", "rm", "--force", container_name]:
+        raise ValueError("Cleanup is not bound to the candidate's own container")
+    if inspect.get("argv") != ["docker", "container", "inspect", container_name]:
+        raise ValueError("Cleanup inspection is not bound to the candidate's own container")
+    log = command_log(directory / "cleanup-inspect").lower()
+    return (not inspect["timed_out"] and not inspect["launch_error"] and
+            inspect["exit_code"] not in (None, 0) and
+            ("no such container" in log or "no such object" in log))
+
+
 def classify_baseline(record, log):
     if record["timed_out"]:
         return "TIMED_OUT"
@@ -137,8 +172,7 @@ def validate_candidate(text):
         raise ValueError("FROM must retain the exact original pinned image and digest")
     index = 1
     while index < len(instructions) and instructions[index][0] == "RUN":
-        if instructions[index][1] == "make":
-            raise ValueError("Dependency installation must precede WORKDIR and COPY")
+        validate_dependency_run(instructions[index][1])
         index += 1
     expected = [("WORKDIR", "/work"), ("COPY", "main.c Makefile ./"),
                 ("RUN", "make"), ("CMD", '["./hello"]')]
@@ -158,7 +192,37 @@ def validate_candidate(text):
         if not valid:
             raise ValueError(f"Preserve exact {want_kind} {want_value}")
     return {"valid": True, "pinned_from": PINNED_FROM,
-            "policy": "Only dependency-install RUN instructions before WORKDIR may be added"}
+            "policy": "Only the fixed apt installation or fixed Debian-mirror sed RUN before WORKDIR may be added"}
+
+
+def validate_dependency_run(command):
+    """A small explicit fixture policy, rather than a shell-language blacklist."""
+    mirror = ["sed", "-i", "s|deb.debian.org|mirrors.aliyun.com|g",
+              "/etc/apt/sources.list.d/debian.sources"]
+    if shlex.split(command) == mirror:
+        return
+    parts = command.split("&&")
+    if len(parts) != 3:
+        raise ValueError("RUN must be the fixed apt-install pipeline or fixed mirror adaptation")
+    allowed_options = {"Acquire::ForceIPv4=true", "Acquire::Retries=2", "Acquire::http::Timeout=30"}
+    def apt_tokens(part):
+        tokens = shlex.split(part)
+        result, index = [], 0
+        while index < len(tokens):
+            if tokens[index] == "-o":
+                if index + 1 >= len(tokens) or tokens[index + 1] not in allowed_options:
+                    raise ValueError("Unsupported apt option")
+                index += 2
+            else:
+                result.append(tokens[index])
+                index += 1
+        return result
+    update, install, clean = apt_tokens(parts[0]), apt_tokens(parts[1]), shlex.split(parts[2])
+    allowed_install = (["apt-get", "install", "-y", "--no-install-recommends", "build-essential"],
+                       ["apt-get", "install", "-y", "--no-install-recommends", "gcc", "make", "libc6-dev"])
+    if (update != ["apt-get", "update"] or install not in allowed_install or
+            clean != ["rm", "-rf", "/var/lib/apt/lists/*"]):
+        raise ValueError("RUN differs from the explicitly allowed dependency-install pipeline")
 
 
 def make_prompts(root):
@@ -371,14 +435,35 @@ def candidate_summary(root):
             raise ValueError(f"Candidate identity/hash mismatch: {directory.name}")
         if result.get("passed"):
             validate_candidate((directory / "Dockerfile").read_text(encoding="utf-8"))
-            build = read_json(directory / "build/command.json")
-            verify = read_json(directory / "verify/command.json")
+            build = checked_command(directory / "build")
+            verify = checked_command(directory / "verify")
             image = (directory / "image-id.txt").read_text(encoding="ascii").strip()
+            # Use the recorded execution root so an offline copy remains portable.
+            original_root = normalized_path(checked_command(root / "baseline/build")["cwd"])
+            original_candidate = f"{original_root}/candidates/{directory.name}"
+            expected_build = ["docker", "build", "--no-cache", "--progress=plain", "--file",
+                              f"{original_candidate}/Dockerfile", "--iidfile",
+                              f"{original_candidate}/image-id.txt", f"{original_root}/project"]
+            actual_build = list(build.get("argv", []))
+            if len(actual_build) == 9:
+                for index in (5, 7, 8):
+                    actual_build[index] = normalized_path(actual_build[index])
+            container_name = f"e5-{read_json(root / 'run.json')['run_id']}-{directory.name}"
+            expected_verify = ["docker", "run", "--rm", "--name", container_name,
+                               "--network", "none", "--cpus", "1", "--memory", "256m",
+                               "--pids-limit", "64", image]
+            inspect = checked_command(directory / "image-inspect")
+            raw_images = json.loads((directory / "image-inspect/stdout.log").read_bytes())
             if (not succeeded(build) or not succeeded(verify) or not IMAGE_RE.fullmatch(image)
-                    or result["image_id"] != image or verify["argv"][-1] != image
+                    or actual_build != expected_build or verify.get("argv") != expected_verify
+                    or normalized_path(build["cwd"]) != original_root
+                    or normalized_path(verify["cwd"]) != original_root
+                    or not succeeded(inspect) or inspect.get("argv") != ["docker", "image", "inspect", image]
+                    or len(raw_images) != 1 or raw_images[0] != read_json(directory / "image.json")
+                    or result["image_id"] != image
                     or read_json(directory / "image.json").get("Id") != image
                     or (directory / "verify/stdout.log").read_bytes() != EXPECTED_OUTPUT
-                    or not result.get("cleanup", {}).get("absence_confirmed")):
+                    or not cleanup_absence(directory, container_name)):
                 raise ValueError(f"Candidate success unsupported by evidence: {directory.name}")
         summaries.append(result)
     return summaries
@@ -391,9 +476,20 @@ def model_evidence(root, candidates):
         directory = root / "candidates" / item["name"]
         try:
             provenance = read_json(directory / "provenance.json")
+            if provenance.get("generation_mode") == "MANUAL_ENVIRONMENT_ADAPTATION":
+                # This lineage is validated separately and never counts as a new
+                # model response. An adapted file need not invent a model reply.
+                continue
             strategy = provenance.get("strategy")
             if strategy not in ("error-driven", "context-driven"):
                 raise ValueError("provenance.strategy must be error-driven or context-driven")
+            mode = provenance.get("generation_mode", "").strip().lower()
+            if mode.startswith("fresh"):
+                generation_kind = "FRESH_MODEL_RESPONSE"
+            elif mode.startswith("replay"):
+                generation_kind = "COURSE_REPLAY"
+            else:
+                raise ValueError("provenance.generation_mode must explicitly identify fresh or replay")
             prompt = root / "baseline" / f"prompt-{strategy}.txt"
             if provenance.get("prompt_sha256") != sha256(prompt):
                 raise ValueError("provenance.prompt_sha256 differs from the actual strategy prompt")
@@ -408,23 +504,85 @@ def model_evidence(root, candidates):
             if extracted_hash != item["dockerfile_sha256"]:
                 raise ValueError("Candidate bytes differ from the Dockerfile in the original model response")
             accepted.append({"name": item["name"], "strategy": strategy,
+                             "generation_kind": generation_kind,
                              "prompt_sha256": provenance["prompt_sha256"],
                              "response_sha256": sha256(directory / "model-response.txt"),
                              "extracted_dockerfile_sha256": extracted_hash})
         except (OSError, ValueError, AttributeError, TypeError) as exc:
             # Hand-authored negative cases remain useful evidence, but do not count
             # as either model strategy and do not have to pass the build.
-            warnings.append({"candidate": item["name"], "reason": str(exc)})
+            reason = "Required provenance/response/prompt file is missing or unreadable" if isinstance(exc, OSError) else str(exc)
+            warnings.append({"candidate": item["name"], "reason": reason})
     return accepted, warnings
+
+
+def adaptation_form(text):
+    validate_candidate(text)
+    result = []
+    mirror = ["sed", "-i", "s|deb.debian.org|mirrors.aliyun.com|g",
+              "/etc/apt/sources.list.d/debian.sources"]
+    for kind, value in _instructions(text):
+        if kind == "RUN" and shlex.split(value) == mirror:
+            continue
+        if kind == "RUN" and value != "make":
+            pieces = []
+            for part in value.split("&&"):
+                tokens, clean, index = shlex.split(part), [], 0
+                while index < len(tokens):
+                    if tokens[index] == "-o":
+                        index += 2  # validate_candidate already checked each option.
+                    else:
+                        clean.append(tokens[index])
+                        index += 1
+                pieces.append(tuple(clean))
+            result.append((kind, tuple(pieces)))
+        elif kind == "CMD":
+            result.append((kind, tuple(json.loads(value))))
+        else:
+            result.append((kind, value))
+    return result
+
+
+def selected_origin(root, candidates, records, selected):
+    record = next((item for item in records if item["name"] == selected), None)
+    if record is not None:
+        return {"kind": record["generation_kind"], "candidate": selected}
+    directory = root / "candidates" / selected
+    if not (directory / "provenance.json").is_file():
+        return {"kind": "UNRECORDED", "candidate": selected}
+    provenance = read_json(directory / "provenance.json")
+    if provenance.get("generation_mode") != "MANUAL_ENVIRONMENT_ADAPTATION":
+        return {"kind": "UNRECORDED", "candidate": selected}
+    parent_name = provenance.get("parent_candidate_name", "")
+    reason = provenance.get("reason", "")
+    if not isinstance(parent_name, str) or not NAME_RE.fullmatch(parent_name):
+        raise ValueError("Environment adaptation requires a valid parent_candidate_name")
+    if not isinstance(reason, str) or not reason.strip():
+        raise ValueError("Environment adaptation requires a nonempty reason")
+    parent_record = next((item for item in records if item["name"] == parent_name and
+                          item["generation_kind"] == "FRESH_MODEL_RESPONSE"), None)
+    parent = next((item for item in candidates if item["name"] == parent_name), None)
+    if parent_record is None or parent is None:
+        raise ValueError("Environment adaptation parent must have valid original fresh model evidence")
+    if provenance.get("parent_sha256") != parent["dockerfile_sha256"]:
+        raise ValueError("Environment adaptation parent_sha256 differs from the original candidate")
+    parent_file = root / "candidates" / parent_name / "Dockerfile"
+    if adaptation_form((directory / "Dockerfile").read_text(encoding="utf-8")) != adaptation_form(parent_file.read_text(encoding="utf-8")):
+        raise ValueError("Environment adaptation changes more than the fixed mirror RUN or allowed apt options")
+    return {"kind": "ENVIRONMENT_ADAPTATION", "candidate": selected,
+            "parent_candidate_name": parent_name, "parent_sha256": parent["dockerfile_sha256"],
+            "parent_model_evidence": parent_record, "reason": reason}
 
 
 def completion_pending(root, candidates, selected):
     accepted, warnings = model_evidence(root, candidates)
-    strategies = {item["strategy"] for item in accepted}
-    pending = [f"Valid original model evidence missing for strategy: {strategy}"
+    fresh = [item for item in accepted if item["generation_kind"] == "FRESH_MODEL_RESPONSE"]
+    strategies = {item["strategy"] for item in fresh}
+    pending = [f"Valid fresh model evidence missing for strategy: {strategy}"
                for strategy in ("error-driven", "context-driven") if strategy not in strategies]
-    if selected not in {item["name"] for item in accepted}:
-        pending.append("Selected candidate lacks matching original model response/prompt provenance")
+    origin = selected_origin(root, candidates, accepted, selected)
+    if origin["kind"] not in ("FRESH_MODEL_RESPONSE", "ENVIRONMENT_ADAPTATION"):
+        pending.append("Selected candidate lacks matching fresh model evidence or validated environment adaptation lineage")
     for name in ("error-localization.json", "prompt-error-driven.txt", "prompt-context-driven.txt"):
         if not (root / "baseline" / name).is_file():
             pending.append(f"Missing E5 artifact: {name}")
@@ -434,6 +592,7 @@ def completion_pending(root, candidates, selected):
 def finalize(run_dir, selected, reason):
     root = Path(run_dir).resolve()
     check_open(root)
+    check_command_tree(root)
     if not reason.strip():
         raise ValueError("A concrete selection reason is required")
     if not NAME_RE.fullmatch(selected):
@@ -443,11 +602,15 @@ def finalize(run_dir, selected, reason):
     if not chosen or not chosen["passed"]:
         raise ValueError("Select a candidate with actual successful build and exact output verification")
     pending, model_records, warnings = completion_pending(root, candidates, selected)
+    origin = selected_origin(root, candidates, model_records, selected)
     result = {"schema_version": 1, "finalized_utc": utc_now(), "scope": "E5 teaching-scale DRAFT",
               "baseline_expected_failure": True, "selected_candidate": selected,
               "selection_reason": reason, "selected_image_id": chosen["image_id"],
+              "selected_source_kind": origin["kind"], "selected_source": origin,
               "build_and_exact_output_verified": True, "e5_records_complete": not pending,
               "pending": pending, "candidates": candidates, "model_evidence": model_records,
+              "fresh_strategies": sorted({item["strategy"] for item in model_records
+                                          if item["generation_kind"] == "FRESH_MODEL_RESPONSE"}),
               "candidate_record_warnings": warnings,
               "limits": ["No model/API calls are made by this driver",
                          "Model generation facts depend on the separately recorded original responses/provenance",
@@ -475,6 +638,7 @@ def verify_run(run_dir):
         path = root / relative
         if path.is_symlink() or sha256(path) != expected:
             raise ValueError(f"Evidence hash mismatch: {name}")
+    check_command_tree(root)
     check_source(root)
     if classify_baseline(read_json(root / "baseline/build/command.json"),
                          command_log(root / "baseline/build")) != "EXPECTED_MISSING_MAKE":
@@ -485,8 +649,12 @@ def verify_run(run_dir):
     if not selected or not selected["passed"] or selected["image_id"] != result["selected_image_id"]:
         raise ValueError("Final selection is not supported by candidate evidence")
     pending, model_records, warnings = completion_pending(root, summaries, result["selected_candidate"])
+    origin = selected_origin(root, summaries, model_records, result["selected_candidate"])
     if (result.get("e5_records_complete") != (not pending) or result.get("pending") != pending
-            or result.get("model_evidence") != model_records or result.get("candidate_record_warnings") != warnings):
+            or result.get("model_evidence") != model_records or result.get("candidate_record_warnings") != warnings
+            or result.get("selected_source_kind") != origin["kind"] or result.get("selected_source") != origin
+            or result.get("fresh_strategies") != sorted({item["strategy"] for item in model_records
+                                                         if item["generation_kind"] == "FRESH_MODEL_RESPONSE"})):
         raise ValueError("Final model-evidence completeness is not supported by the original records")
     return {"verified": True, "files_checked": len(manifest),
             "e5_records_complete": result["e5_records_complete"], "pending": result["pending"]}

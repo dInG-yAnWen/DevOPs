@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "python3",
+    "validator/validate.py",
+    "--suite"
+  ],
+  "cwd": "/root/241880284/e5-20261030-run01",
+  "started_utc": "2026-10-30T01:33:20.620256+00:00",
+  "timeout_seconds": 180,
+  "exit_code": 0,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-10-30T01:33:20.806219+00:00",
+  "stdout_sha256": "e30be41519a0a144215b0f338aa432b27f2586fa72c46983e4e71db5bd243083",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

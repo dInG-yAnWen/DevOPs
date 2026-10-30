@@ -1,0 +1,24 @@
+{
+  "name": "context-mirror",
+  "created_utc": "2026-10-30T01:27:43.302775+00:00",
+  "dockerfile_sha256": "e0a47332ae920e9372a583abd44a2d2841c9622e0ed736fbd98b79db6acdbd76",
+  "response_recorded": false,
+  "provenance_recorded": true,
+  "passed": true,
+  "build_exit_code": 0,
+  "verify_exit_code": 0,
+  "image_id": "sha256:83be11ffc4b8afa78156b3baef3e444cb0d551c4da314374bffc2a33d9659da1",
+  "output_matches": true,
+  "validation": {
+    "valid": true,
+    "pinned_from": "m.daocloud.io/docker.io/library/python@sha256:f82c96458eedc847b233e582eb31336f4954b39cae020b6dcf5b3ed0e5cbcd74",
+    "policy": "Only dependency-install RUN instructions before WORKDIR may be added"
+  },
+  "cleanup": {
+    "container_name": "e5-4786d30309734570-context-mirror",
+    "remove_exit_code": 0,
+    "absence_confirmed": true
+  },
+  "status": "PASSED",
+  "launch_error": null
+}

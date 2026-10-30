@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "docker",
+    "build",
+    "--no-cache",
+    "--progress=plain",
+    "--file",
+    "/root/241880284/e5-20261030-run01/work/e5-20261030-run01/candidates/context-mirror/Dockerfile",
+    "--iidfile",
+    "/root/241880284/e5-20261030-run01/work/e5-20261030-run01/candidates/context-mirror/image-id.txt",
+    "/root/241880284/e5-20261030-run01/work/e5-20261030-run01/project"
+  ],
+  "cwd": "/root/241880284/e5-20261030-run01/work/e5-20261030-run01",
+  "started_utc": "2026-10-30T01:27:43.302873+00:00",
+  "timeout_seconds": 600,
+  "exit_code": 0,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-10-30T01:29:48.731417+00:00",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "9a2205eea27bbf2841e67210e5b04af10462c1b0b330ca235a0f4db3fc91d951"
+}

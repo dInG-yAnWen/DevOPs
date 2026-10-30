@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "sh",
+    "-c",
+    "cat /etc/os-release; uname -a; nproc; free -m; df -h /; docker version; git --version; python3 --version"
+  ],
+  "cwd": "/root/241880284/e5-20261030-run01",
+  "started_utc": "2026-10-30T01:33:20.807056+00:00",
+  "timeout_seconds": 30,
+  "exit_code": 0,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-10-30T01:33:20.825836+00:00",
+  "stdout_sha256": "93ef2b06876bb1acde3846c77523d7bac53f9eff4a728c3d0acfff5072c67756",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

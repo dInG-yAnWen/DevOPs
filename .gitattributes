@@ -6,5 +6,12 @@
 /e3/evidence/** -text
 /e4/evidence/** -text
 
+# E5 model inputs, replies and raw evidence are hashed byte-for-byte.
+/e5/evidence/** -text
+/e5/model-records/** -text
+/e5/candidates/** -text
+/e5/scripts/*.py text eol=lf
+/e5/tests/*.py text eol=lf
+
 # Preserve the received A14 reply byte-for-byte for the handoff receipt hash.
 /docs/collaboration/A14_回复B14_E3E4资料说明_20261008.md -text

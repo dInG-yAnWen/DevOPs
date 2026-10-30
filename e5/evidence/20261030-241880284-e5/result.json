@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "finalized_utc": "2026-10-30T01:33:21.052269+00:00",
+  "scope": "E5 teaching-scale DRAFT",
+  "baseline_expected_failure": true,
+  "selected_candidate": "context-mirror",
+  "selection_reason": "The two original strategies produced the same dependency repair and both exceeded the equal 240-second default-source download budget. A documented derivative preserves the parent candidate, exact base digest, source, make and program command; only dependency download source/options differ. Its actual build and offline run succeeded. No strategy superiority or mirror-only speed claim is made.",
+  "selected_image_id": "sha256:83be11ffc4b8afa78156b3baef3e444cb0d551c4da314374bffc2a33d9659da1",
+  "selected_source_kind": "ENVIRONMENT_ADAPTATION",
+  "selected_source": {
+    "kind": "ENVIRONMENT_ADAPTATION",
+    "candidate": "context-mirror",
+    "parent_candidate_name": "context-driven",
+    "parent_sha256": "3af5dc924a2ac81f49289ef0503356ddb2ffa21510d9c71f296bf18e0937dd72",
+    "parent_model_evidence": {
+      "name": "context-driven",
+      "strategy": "context-driven",
+      "generation_kind": "FRESH_MODEL_RESPONSE",
+      "prompt_sha256": "ccfb1b021194acd0e8cd64d956afe645916dfd0fa08663d44c588cb28ea31217",
+      "response_sha256": "50bdbbd1b28f66e5148ed3bef330e45ce4687d9b260525478bd395d2ffd14adf",
+      "extracted_dockerfile_sha256": "3af5dc924a2ac81f49289ef0503356ddb2ffa21510d9c71f296bf18e0937dd72"
+    },
+    "reason": "Default apt-get update stalled in the actual B14 cloud build; prior B14 E4 documentation records the same slow default Debian route. Original model candidates remain preserved; this candidate is not an untouched model response."
+  },
+  "build_and_exact_output_verified": true,
+  "e5_records_complete": true,
+  "pending": [],
+  "candidates": [
+    {
+      "name": "context-driven",
+      "created_utc": "2026-10-30T01:24:57.077231+00:00",
+      "dockerfile_sha256": "3af5dc924a2ac81f49289ef0503356ddb2ffa21510d9c71f296bf18e0937dd72",
+      "response_recorded": true,
+      "provenance_recorded": true,
+      "passed": false,
+      "build_exit_code": null,
+      "verify_exit_code": null,
+      "image_id": null,
+      "output_matches": false,
+      "validation": {
+        "valid": true,
+        "pinned_from": "m.daocloud.io/docker.io/library/python@sha256:f82c96458eedc847b233e582eb31336f4954b39cae020b6dcf5b3ed0e5cbcd74",
+        "policy": "Only dependency-install RUN instructions before WORKDIR may be added"
+      },
+      "status": "TIMED_OUT",
+      "launch_error": null
+    },
+    {
+      "name": "context-mirror",
+      "created_utc": "2026-10-30T01:27:43.302775+00:00",
+      "dockerfile_sha256": "e0a47332ae920e9372a583abd44a2d2841c9622e0ed736fbd98b79db6acdbd76",
+      "response_recorded": false,
+      "provenance_recorded": true,
+      "passed": true,
+      "build_exit_code": 0,
+      "verify_exit_code": 0,
+      "image_id": "sha256:83be11ffc4b8afa78156b3baef3e444cb0d551c4da314374bffc2a33d9659da1",
+      "output_matches": true,
+      "validation": {
+        "valid": true,
+        "pinned_from": "m.daocloud.io/docker.io/library/python@sha256:f82c96458eedc847b233e582eb31336f4954b39cae020b6dcf5b3ed0e5cbcd74",
+        "policy": "Only dependency-install RUN instructions before WORKDIR may be added"
+      },
+      "cleanup": {
+        "container_name": "e5-4786d30309734570-context-mirror",
+        "remove_exit_code": 0,
+        "absence_confirmed": true
+      },
+      "status": "PASSED",
+      "launch_error": null
+    },
+    {
+      "name": "error-driven",
+      "created_utc": "2026-10-30T01:23:01.575494+00:00",
+      "dockerfile_sha256": "26d5ad5f77d3b0b3f90026b4f22340cfd79bc4de0ed2a639bcc44cf795b9b6b6",
+      "response_recorded": true,
+      "provenance_recorded": true,
+      "passed": false,
+      "build_exit_code": null,
+      "verify_exit_code": null,
+      "image_id": null,
+      "output_matches": false,
+      "validation": {
+        "valid": true,
+        "pinned_from": "m.daocloud.io/docker.io/library/python@sha256:f82c96458eedc847b233e582eb31336f4954b39cae020b6dcf5b3ed0e5cbcd74",
+        "policy": "Only dependency-install RUN instructions before WORKDIR may be added"
+      },
+      "status": "TIMED_OUT",
+      "launch_error": null
+    }
+  ],
+  "model_evidence": [
+    {
+      "name": "context-driven",
+      "strategy": "context-driven",
+      "generation_kind": "FRESH_MODEL_RESPONSE",
+      "prompt_sha256": "ccfb1b021194acd0e8cd64d956afe645916dfd0fa08663d44c588cb28ea31217",
+      "response_sha256": "50bdbbd1b28f66e5148ed3bef330e45ce4687d9b260525478bd395d2ffd14adf",
+      "extracted_dockerfile_sha256": "3af5dc924a2ac81f49289ef0503356ddb2ffa21510d9c71f296bf18e0937dd72"
+    },
+    {
+      "name": "error-driven",
+      "strategy": "error-driven",
+      "generation_kind": "FRESH_MODEL_RESPONSE",
+      "prompt_sha256": "8f3cf6250784240fdd1b70da62abe46c46f5ca5d90dd1d19047b2b98ac6a743d",
+      "response_sha256": "5ea3eea466199067c30bbd70633ca238ceaca7a59357eee67fe994bef4fc7851",
+      "extracted_dockerfile_sha256": "26d5ad5f77d3b0b3f90026b4f22340cfd79bc4de0ed2a639bcc44cf795b9b6b6"
+    }
+  ],
+  "fresh_strategies": [
+    "context-driven",
+    "error-driven"
+  ],
+  "candidate_record_warnings": [],
+  "limits": [
+    "No model/API calls are made by this driver",
+    "Model generation facts depend on the separately recorded original responses/provenance",
+    "TinyGreeting is a course fixture, not the original paper benchmark",
+    "No E6 service or E7 gate is implemented"
+  ]
+}
