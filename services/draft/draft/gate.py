@@ -27,6 +27,7 @@ EXPECTED = "hello E3"
 WRONG_EXPECTED = "E7 intentionally incorrect expected output"
 BUILD_MARKER = "E7_INJECTED_BUILD_FAILURE"
 TIMEOUT_MARKER = b"E7_TIMEOUT_STARTED\n"
+RUNTIME_TIMEOUT_SECONDS = 5
 TIMEOUT_SOURCE = (b'#include <stdio.h>\n#include <unistd.h>\n'
                   b'int main(void) { puts("E7_TIMEOUT_STARTED"); fflush(stdout); '
                   b'sleep(10); puts("hello E3"); return 0; }\n')
@@ -46,7 +47,16 @@ def _selection(cases):
     return [name for name in CASES if name in selected]
 
 
-def _mutation(name, originals, candidate):
+def _runtime_timeout(metadata):
+    # Original E7 bundles omitted this field and used one second. Preserve
+    # their original argv, fault injection and oracle when verifying them.
+    value = metadata.get("runtime_timeout_seconds", 1)
+    if type(value) is not int or value not in (1, 5):
+        raise ValueError("Runtime timeout must be the recorded E7 budget of 1 or 5 seconds")
+    return value
+
+
+def _mutation(name, originals, candidate, runtime_timeout_seconds=RUNTIME_TIMEOUT_SECONDS):
     sources, modified_candidate = dict(originals), candidate
     if name == "build-failed":
         sources["main.c"] = b"#error E7_INJECTED_BUILD_FAILURE\n" + sources["main.c"]
@@ -79,7 +89,7 @@ def _mutation(name, originals, candidate):
                                                fromfile="original/" + path, tofile=name + "/" + path))
     injection = {"schema_version": 1, "case": name, "changes": changes,
                  "expected_output": WRONG_EXPECTED if name == "wrong-output" else EXPECTED,
-                 "verify_timeout": 1 if name == "runtime-timeout" else 30,
+                 "verify_timeout": runtime_timeout_seconds if name == "runtime-timeout" else 30,
                  "source_kind": "REPLAY_WITH_EXPLICIT_FAULT_INJECTION", "model_call_in_e7": False}
     return sources, modified_candidate, injection, diff.encode("utf-8")
 
@@ -103,7 +113,7 @@ def _argv(metadata, name):
     result = [metadata["python_executable"], "-m", "draft", "auto-build", "--fixture", join("cases", name, "fixture"),
               "--candidate", join("cases", name, "candidate.Dockerfile"), "--out", join("cases", name, "run"),
               "--expected-output", WRONG_EXPECTED if name == "wrong-output" else EXPECTED,
-              "--timeout", str(metadata["build_timeout"]), "--verify-timeout", "1" if name == "runtime-timeout" else "30"]
+              "--timeout", str(metadata["build_timeout"]), "--verify-timeout", str(_runtime_timeout(metadata)) if name == "runtime-timeout" else "30"]
     if metadata["provenance_sha256"] is not None:
         result += ["--provenance", join("inputs", "provenance.json")]
     return result
@@ -187,7 +197,7 @@ def _oracle(root, metadata, name, record):
              and run_metadata["provenance_sha256"] == metadata["provenance_sha256"]
              and run_metadata["driver_sha256"] == metadata["autobuild_sha256"]
              and run_metadata["build_timeout"] == metadata["build_timeout"]
-             and run_metadata["verify_timeout"] == (1 if name == "runtime-timeout" else 30)
+             and run_metadata["verify_timeout"] == (_runtime_timeout(metadata) if name == "runtime-timeout" else 30)
              and run_metadata["expected_output"] == (WRONG_EXPECTED if name == "wrong-output" else EXPECTED))
     if not bound:
         raise ValueError("E6 replay input/command binding differs from E7: " + name)
@@ -291,7 +301,7 @@ def run_gate(fixture, candidate, output, provenance=None, build_timeout=600, cas
         e6._validate_provenance(original_provenance, _digest(candidate_bytes))
     # Construct all mutations before creating output; malformed inputs do not
     # leave an ambiguous bundle or launch any command.
-    mutations = {name: _mutation(name, sources, candidate_bytes) for name in selected}
+    mutations = {name: _mutation(name, sources, candidate_bytes, RUNTIME_TIMEOUT_SECONDS) for name in selected}
     root.mkdir(parents=True, exist_ok=False)
     for name, value in sources.items():
         e6.write_new(root / "fixture" / name, value)
@@ -304,6 +314,7 @@ def run_gate(fixture, candidate, output, provenance=None, build_timeout=600, cas
                 "model_call_in_e7": False, "created_utc": e6.utc_now(), "evidence_root": str(root),
                 "command_cwd": str(Path(__file__).resolve().parents[1]), "python_executable": str(Path(sys.executable).resolve()),
                 "path_style": "windows" if os.name == "nt" else "posix", "build_timeout": build_timeout,
+                "runtime_timeout_seconds": RUNTIME_TIMEOUT_SECONDS,
                 "outer_timeout": 2 * build_timeout + 180, "expected_cases": list(CASES), "selected_cases": selected,
                 "input_sha256": {name: _digest(value) for name, value in sources.items()},
                 "candidate_sha256": _digest(candidate_bytes),
@@ -360,6 +371,7 @@ def verify_gate(directory):
         raise ValueError("Invalid E7 build timeout")
     if metadata.get("outer_timeout") != 2 * metadata["build_timeout"] + 180:
         raise ValueError("Outer timeout differs from the declared two-build budget")
+    runtime_timeout_seconds = _runtime_timeout(metadata)
     join = _paths(metadata)
     sources = {name: (root / "fixture" / name).read_bytes() for name in e6.FIXTURE_FILES}
     if metadata.get("input_sha256") != {name: _digest(value) for name, value in sources.items()}:
@@ -386,7 +398,7 @@ def verify_gate(directory):
     rows, records = [], []
     for name in metadata["selected_cases"]:
         prefix, case = "cases/" + name + "/", root / "cases" / name
-        modified, modified_candidate, injection, diff = _mutation(name, sources, candidate)
+        modified, modified_candidate, injection, diff = _mutation(name, sources, candidate, runtime_timeout_seconds)
         for path, content in modified.items():
             if (case / "fixture" / path).read_bytes() != content:
                 raise ValueError("Undeclared fixture mutation: " + name + "/" + path)

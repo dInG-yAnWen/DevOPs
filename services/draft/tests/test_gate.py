@@ -13,10 +13,11 @@ from test_autobuild import BROKEN, VALID, FakeDocker, FakeProcess
 
 
 class CaseDocker(FakeDocker):
-    def __init__(self, name, *, network_failure=False, ignore_nonzero=False):
+    def __init__(self, name, *, network_failure=False, ignore_nonzero=False, empty_timeout=False):
         super().__init__(candidate_exit=1 if name == "build-failed" or network_failure else 0,
                          timeout_stage="verify" if name == "runtime-timeout" else None)
         self.name, self.network_failure, self.ignore_nonzero = name, network_failure, ignore_nonzero
+        self.empty_timeout = empty_timeout
 
     def __call__(self, argv, **kwargs):
         if argv[:2] == ["docker", "build"] and Path(argv[argv.index("--file") + 1]).parent.name == "iter-02":
@@ -26,7 +27,7 @@ class CaseDocker(FakeDocker):
                 return subprocess.CompletedProcess(argv, 1, b"", b"main.c:1:2: error: #error E7_INJECTED_BUILD_FAILURE\n")
         if argv[:2] == ["docker", "run"]:
             if self.name == "runtime-timeout":
-                raise subprocess.TimeoutExpired(argv, kwargs["timeout"], output=gate.TIMEOUT_MARKER, stderr=b"")
+                raise subprocess.TimeoutExpired(argv, kwargs["timeout"], output=b"" if self.empty_timeout else gate.TIMEOUT_MARKER, stderr=b"")
             if self.name == "runtime-nonzero":
                 return subprocess.CompletedProcess(argv, 0 if self.ignore_nonzero else 23, b"hello E3\n", b"")
         return super().__call__(argv, **kwargs)
@@ -52,6 +53,7 @@ class GateTests(unittest.TestCase):
         self.network_failure = False
         self.ignore_nonzero = False
         self.baseline_failure = None
+        self.empty_timeout = False
 
     def fake_outer(self, argv, cwd, evidence, timeout):
         if argv[1:4] != ["-m", "draft", "auto-build"]:
@@ -60,7 +62,8 @@ class GateTests(unittest.TestCase):
         options = {argv[index][2:].replace("-", "_"): argv[index + 1] for index in range(4, len(argv), 2)}
         name = Path(options["out"]).parent.name
         started = e6.utc_now()
-        fake = CaseDocker(name, network_failure=self.network_failure, ignore_nonzero=self.ignore_nonzero)
+        fake = CaseDocker(name, network_failure=self.network_failure, ignore_nonzero=self.ignore_nonzero,
+                          empty_timeout=self.empty_timeout)
         if self.baseline_failure == "network":
             fake.baseline_exit, fake.baseline_log = 1, b"failed to resolve source metadata: network unavailable\n"
         elif self.baseline_failure == "timeout":
@@ -134,6 +137,55 @@ class GateTests(unittest.TestCase):
         result = self.run_gate(cases=["runtime-nonzero"])
         self.assertFalse(result["cases"][0]["passed"])
         self.assertEqual(result["cases"][0]["observed_workflow_status"], "SUCCEEDED")
+
+    def test_new_runtime_timeout_uses_five_seconds_in_metadata_cli_injection_and_e6(self):
+        result = self.run_gate(cases=["runtime-timeout"])
+        self.assertTrue(result["cases"][0]["passed"])
+        self.assertEqual(e6.read_json(self.output / "run.json")["runtime_timeout_seconds"], 5)
+        case = self.output / "cases/runtime-timeout"
+        self.assertEqual(e6.read_json(case / "fault-injection.json")["verify_timeout"], 5)
+        argv = e6.read_json(case / "workflow/command.json")["argv"]
+        self.assertEqual(argv[argv.index("--verify-timeout") + 1], "5")
+        self.assertEqual(e6.read_json(case / "run/verify/command.json")["timeout_seconds"], 5)
+        self.assertEqual((case / "fixture/main.c").read_bytes(), gate.TIMEOUT_SOURCE)
+        self.assertIn(b"sleep(10)", gate.TIMEOUT_SOURCE)
+
+    def test_empty_runtime_timeout_streams_do_not_prove_the_program_started(self):
+        self.empty_timeout = True
+        result = self.run_gate(cases=["runtime-timeout"])
+        row = result["cases"][0]
+        self.assertFalse(row["passed"])
+        self.assertTrue(row["e6_verified"])
+        self.assertEqual(row["observed_workflow_status"], "TIMED_OUT")
+        self.assertTrue(gate.verify_gate(self.output)["verified"])
+        self.assertFalse(gate.verify_gate(self.output)["cases"][0]["passed"])
+
+    def test_old_one_second_bundle_without_budget_field_retains_its_failed_oracle(self):
+        self.empty_timeout = True
+        with patch.object(gate, "RUNTIME_TIMEOUT_SECONDS", 1):
+            result = self.run_gate()
+        self.assertEqual(result["status"], "FAILED")
+        metadata = self.output / "run.json"
+        self.edit_json(metadata, lambda value: value.pop("runtime_timeout_seconds"))
+        self.rehash()
+        checked = gate.verify_gate(self.output)
+        self.assertTrue(checked["verified"])
+        self.assertFalse(checked["passed"])
+        self.assertEqual(checked["status"], "FAILED")
+        timeout = next(row for row in checked["cases"] if row["case"] == "runtime-timeout")
+        self.assertFalse(timeout["passed"])
+        case = self.output / "cases/runtime-timeout"
+        self.assertEqual(e6.read_json(case / "fault-injection.json")["verify_timeout"], 1)
+        self.assertEqual(e6.read_json(case / "run/verify/command.json")["timeout_seconds"], 1)
+
+    def test_unrecognized_or_boolean_recorded_runtime_budget_is_rejected(self):
+        self.run_gate(cases=["runtime-timeout"])
+        for budget in (True, 2, 30):
+            with self.subTest(budget=budget):
+                self.edit_json(self.output / "run.json", lambda value: value.update(runtime_timeout_seconds=budget))
+                self.rehash()
+                with self.assertRaisesRegex(ValueError, "Runtime timeout"):
+                    gate.verify_gate(self.output)
 
     def test_build_network_failure_cannot_pass_build_or_runtime_negatives(self):
         self.network_failure = True
