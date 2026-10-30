@@ -204,3 +204,16 @@
 - 通过 SCP 将已封存运行目录复制到本地个人分支的 `e5/evidence/20261030-241880273-e5/`；对传输副本和仓库副本运行 `run_e5.py verify` 均通过，清单覆盖 67 个证据文件，`e5_records_complete=true`，`pending=[]`。服务器原始运行目录未修改。
 - 提示与回复来源记录为 Codex 桌面对话；精确模型标识未记录。实验驱动不调用模型或 API；人工镜像适配明确与模型候选区分。该运行是 TinyGreeting 教学样例，不是原论文完整基准。
 - 本地另运行 `python -m unittest discover -s e5/tests -v`，22 项通过，作为代码复核而非服务器运行步骤。E5 驱动和测试用例由丁彦文实现；本记录不将框架开发归于徐梓航，也不登记 E6/E7 工作。
+
+## 2026-10-30 E6 独立复跑与证据归档
+
+- 用户请求：按本地 E5-7 的 E6 要求复核 `e6-mvp`，在本人学号目录独立复跑并把证据归档；随后要求补齐 E6 的 AI 使用与贡献记录。
+- 身份与来源：Codex 经 SSH 密钥登录 B14 ECS，在 `/root/241880272/draft` 的 `e6-mvp` 分支执行；仓库本地身份为 `241880272 <241880272@localhost>`。E6 实现与首轮证据由丁彦文（241880284）提交，本记录只登记本人的独立复跑、归档与审查。
+- 执行与结果：
+  - 服务镜像内 `python3 -m pytest tests`：40 项通过。
+  - `python3 e6/scripts/run_e6.py auto-build`：第一轮退出 1、`EXPECTED_MISSING_MAKE`；第二轮退出 0；同镜像离线运行退出 0，stdout 精确为 `hello E3\n`；容器清理确认。
+  - `verify-evidence`：`verified: true`，32 个文件。
+  - 原始证据归档到 `e6/evidence/20261030-241880272-e6/`，含 run 目录、校验清单、单测输出与来源信息。
+- 审查结论：本地 E6 要求的五项检查全部成立——第一轮 `MISSING_MAKE`、第二轮 `build_exit_code=0`、保存并运行同一镜像 ID、退出 0 与 `hello E3`、`output_matches=true`。
+- 发现与边界：本次为 E5 保存候选回放（`source_kind=REPLAY`，`model_call_in_e6=false`）；镜像 ID 跨运行不可复现，因为 apt 安装包未锁版本；E6 实现由 241880284 提交，本人只做独立复跑与归档。
+- 未做：未修改 E6 实现、候选或测试；未推送远端；实验报告待 E5–E7 完成后统一整理。

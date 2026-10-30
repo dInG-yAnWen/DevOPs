@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "verified": true,
+  "workflow_succeeded": true,
+  "status": "SUCCEEDED",
+  "trace_id": "e6-b-a0cb9b414bcd4dfc8c6ea53bfa3ce974",
+  "source_kind": "REPLAY",
+  "files_checked": 32,
+  "image_id": "sha256:d3c741d7a7bd09db82690321c7d860c0be68686bbb8349ba4301dbf6701bc463",
+  "candidate_sha256": "e0a47332ae920e9372a583abd44a2d2841c9622e0ed736fbd98b79db6acdbd76",
+  "scope": "Offline saved evidence consistency; builds were not rerun"
+}

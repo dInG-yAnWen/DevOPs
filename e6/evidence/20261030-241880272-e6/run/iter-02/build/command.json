@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "docker",
+    "build",
+    "--no-cache",
+    "--progress=plain",
+    "--file",
+    "/root/241880272/draft/work/e6-20261030-212703-recheck/iter-02/Dockerfile",
+    "--iidfile",
+    "/root/241880272/draft/work/e6-20261030-212703-recheck/iter-02/image-id.txt",
+    "/root/241880272/draft/work/e6-20261030-212703-recheck/project"
+  ],
+  "cwd": "/root/241880272/draft/work/e6-20261030-212703-recheck",
+  "started_utc": "2026-10-30T13:27:05.139749+00:00",
+  "timeout_seconds": 600,
+  "exit_code": 0,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-10-30T13:28:36.503038+00:00",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "a5758da7d689dd34345a207c74c01e29c9eb6f0b5f6638f2458cb61fd1bed2a5"
+}
