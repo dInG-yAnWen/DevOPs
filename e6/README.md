@@ -58,6 +58,12 @@ python3 e6/scripts/run_e6.py verify-evidence --run-dir work/e6-service-01/run
 
 `verify-evidence` 核对完整文件集合及哈希，并检查原始日志、命令与 image ID 的对应关系。它不重新构建，故不要求原镜像仍存在。CLI 仅在成功工作流且证据一致时退出0；完整保存的失败结果仍返回非零。
 
+已归档技术证据可用以下命令只读校验：
+
+```bash
+python3 e6/scripts/run_e6.py verify-evidence --run-dir e6/evidence/20261030-241880284-e6/run
+```
+
 单元测试：
 
 ```bash

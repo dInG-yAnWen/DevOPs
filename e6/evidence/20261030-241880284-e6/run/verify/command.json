@@ -1,0 +1,27 @@
+{
+  "argv": [
+    "docker",
+    "run",
+    "--rm",
+    "--name",
+    "e6-draft-016f2e5a66b24ab0a663b6cfc4eae514",
+    "--network",
+    "none",
+    "--cpus",
+    "1",
+    "--memory",
+    "256m",
+    "--pids-limit",
+    "64",
+    "sha256:d147063905fd47fba13b813b0c63ea37f50f2b0acded81480f67aea2c3192870"
+  ],
+  "cwd": "/evidence/run",
+  "started_utc": "2026-10-30T05:38:35.093595+00:00",
+  "timeout_seconds": 30,
+  "exit_code": 0,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-10-30T05:38:36.645994+00:00",
+  "stdout_sha256": "8e4e09b0c3458c9c59e691c847d4d7484995403e663549d919fac7c2a5823548",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

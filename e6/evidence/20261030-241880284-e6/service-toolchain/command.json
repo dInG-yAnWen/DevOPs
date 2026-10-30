@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "docker",
+    "run",
+    "--rm",
+    "--name",
+    "b14-e6-collector-cea9d7e2b19844d7a33a86180cec7353-service-toolchain",
+    "--network",
+    "none",
+    "sha256:177149671ad80e4713d7137cbcd9962eb1e866e052412d09663a1959e9c262dd",
+    "cat",
+    "/opt/toolchain.lock"
+  ],
+  "cwd": "/root/241880284/e6-20261030-run01",
+  "started_utc": "2026-10-30T05:37:02.334282+00:00",
+  "timeout_seconds": 30,
+  "exit_code": 0,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-10-30T05:37:02.455706+00:00",
+  "stdout_sha256": "42f79c804c8c8d6a676d82f31f37aef804fce367381ee014461c7d772fa5f15c",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}
