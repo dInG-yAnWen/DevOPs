@@ -1,10 +1,10 @@
-# DevOPs · B14（E2 + E3 + E4 + E5）
+# DevOPs · B14（E2 + E3 + E4）
 
 B14 负责 DRAFT 环境生成与 MDFixer（REPAIR），配对组为 A14。
 
-**E5 最新交付：**[B14 E5 复现报告与提交说明](docs/B14_E5_提交说明.md)。2026-10-30 已完成真实缺 make 失败、两类模型候选、环境适配、成功构建及同镜像禁网验证；最终输出 `hello E3`，22 项驱动测试和 69 项契约检查通过。操作入口见 [e5/README.md](e5/README.md)。原候选的下载超时原样保留，远端发布和课程平台补交尚未完成。
+E5 DRAFT 技术入口：[操作说明](e5/README.md)、[脚本](e5/scripts/run_e5.py)、[测试](e5/tests/test_run_e5.py)。
 
-E3/E4 交付文件：[B14 E3/E4 提交说明](docs/B14_E3E4_提交说明.md)。成员贡献见 [contributions.md](docs/contributions.md)，包含徐梓航的框架工作、丁彦文的文档与交付物整理，以及丁彦文、徐梓航、杨王旭三人的独立测试。
+本轮主交付文件：[B14 E3/E4 提交说明](docs/B14_E3E4_提交说明.md)。成员贡献见 [contributions.md](docs/contributions.md)，包含徐梓航的框架工作、丁彦文的文档与交付物整理，以及丁彦文、徐梓航、杨王旭三人的独立测试。
 
 E2 契约基线已获 A14 接受。2026-09-25 已收到回复并完成 B14 本地交接校验，详见 [协作确认与交接记录](docs/collaboration/交接确认.md)。示例仍为人工协议数据，不代表真实构建、算法复现或真实服务联调结果。B14 已 commit/push，已发布契约基线为 `689539119e60afd4b224d3163d1ba292992baa95`，详见 [版本记录](docs/release.md)。本轮 E3/E4 材料归档提交为 `2ab392a81a95f88d438087258c8226f99b6e1f2a`；最终交付提交见提交包的版本信息。
 

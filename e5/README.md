@@ -1,6 +1,6 @@
 # B14 E5 DRAFT 复现操作
 
-执行与整理：丁彦文。课程验收依据见 [requirements.md](requirements.md)，AI 使用记录集中见 [docs/AI_USAGE.md](../docs/AI_USAGE.md)。本说明给出可复现步骤，实际结果以本轮报告及原始证据为准。
+本目录提供 DRAFT 复现脚本、测试、固定输入和原始证据。课程验收依据见 [requirements.md](requirements.md)，以下说明脚本用法。
 
 以下为本组 Linux 云主机上的 Bash 命令，均在仓库根目录执行。需要 Python 3、Git、Docker 客户端和可用的 Docker daemon。`e5/scripts/run_e5.py` 使用 Python 标准库，不调用模型 API。
 
