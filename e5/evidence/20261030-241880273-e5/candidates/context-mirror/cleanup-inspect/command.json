@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "docker",
+    "container",
+    "inspect",
+    "e5-42ba31358e7f4a81-context-mirror"
+  ],
+  "cwd": "/root/241880273/e5-reproduction/work/e5-20261030-163629-241880273",
+  "started_utc": "2026-10-30T09:28:11.529619+00:00",
+  "timeout_seconds": 30,
+  "exit_code": 1,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-10-30T09:28:11.539385+00:00",
+  "stdout_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "stderr_sha256": "fc0711b4cc6f065332113794d7fecef3746bb764b57241b436693b7f557c1cc2"
+}

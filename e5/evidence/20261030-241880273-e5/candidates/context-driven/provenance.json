@@ -1,0 +1,13 @@
+{
+  "provider": "OpenAI",
+  "platform": "Codex desktop conversation",
+  "model": "Codex current session; exact model identifier not disclosed",
+  "generation_date": "2026-10-30",
+  "generation_mode": "FRESH_MODEL_RESPONSE",
+  "human_edits": [],
+  "strategy": "context-driven",
+  "prompt_sha256": "7da5a89eb213d097eab92220f137d9203b3771f89de8a986ef12b7106c2ff162",
+  "response_sha256": "74a108e26096bc03269f23d2be709930fdaefe20d8b7ff9136bb6028d6ea7880",
+  "candidate_sha256": "562460524b21ad96c5da7c434de851ab0ab57ac3fe65f4874585553b6db5be27",
+  "recorded_utc": "2026-10-30T08:49:44.965334+00:00"
+}
