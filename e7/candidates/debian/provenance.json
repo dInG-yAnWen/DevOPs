@@ -1,0 +1,9 @@
+{
+  "generation_mode": "REPLAY_EXISTING_MODEL_CANDIDATE",
+  "source_kind": "E5_SAVED_CANDIDATE",
+  "source_commit": "dbfcbe55d2f370751142c337fb9f7c1cf6a657be",
+  "source_path": "e5/model-records/context-driven/Dockerfile",
+  "candidate_sha256": "3af5dc924a2ac81f49289ef0503356ddb2ffa21510d9c71f296bf18e0937dd72",
+  "model_call_in_e7": false,
+  "network_configuration": "Original Debian sources; used in GitHub-hosted CI. Cloud replay uses the separate E6 context-mirror adaptation."
+}

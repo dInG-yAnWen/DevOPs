@@ -1,10 +1,11 @@
-"""DRAFT CLI: E4 smoke and E6 two-attempt build/verification workflow."""
+"""DRAFT CLI: smoke, E6 build/verification and the E7 regression gate."""
 import argparse
 import json
 
 from . import __version__
 from .smoke import run_smoke
 from .autobuild import auto_build, verify_evidence
+from .gate import run_gate, verify_gate
 
 
 def positive_int(value):
@@ -31,6 +32,15 @@ def build_parser():
     sp.add_argument("--verify-timeout", type=positive_int, default=30)
     sp = sub.add_parser("verify-evidence", help="Read-only verification of saved E6 artifacts")
     sp.add_argument("--run-dir", required=True)
+    sp = sub.add_parser("quality-gate", help="E7: real Docker regression and controlled failure scenarios")
+    sp.add_argument("--fixture", default="fixtures/draft")
+    sp.add_argument("--candidate", required=True)
+    sp.add_argument("--provenance")
+    sp.add_argument("--out", required=True)
+    sp.add_argument("--build-timeout", type=positive_int, default=600)
+    sp.add_argument("--case", action="append", choices=("success", "wrong-output", "invalid-candidate", "build-failed", "runtime-timeout", "runtime-nonzero"))
+    sp = sub.add_parser("verify-gate", help="Read-only verification of saved E7 scenario artifacts")
+    sp.add_argument("--run-dir", required=True)
     return ap
 
 
@@ -48,9 +58,16 @@ def main(argv=None):
             result = auto_build(args.fixture, args.candidate, args.out, args.expected_output,
                                 args.timeout, args.verify_timeout, args.provenance)
             passed = result["status"] == "SUCCEEDED"
-        else:
+        elif args.cmd == "verify-evidence":
             result = verify_evidence(args.run_dir)
             passed = result["verified"] and result["status"] == "SUCCEEDED"
+        elif args.cmd == "quality-gate":
+            result = run_gate(args.fixture, args.candidate, args.out, args.provenance,
+                              args.build_timeout, args.case)
+            passed = result["passed"]
+        else:
+            result = verify_gate(args.run_dir)
+            passed = result["verified"] and result["passed"]
     except (ValueError, OSError, KeyError, TypeError, IndexError) as exc:
         result = {"status": "FAILED", "error": str(exc)}
         passed = False
