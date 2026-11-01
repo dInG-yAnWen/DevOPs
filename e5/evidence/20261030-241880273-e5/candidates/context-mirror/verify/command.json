@@ -1,0 +1,27 @@
+{
+  "argv": [
+    "docker",
+    "run",
+    "--rm",
+    "--name",
+    "e5-42ba31358e7f4a81-context-mirror",
+    "--network",
+    "none",
+    "--cpus",
+    "1",
+    "--memory",
+    "256m",
+    "--pids-limit",
+    "64",
+    "sha256:477bafa241a02e3b16daec8f359d5f391a43290c3f405c2cfb5ce240ff36bbf5"
+  ],
+  "cwd": "/root/241880273/e5-reproduction/work/e5-20261030-163629-241880273",
+  "started_utc": "2026-10-30T09:28:09.928344+00:00",
+  "timeout_seconds": 30,
+  "exit_code": 0,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-10-30T09:28:11.518756+00:00",
+  "stdout_sha256": "8e4e09b0c3458c9c59e691c847d4d7484995403e663549d919fac7c2a5823548",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

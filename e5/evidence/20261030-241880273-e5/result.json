@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "finalized_utc": "2026-10-30T09:29:17.242626+00:00",
+  "scope": "E5 teaching-scale DRAFT",
+  "baseline_expected_failure": true,
+  "selected_candidate": "context-mirror",
+  "selection_reason": "Selected the manually adapted context-driven candidate after both original candidates timed out downloading packages from deb.debian.org. Only the approved Debian mirror rewrite was added; package list and build instructions were unchanged. The adaptation passed build and runtime verification.",
+  "selected_image_id": "sha256:477bafa241a02e3b16daec8f359d5f391a43290c3f405c2cfb5ce240ff36bbf5",
+  "selected_source_kind": "ENVIRONMENT_ADAPTATION",
+  "selected_source": {
+    "kind": "ENVIRONMENT_ADAPTATION",
+    "candidate": "context-mirror",
+    "parent_candidate_name": "context-driven",
+    "parent_sha256": "562460524b21ad96c5da7c434de851ab0ab57ac3fe65f4874585553b6db5be27",
+    "parent_model_evidence": {
+      "name": "context-driven",
+      "strategy": "context-driven",
+      "generation_kind": "FRESH_MODEL_RESPONSE",
+      "prompt_sha256": "7da5a89eb213d097eab92220f137d9203b3771f89de8a986ef12b7106c2ff162",
+      "response_sha256": "74a108e26096bc03269f23d2be709930fdaefe20d8b7ff9136bb6028d6ea7880",
+      "extracted_dockerfile_sha256": "562460524b21ad96c5da7c434de851ab0ab57ac3fe65f4874585553b6db5be27"
+    },
+    "reason": "The original context-driven build timed out after 600 seconds while downloading 88.1 MB from deb.debian.org. Applied only the repository-approved Aliyun mirror rewrite; package list and build instructions are unchanged."
+  },
+  "build_and_exact_output_verified": true,
+  "e5_records_complete": true,
+  "pending": [],
+  "candidates": [
+    {
+      "name": "context-driven",
+      "created_utc": "2026-10-30T09:07:34.345297+00:00",
+      "dockerfile_sha256": "562460524b21ad96c5da7c434de851ab0ab57ac3fe65f4874585553b6db5be27",
+      "response_recorded": true,
+      "provenance_recorded": true,
+      "passed": false,
+      "build_exit_code": null,
+      "verify_exit_code": null,
+      "image_id": null,
+      "output_matches": false,
+      "validation": {
+        "valid": true,
+        "pinned_from": "m.daocloud.io/docker.io/library/python@sha256:f82c96458eedc847b233e582eb31336f4954b39cae020b6dcf5b3ed0e5cbcd74",
+        "policy": "Only the fixed apt installation or fixed Debian-mirror sed RUN before WORKDIR may be added"
+      },
+      "status": "TIMED_OUT",
+      "launch_error": null
+    },
+    {
+      "name": "context-mirror",
+      "created_utc": "2026-10-30T09:24:36.909677+00:00",
+      "dockerfile_sha256": "71ce99be3de2d365cc6a1e2934dfd949f5a612a8c98af8a940e4a093aaff3b45",
+      "response_recorded": false,
+      "provenance_recorded": true,
+      "passed": true,
+      "build_exit_code": 0,
+      "verify_exit_code": 0,
+      "image_id": "sha256:477bafa241a02e3b16daec8f359d5f391a43290c3f405c2cfb5ce240ff36bbf5",
+      "output_matches": true,
+      "validation": {
+        "valid": true,
+        "pinned_from": "m.daocloud.io/docker.io/library/python@sha256:f82c96458eedc847b233e582eb31336f4954b39cae020b6dcf5b3ed0e5cbcd74",
+        "policy": "Only the fixed apt installation or fixed Debian-mirror sed RUN before WORKDIR may be added"
+      },
+      "cleanup": {
+        "container_name": "e5-42ba31358e7f4a81-context-mirror",
+        "remove_exit_code": 0,
+        "absence_confirmed": true
+      },
+      "status": "PASSED",
+      "launch_error": null
+    },
+    {
+      "name": "error-driven",
+      "created_utc": "2026-10-30T08:50:40.649061+00:00",
+      "dockerfile_sha256": "c4e63748283f29eb30beb5e02fe87d48b1eb9b24ee25f537d08681630803f9f3",
+      "response_recorded": true,
+      "provenance_recorded": true,
+      "passed": false,
+      "build_exit_code": null,
+      "verify_exit_code": null,
+      "image_id": null,
+      "output_matches": false,
+      "validation": {
+        "valid": true,
+        "pinned_from": "m.daocloud.io/docker.io/library/python@sha256:f82c96458eedc847b233e582eb31336f4954b39cae020b6dcf5b3ed0e5cbcd74",
+        "policy": "Only the fixed apt installation or fixed Debian-mirror sed RUN before WORKDIR may be added"
+      },
+      "status": "TIMED_OUT",
+      "launch_error": null
+    }
+  ],
+  "model_evidence": [
+    {
+      "name": "context-driven",
+      "strategy": "context-driven",
+      "generation_kind": "FRESH_MODEL_RESPONSE",
+      "prompt_sha256": "7da5a89eb213d097eab92220f137d9203b3771f89de8a986ef12b7106c2ff162",
+      "response_sha256": "74a108e26096bc03269f23d2be709930fdaefe20d8b7ff9136bb6028d6ea7880",
+      "extracted_dockerfile_sha256": "562460524b21ad96c5da7c434de851ab0ab57ac3fe65f4874585553b6db5be27"
+    },
+    {
+      "name": "error-driven",
+      "strategy": "error-driven",
+      "generation_kind": "FRESH_MODEL_RESPONSE",
+      "prompt_sha256": "6da65bd5bb0e4b3614ef8243ac13f298fdd64bad2cf25f72677d5f881bd4c66a",
+      "response_sha256": "038e6bca49acce6f3fbe680ed6fc71a3a045d37eea0e2d125d404a21466680d1",
+      "extracted_dockerfile_sha256": "c4e63748283f29eb30beb5e02fe87d48b1eb9b24ee25f537d08681630803f9f3"
+    }
+  ],
+  "fresh_strategies": [
+    "context-driven",
+    "error-driven"
+  ],
+  "candidate_record_warnings": [],
+  "limits": [
+    "No model/API calls are made by this driver",
+    "Model generation facts depend on the separately recorded original responses/provenance",
+    "TinyGreeting is a course fixture, not the original paper benchmark",
+    "No E6 service or E7 gate is implemented"
+  ]
+}

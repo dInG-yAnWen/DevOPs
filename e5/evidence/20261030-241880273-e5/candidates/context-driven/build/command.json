@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "docker",
+    "build",
+    "--no-cache",
+    "--progress=plain",
+    "--file",
+    "/root/241880273/e5-reproduction/work/e5-20261030-163629-241880273/candidates/context-driven/Dockerfile",
+    "--iidfile",
+    "/root/241880273/e5-reproduction/work/e5-20261030-163629-241880273/candidates/context-driven/image-id.txt",
+    "/root/241880273/e5-reproduction/work/e5-20261030-163629-241880273/project"
+  ],
+  "cwd": "/root/241880273/e5-reproduction/work/e5-20261030-163629-241880273",
+  "started_utc": "2026-10-30T09:07:34.345550+00:00",
+  "timeout_seconds": 600,
+  "exit_code": null,
+  "timed_out": true,
+  "launch_error": null,
+  "finished_utc": "2026-10-30T09:17:34.409838+00:00",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "1e794dcd8d38d4a9a76522c1f90729d2dba857c23875ee3e5d3f6e9900e56341"
+}

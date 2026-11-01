@@ -1,0 +1,47 @@
+[
+    {
+        "Id": "sha256:477bafa241a02e3b16daec8f359d5f391a43290c3f405c2cfb5ce240ff36bbf5",
+        "RepoTags": [],
+        "RepoDigests": [],
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2026-10-30T17:27:58.780710115+08:00",
+        "Config": {
+            "Env": [
+                "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "GPG_KEY=7169605F62C751356D054A26A821E680E5FA6305",
+                "PYTHON_VERSION=3.13.14",
+                "PYTHON_SHA256=639e43243c620a308f968213df9e00f2f8f62332f7adbaa7a7eeb9783057c690"
+            ],
+            "Cmd": [
+                "./hello"
+            ],
+            "WorkingDir": "/work",
+            "ArgsEscaped": true
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 157830365,
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:f4f8b983b714f130e2cff99176baa26352db6a55d3622e10ada40f2b4720a4eb",
+                "sha256:7ef9ddba6965cfcb2dcd5bf24e61737a0031c2d9be2b3377339111ab1ad3f0f2",
+                "sha256:ef9f8c7c1d6b6b918d5e93cba9a7de4c837e3047ca733296bd396d9a413ae64f",
+                "sha256:fde42b5dd2510411f5cd411982dd5fa72f546553ccba3e5260f33a3da21bbf8f",
+                "sha256:658110f0a96f7334ff8d2ca47f7b8862d74cbcfb7d521081740d2317ef4ed776",
+                "sha256:d89cb36a088631a76f4582f032f98a1bebe1e6cce6919b07d96ba14c30ee8bdd",
+                "sha256:3162a5c9cd6648d6fae3374ef1fa5ac29117adca356e621685fa55ccdf428bda",
+                "sha256:78e1405d7857b9f2ba5b419b5a2e3d7f4851119282bef7aacdccb1ec30f23121",
+                "sha256:d0422d1d00788fee13dba3aa4b2204d45ef88c5e4bf2ecd3ee3966647b9ab99e"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-10-30T09:28:08.143023478Z"
+        },
+        "Descriptor": {
+            "mediaType": "application/vnd.oci.image.index.v1+json",
+            "digest": "sha256:477bafa241a02e3b16daec8f359d5f391a43290c3f405c2cfb5ce240ff36bbf5",
+            "size": 856
+        }
+    }
+]

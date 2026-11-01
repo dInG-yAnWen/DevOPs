@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "docker",
+    "image",
+    "inspect",
+    "sha256:80c1236d0ab2e4d1cbe50b60ed7834b50ef2ecb0a7bdbcc024aa4a27c00515d3"
+  ],
+  "cwd": "/evidence/run",
+  "started_utc": "2026-11-01T10:43:45.266295+00:00",
+  "timeout_seconds": 30,
+  "exit_code": 0,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-11-01T10:43:45.288192+00:00",
+  "stdout_sha256": "6847c9f5d02766cfe4b96ba7de4c289dd5be8452b43cc2cb33fd79692df2bf58",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

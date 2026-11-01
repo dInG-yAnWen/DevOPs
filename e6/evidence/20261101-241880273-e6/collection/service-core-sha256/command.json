@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "docker",
+    "run",
+    "--rm",
+    "--name",
+    "b14-e6-collector-9e24f71d985a445eb6e2ed2b248137d3-service-core-sha256",
+    "--network",
+    "none",
+    "sha256:d55bff3dd21ddbe0af364b915bc7bf8004d506b3a53325d91cddcf0ffb88e743",
+    "sha256sum",
+    "/app/draft/autobuild.py"
+  ],
+  "cwd": "/root/241880273/e6-241880273",
+  "started_utc": "2026-11-01T10:41:24.549043+00:00",
+  "timeout_seconds": 30,
+  "exit_code": 0,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-11-01T10:41:24.685609+00:00",
+  "stdout_sha256": "830bad6e0517ec171b4e241d094b1a598424d75084d72bc0827560536dea390c",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}
