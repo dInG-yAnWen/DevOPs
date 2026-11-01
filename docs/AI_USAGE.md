@@ -224,3 +224,16 @@
 - 执行：在 `/root/241880273/e6-241880273` 的 `e6-241880273` 分支运行 E6 采集器。服务镜像构建成功，服务测试 40 项通过。
 - 结果：采集状态为 `SUCCEEDED`；E6 工作流证据校验通过，检查 32 个文件。证据归档于 `e6/evidence/20261101-241880273-e6/`，外层清单 101 项校验通过。
 - 边界：工作流使用 E5 已保存的 `context-mirror` 候选进行离线一致性回放；E6 工作流构建未重新执行，E6 运行流程未调用模型或 API。
+
+## 2026-11-01 E7 独立复跑与证据归档
+
+- 用户请求：按本地 E5-7 的 E7 要求复核 `e7-validation`，独立复跑并把证据归档；随后要求补齐 E7 的 AI 使用与贡献记录。
+- 身份与来源：Codex 经 SSH 密钥登录 B14 ECS，在 `/root/241880272/draft` 的 `e7-validation` 分支执行，运行时 HEAD 为 `3874f0f3825a59204182a4bcdafc9ad9660ae63c`；E7 实现由丁彦文（241880284）提交（`818fc33`、`7a1313d`、`6db4293`），本记录只登记本人的独立复跑、归档与审查。
+- 执行与结果：
+  - 采集器单测 7 项通过；`b14-e7-service` 镜像内服务测试 68 项通过。
+  - 完整 `quality-gate` 六场景：success、wrong-output、invalid-candidate、build-failed、runtime-timeout、runtime-nonzero 全部通过，`status=PASS`、`complete=true`。
+  - `verify-gate`：退出 0，236 个文件校验通过。
+  - 归档到 `e7/evidence/20261101-241880272-e7/`，含门禁原始证据、校验输出、单测日志与来源信息。
+- 关键验证：超时场景 stdout 首行为 `E7_TIMEOUT_STARTED`，证明程序已启动后才超时；`cleanup-inspect` 输出 `[]`，容器已清理；`runtime-nonzero` 输出正确但退出 23 仍判失败，说明门禁不是只看 stdout。
+- 审查发现：本次复跑耗时约 32 分钟，主要因每个场景 `--no-cache` 重建依赖且 apt 下载偏慢，不是实现缺陷；GitHub Actions 运行链接、artifact、实际分支保护配置、合并拒绝与最终合并记录仍缺失（`github_proof=false`），这是 E7 目前的主要缺口。
+- 未做：未修改 E7 实现、候选或测试；未推送远端；实验报告与验收 CSV 待统一整理。

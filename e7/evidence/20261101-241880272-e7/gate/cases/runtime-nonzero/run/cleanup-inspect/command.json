@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "docker",
+    "container",
+    "inspect",
+    "e6-draft-3e9613ee707d4b0b9dbe8db8b3d82fca"
+  ],
+  "cwd": "/root/241880272/draft/work/e7-20261101-224933-recheck/cases/runtime-nonzero/run",
+  "started_utc": "2026-11-01T15:15:25.097919+00:00",
+  "timeout_seconds": 30,
+  "exit_code": 1,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-11-01T15:15:25.106121+00:00",
+  "stdout_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "stderr_sha256": "bcc0d2eb6cada7d355e6c37a7b2eac155e9c0a431cab10a25dbc3c7bef40a2c7"
+}

@@ -1,0 +1,27 @@
+{
+  "argv": [
+    "docker",
+    "run",
+    "--rm",
+    "--name",
+    "e6-draft-a948160884d746d48a1bcc6c6c0672d1",
+    "--network",
+    "none",
+    "--cpus",
+    "1",
+    "--memory",
+    "256m",
+    "--pids-limit",
+    "64",
+    "sha256:773d957e5bfcfbbc9f0123b0eb8a9c04de7841ac26f890a2d46116e56ad11ccd"
+  ],
+  "cwd": "/root/241880272/draft/work/e7-20261101-224933-recheck/cases/wrong-output/run",
+  "started_utc": "2026-11-01T15:06:19.173202+00:00",
+  "timeout_seconds": 30,
+  "exit_code": 0,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-11-01T15:06:20.747981+00:00",
+  "stdout_sha256": "8e4e09b0c3458c9c59e691c847d4d7484995403e663549d919fac7c2a5823548",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}
