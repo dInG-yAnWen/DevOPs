@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "docker",
+    "run",
+    "--rm",
+    "--name",
+    "b14-e6-collector-9e24f71d985a445eb6e2ed2b248137d3-service-tests",
+    "--network",
+    "none",
+    "sha256:d55bff3dd21ddbe0af364b915bc7bf8004d506b3a53325d91cddcf0ffb88e743",
+    "python3",
+    "-m",
+    "pytest",
+    "-q"
+  ],
+  "cwd": "/root/241880273/e6-241880273",
+  "started_utc": "2026-11-01T10:41:24.702445+00:00",
+  "timeout_seconds": 120,
+  "exit_code": 0,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-11-01T10:41:25.986296+00:00",
+  "stdout_sha256": "b1caae85ec31d08a00b70488af9cc30676ea609b8012c2800620e199adf3bcb2",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

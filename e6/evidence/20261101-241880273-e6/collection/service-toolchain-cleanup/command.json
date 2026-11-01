@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "docker",
+    "container",
+    "rm",
+    "--force",
+    "b14-e6-collector-9e24f71d985a445eb6e2ed2b248137d3-service-toolchain"
+  ],
+  "cwd": "/root/241880273/e6-241880273",
+  "started_utc": "2026-11-01T10:41:24.532329+00:00",
+  "timeout_seconds": 30,
+  "exit_code": 0,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-11-01T10:41:24.541387+00:00",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "968cce89583ed864fb0c35e7cc72073de8a91a435b6ba42c3c6bab71a3fb4bc6"
+}
