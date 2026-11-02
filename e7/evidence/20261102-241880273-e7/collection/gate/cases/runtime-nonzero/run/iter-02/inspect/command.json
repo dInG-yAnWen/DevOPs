@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "docker",
+    "image",
+    "inspect",
+    "sha256:dc56d872c42678199101944acc6178fe0a7dc94cd4982e8bd157e1b9c742d4d1"
+  ],
+  "cwd": "/evidence/gate/cases/runtime-nonzero/run",
+  "started_utc": "2026-11-02T07:23:50.420635+00:00",
+  "timeout_seconds": 30,
+  "exit_code": 0,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-11-02T07:23:50.436667+00:00",
+  "stdout_sha256": "40707f082aef98063f94bbe7258a3a3c7f3cda1fe2e73c66adb34c3a354aa40d",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

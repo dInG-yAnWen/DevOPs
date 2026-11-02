@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "docker",
+    "container",
+    "rm",
+    "--force",
+    "b14-e7-collector-985cd1e049d2495fadb01e65b105f0c0-unit-oracle-failure"
+  ],
+  "cwd": "/root/241880273/e7-241880273",
+  "started_utc": "2026-11-02T07:23:53.379346+00:00",
+  "timeout_seconds": 30,
+  "exit_code": 0,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-11-02T07:23:53.388072+00:00",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "142eee66e7e1294b2a046b63936eeb22986ae2b8bddb9cb9e55ed107db93d92d"
+}

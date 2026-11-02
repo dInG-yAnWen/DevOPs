@@ -1,0 +1,16 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+________________________ test_e7_version_success_oracle ________________________
+
+    def test_e7_version_success_oracle():
+>       assert main(["version"]) == 1, "E7_INTENTIONAL_WRONG_VERSION_ORACLE"
+E       AssertionError: E7_INTENTIONAL_WRONG_VERSION_ORACLE
+E       assert 0 == 1
+E        +  where 0 = main(['version'])
+
+tests/test_ci_reject_demo.py:6: AssertionError
+----------------------------- Captured stdout call -----------------------------
+draft 0.3.0
+=========================== short test summary info ============================
+FAILED tests/test_ci_reject_demo.py::test_e7_version_success_oracle - Asserti...
+1 failed in 0.03s
