@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "docker",
+    "build",
+    "--progress=plain",
+    "--file",
+    "services/draft/Dockerfile",
+    "--iidfile",
+    "/root/241880273/e7-241880273/work/e7-20261102-145703-241880273/service-image-id.txt",
+    "--tag",
+    "b14-e7-service:985cd1e049d2495fadb01e65b105f0c0",
+    "."
+  ],
+  "cwd": "/root/241880273/e7-241880273",
+  "started_utc": "2026-11-02T06:57:03.827759+00:00",
+  "timeout_seconds": 1200,
+  "exit_code": 0,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-11-02T06:57:05.235664+00:00",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "829455045617e69c460c6825c6ee09bc71c310800146af73b561072b281585a8"
+}

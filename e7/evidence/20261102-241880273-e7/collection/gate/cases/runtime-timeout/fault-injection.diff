@@ -1,0 +1,7 @@
+--- original/fixture/main.c
++++ runtime-timeout/fixture/main.c
+@@ -1,2 +1,3 @@
+ #include <stdio.h>
+-int main(void) { puts("hello E3"); return 0; }
++#include <unistd.h>
++int main(void) { puts("E7_TIMEOUT_STARTED"); fflush(stdout); sleep(10); puts("hello E3"); return 0; }

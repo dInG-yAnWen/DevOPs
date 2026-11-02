@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "docker",
+    "container",
+    "rm",
+    "--force",
+    "e6-draft-d01c9fc85cc549ed81961e268a864d98"
+  ],
+  "cwd": "/evidence/gate/cases/build-failed/run",
+  "started_utc": "2026-11-02T07:11:15.403518+00:00",
+  "timeout_seconds": 30,
+  "exit_code": 0,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-11-02T07:11:15.411756+00:00",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "bf40392b70170e7cf003017f9136656a463228d985aaec125619e9f2842f091c"
+}

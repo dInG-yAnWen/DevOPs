@@ -1,0 +1,4 @@
+{
+  "status": "FAILED",
+  "error": "Preserve exact CMD [\"./hello\"]"
+}
