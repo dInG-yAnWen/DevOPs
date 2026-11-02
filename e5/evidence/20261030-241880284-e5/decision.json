@@ -1,0 +1,17 @@
+{
+  "selected": "context-mirror",
+  "normalized_original_candidates_equal": true,
+  "normalization": "Ignore formatting whitespace and Dockerfile backslash-newline continuations for comparison only",
+  "R1": "The two original model candidates are equivalent after classroom normalization; preserve both raw responses and count one distinct dependency repair.",
+  "R2": "No independent multi-candidate majority experiment was performed.",
+  "R3": "Both install build-essential, which supplies GNU Make and the C toolchain; the original missing-make error is addressed.",
+  "R4": "No additional model-based tie-break was necessary.",
+  "selection_reason": "Both original candidates exhausted the equal 240-second budgets while downloading Debian packages. The context candidate was retained in readable multiline form; a separately recorded dependency-download source/IPv4/retry adaptation built successfully and ran the exact image ID offline. No prompt-strategy superiority or mirror-only speedup is claimed because adaptation also changes download options and budget.",
+  "base_digest_unchanged": true,
+  "project_files_unchanged": true,
+  "limits": [
+    "One course-authored TinyGreeting fixture",
+    "Model/API billing calls made by the driver: 0",
+    "No E6 service or E7 CI completion claim"
+  ]
+}

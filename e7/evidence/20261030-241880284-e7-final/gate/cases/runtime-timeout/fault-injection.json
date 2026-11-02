@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "case": "runtime-timeout",
+  "changes": [
+    {
+      "path": "fixture/main.c",
+      "before_sha256": "05f3bcbf50c51513eb01dd78b3a9a4ae0a01115140fed7d1030cc47451807bc1",
+      "after_sha256": "f86162689e2876bfea207a25d524e58495708439239c703ce901ba566f6ab86f"
+    }
+  ],
+  "expected_output": "hello E3",
+  "verify_timeout": 5,
+  "source_kind": "REPLAY_WITH_EXPLICIT_FAULT_INJECTION",
+  "model_call_in_e7": false
+}

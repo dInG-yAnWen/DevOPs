@@ -1,0 +1,6 @@
+{
+  "generation_mode": "MANUAL_ENVIRONMENT_ADAPTATION",
+  "parent_candidate_name": "context-driven",
+  "parent_sha256": "562460524b21ad96c5da7c434de851ab0ab57ac3fe65f4874585553b6db5be27",
+  "reason": "The original context-driven build timed out after 600 seconds while downloading 88.1 MB from deb.debian.org. Applied only the repository-approved Aliyun mirror rewrite; package list and build instructions are unchanged."
+}

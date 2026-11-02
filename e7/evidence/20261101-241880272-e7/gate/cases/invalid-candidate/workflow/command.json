@@ -1,0 +1,31 @@
+{
+  "argv": [
+    "/usr/bin/python3.10",
+    "-m",
+    "draft",
+    "auto-build",
+    "--fixture",
+    "/root/241880272/draft/work/e7-20261101-224933-recheck/cases/invalid-candidate/fixture",
+    "--candidate",
+    "/root/241880272/draft/work/e7-20261101-224933-recheck/cases/invalid-candidate/candidate.Dockerfile",
+    "--out",
+    "/root/241880272/draft/work/e7-20261101-224933-recheck/cases/invalid-candidate/run",
+    "--expected-output",
+    "hello E3",
+    "--timeout",
+    "600",
+    "--verify-timeout",
+    "30",
+    "--provenance",
+    "/root/241880272/draft/work/e7-20261101-224933-recheck/inputs/provenance.json"
+  ],
+  "cwd": "/root/241880272/draft/services/draft",
+  "started_utc": "2026-11-01T15:06:20.784771+00:00",
+  "timeout_seconds": 1380,
+  "exit_code": 1,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-11-01T15:06:20.853145+00:00",
+  "stdout_sha256": "15cf311b795e29258ff38ce7427c6bf70ab559fb78a830523916a74aa2e9bb48",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

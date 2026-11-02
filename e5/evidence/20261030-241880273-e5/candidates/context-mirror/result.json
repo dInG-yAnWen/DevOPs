@@ -1,0 +1,24 @@
+{
+  "name": "context-mirror",
+  "created_utc": "2026-10-30T09:24:36.909677+00:00",
+  "dockerfile_sha256": "71ce99be3de2d365cc6a1e2934dfd949f5a612a8c98af8a940e4a093aaff3b45",
+  "response_recorded": false,
+  "provenance_recorded": true,
+  "passed": true,
+  "build_exit_code": 0,
+  "verify_exit_code": 0,
+  "image_id": "sha256:477bafa241a02e3b16daec8f359d5f391a43290c3f405c2cfb5ce240ff36bbf5",
+  "output_matches": true,
+  "validation": {
+    "valid": true,
+    "pinned_from": "m.daocloud.io/docker.io/library/python@sha256:f82c96458eedc847b233e582eb31336f4954b39cae020b6dcf5b3ed0e5cbcd74",
+    "policy": "Only the fixed apt installation or fixed Debian-mirror sed RUN before WORKDIR may be added"
+  },
+  "cleanup": {
+    "container_name": "e5-42ba31358e7f4a81-context-mirror",
+    "remove_exit_code": 0,
+    "absence_confirmed": true
+  },
+  "status": "PASSED",
+  "launch_error": null
+}

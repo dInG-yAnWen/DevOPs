@@ -1,0 +1,7 @@
+commit 818fc335d17e467c1f928d2864b103c7e6efbefe
+Author:     241880284 <dingyanw@outlook.com>
+AuthorDate: Fri Oct 30 13:58:40 2026 +0800
+Commit:     241880284 <dingyanw@outlook.com>
+CommitDate: Fri Oct 30 13:58:40 2026 +0800
+
+    feat(e7): add real fault gate and CI evidence collection

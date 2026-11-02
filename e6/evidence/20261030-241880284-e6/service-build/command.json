@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "docker",
+    "build",
+    "--progress=plain",
+    "--file",
+    "services/draft/Dockerfile",
+    "--iidfile",
+    "/root/241880284/e6-20261030-run01/work/e6-collection-01/service-image-id.txt",
+    "--tag",
+    "b14-e6-service:cea9d7e2b19844d7a33a86180cec7353",
+    "."
+  ],
+  "cwd": "/root/241880284/e6-20261030-run01",
+  "started_utc": "2026-10-30T05:37:00.501152+00:00",
+  "timeout_seconds": 1200,
+  "exit_code": 0,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-10-30T05:37:02.309215+00:00",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "49ba1ee4e1f6d6c17654fae2dba071091c33bdb6eddd563bf9d29a6a77eebce3"
+}

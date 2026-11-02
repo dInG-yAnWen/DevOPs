@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "run_id": "4786d30309734570",
+  "created_utc": "2026-10-30T01:20:07.431758+00:00",
+  "scope": "E5 teaching-scale DRAFT evidence; no automatic model/API calls",
+  "fixture_source": "/root/241880284/e5-20261030-run01/fixtures/draft",
+  "pinned_from": "m.daocloud.io/docker.io/library/python@sha256:f82c96458eedc847b233e582eb31336f4954b39cae020b6dcf5b3ed0e5cbcd74",
+  "driver_sha256": "0c652bf39ac20837156fbb9de96594cc345fd7a9711e4ff6cbc17d10c2298005",
+  "source_files": {
+    "main.c": "05f3bcbf50c51513eb01dd78b3a9a4ae0a01115140fed7d1030cc47451807bc1",
+    "Makefile": "7ed3f5b85a10827cf4c177ee9fa9855b1c70166b5339e5da8e81f4decee74cc3",
+    "README.md": "706f5780103451757caa6327b11159989d0bbcd80688405a25e5f15eaa57c011",
+    ".dockerignore": "4e2d01841cd05ae77ebcac6d7ed12f277fc7ab86506a5eb0186d2b7600e6487c",
+    "Dockerfile.broken": "e3a8a0b8cd3f526f49af8c54b954f5d1ee7f8da508362949fcdc185e81d4a03d"
+  },
+  "environment": {
+    "platform": "Linux-5.15.0-191-generic-x86_64-with-glibc2.35",
+    "machine": "x86_64",
+    "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+    "executable": "/usr/bin/python3"
+  },
+  "repository_commit": "9ca2b229864f782052e59abb23ba90c194325e40"
+}

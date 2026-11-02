@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "trace_id": "e7-g-f499ada1aab84f3baf8ba6f5b2e9c249",
+  "source_kind": "REPLAY",
+  "model_call_in_e7": false,
+  "passed": false,
+  "complete": true,
+  "status": "FAILED",
+  "expected_cases": [
+    "success",
+    "wrong-output",
+    "invalid-candidate",
+    "build-failed",
+    "runtime-timeout",
+    "runtime-nonzero"
+  ],
+  "selected_cases": [
+    "success",
+    "wrong-output",
+    "invalid-candidate",
+    "build-failed",
+    "runtime-timeout",
+    "runtime-nonzero"
+  ],
+  "cases": [
+    {
+      "case": "success",
+      "passed": true,
+      "expected_workflow_status": "SUCCEEDED",
+      "workflow_exit_code": 0,
+      "e6_verified": true,
+      "observed_workflow_status": "SUCCEEDED",
+      "reason": "EXPECTED_BEHAVIOR_VERIFIED"
+    },
+    {
+      "case": "wrong-output",
+      "passed": true,
+      "expected_workflow_status": "FAILED",
+      "workflow_exit_code": 1,
+      "e6_verified": true,
+      "observed_workflow_status": "FAILED",
+      "reason": "EXPECTED_BEHAVIOR_VERIFIED"
+    },
+    {
+      "case": "invalid-candidate",
+      "passed": true,
+      "expected_workflow_status": "PREFLIGHT_REJECTED",
+      "workflow_exit_code": 1,
+      "e6_verified": false,
+      "observed_workflow_status": "PREFLIGHT_REJECTED",
+      "reason": "INVALID_CMD_REJECTED_BEFORE_OUTPUT_AND_DOCKER"
+    },
+    {
+      "case": "build-failed",
+      "passed": true,
+      "expected_workflow_status": "FAILED",
+      "workflow_exit_code": 1,
+      "e6_verified": true,
+      "observed_workflow_status": "FAILED",
+      "reason": "EXPECTED_BEHAVIOR_VERIFIED"
+    },
+    {
+      "case": "runtime-timeout",
+      "passed": false,
+      "expected_workflow_status": "TIMED_OUT",
+      "workflow_exit_code": 1,
+      "e6_verified": true,
+      "observed_workflow_status": "TIMED_OUT",
+      "reason": "EXPECTED_BEHAVIOR_NOT_PROVEN"
+    },
+    {
+      "case": "runtime-nonzero",
+      "passed": true,
+      "expected_workflow_status": "FAILED",
+      "workflow_exit_code": 1,
+      "e6_verified": true,
+      "observed_workflow_status": "FAILED",
+      "reason": "EXPECTED_BEHAVIOR_VERIFIED"
+    }
+  ]
+}

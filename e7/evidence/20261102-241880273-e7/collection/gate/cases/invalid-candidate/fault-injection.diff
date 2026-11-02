@@ -1,0 +1,8 @@
+--- original/candidate.Dockerfile
++++ invalid-candidate/candidate.Dockerfile
+@@ -6,4 +6,4 @@
+ WORKDIR /work
+ COPY main.c Makefile ./
+ RUN make
+-CMD ["./hello"]
++CMD ["echo", "hello E3"]

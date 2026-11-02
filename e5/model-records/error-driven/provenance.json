@@ -1,0 +1,19 @@
+{
+  "strategy": "error-driven",
+  "prompt_sha256": "8f3cf6250784240fdd1b70da62abe46c46f5ca5d90dd1d19047b2b98ac6a743d",
+  "model_input_sha256": "9ea47905637acf9fa8a18975418aad01b8b911f02b5d789cf35c5124ef12ae54",
+  "response_sha256": "5ea3eea466199067c30bbd70633ca238ceaca7a59357eee67fe994bef4fc7851",
+  "candidate_sha256": "26d5ad5f77d3b0b3f90026b4f22340cfd79bc4de0ed2a639bcc44cf795b9b6b6",
+  "provider": "OpenAI",
+  "platform": "Codex subagent",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "xhigh",
+  "recorded_utc": "2026-10-30T01:22:21.511768+00:00",
+  "generation_date": "2026-10-30",
+  "generation_mode": "fresh response to the included full model-input.txt; fork_turns=none",
+  "task_name": "/root/candidate_error",
+  "human_edits": [],
+  "extraction": "Dockerfile code block extracted without editing; LF and final newline retained",
+  "role": "B14 E5 current model response; not supplied DeepSeek replay",
+  "ai_usage_record": "../../../docs/AI_USAGE.md"
+}

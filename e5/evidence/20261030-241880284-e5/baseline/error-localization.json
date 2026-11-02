@@ -1,0 +1,32 @@
+{
+  "provenance": "SCRIPT_FROM_ACTUAL_BUILD_LOG",
+  "note": "Fixture-specific teaching localization and teaching adaptations of the course DRAFT prompts; not verbatim paper templates or the original paper algorithm.",
+  "build_exit_code": 1,
+  "stream_order": "stdout then stderr; each original stream is retained separately",
+  "keyword_matches": [
+    {
+      "line": 31,
+      "text": "#8 ERROR: process \"/bin/sh -c make\" did not complete successfully: exit code: 127",
+      "keywords": [
+        "error"
+      ]
+    },
+    {
+      "line": 44,
+      "text": "ERROR: failed to build: failed to solve: process \"/bin/sh -c make\" did not complete successfully: exit code: 127",
+      "keywords": [
+        "error"
+      ]
+    }
+  ],
+  "root_cause_lines": [
+    {
+      "line": 30,
+      "text": "#8 0.183 /bin/sh: 1: make: not found"
+    },
+    {
+      "line": 34,
+      "text": "0.183 /bin/sh: 1: make: not found"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "docker",
+    "container",
+    "rm",
+    "--force",
+    "e6-draft-d837c946ee3446319d2435384664be40"
+  ],
+  "cwd": "/evidence/gate/cases/success/run",
+  "started_utc": "2026-10-30T06:19:20.898015+00:00",
+  "timeout_seconds": 30,
+  "exit_code": 0,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-10-30T06:19:20.907001+00:00",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "456a42afee6f19211e2801ac179dd40f1514e62e0d36d26e9c5676c71544b893"
+}

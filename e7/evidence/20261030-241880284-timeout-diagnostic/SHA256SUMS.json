@@ -1,0 +1,11 @@
+{
+  "cleanup/command.json": "6c20131811e828e7789fe99208cfb6da7b1cfd75941a8326dca04b216ff25bfc",
+  "cleanup/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "cleanup/stdout.log": "d7a83205e6ef000f3ed31a4f9328e45b33d510bc3d04fc0ce6306fc109954b7b",
+  "cleanup-inspect/command.json": "ab4cdacd96506e8dfd382607d62c042ce062bf022ef2713c3d4e163af3adec19",
+  "cleanup-inspect/stderr.log": "009c057668e4436c08d66686c96520a7b244055d0cf1b1ad085f8a79a508c85c",
+  "cleanup-inspect/stdout.log": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "run/command.json": "63a93d9b098440d9557b3c358ca12a879386b243ff0166e7b4f2aa363256b191",
+  "run/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "run/stdout.log": "38921e03aeb7b9cc8ac9007260dd59045a43545e71dcd19f3872a69341b9e1b5"
+}

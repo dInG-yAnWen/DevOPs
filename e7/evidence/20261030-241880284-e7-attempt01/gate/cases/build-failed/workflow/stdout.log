@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "trace_id": "e6-b-93b9b56194fa493796dfc35d9e81a910",
+  "source_kind": "REPLAY",
+  "status": "FAILED",
+  "passed": false,
+  "reason": "CANDIDATE_BUILD_FAILED",
+  "attempts": [
+    {
+      "iteration": 1,
+      "role": "BASELINE",
+      "dockerfile_sha256": "e3a8a0b8cd3f526f49af8c54b954f5d1ee7f8da508362949fcdc185e81d4a03d",
+      "build_exit_code": 1,
+      "timed_out": false,
+      "launch_error": null,
+      "failure_class": "EXPECTED_MISSING_MAKE"
+    },
+    {
+      "iteration": 2,
+      "role": "CANDIDATE",
+      "dockerfile_sha256": "e0a47332ae920e9372a583abd44a2d2841c9622e0ed736fbd98b79db6acdbd76",
+      "build_exit_code": 1,
+      "timed_out": false,
+      "launch_error": null,
+      "failure_class": "FAILED"
+    }
+  ],
+  "verification": {
+    "executed": false,
+    "expected_output": "hello E3",
+    "output_matches": false
+  },
+  "cleanup": {
+    "container_name": "e6-draft-93b9b56194fa493796dfc35d9e81a910",
+    "removal_confirmed": true,
+    "absence_confirmed": true
+  },
+  "image_id": null,
+  "input_sha256": {
+    "main.c": "690d9c61ed24dbf937293e9228c819bfc5b67f6f73989091303704abdd46c15e",
+    "Makefile": "7ed3f5b85a10827cf4c177ee9fa9855b1c70166b5339e5da8e81f4decee74cc3",
+    "README.md": "706f5780103451757caa6327b11159989d0bbcd80688405a25e5f15eaa57c011",
+    ".dockerignore": "4e2d01841cd05ae77ebcac6d7ed12f277fc7ab86506a5eb0186d2b7600e6487c",
+    "Dockerfile.broken": "e3a8a0b8cd3f526f49af8c54b954f5d1ee7f8da508362949fcdc185e81d4a03d"
+  },
+  "candidate_sha256": "e0a47332ae920e9372a583abd44a2d2841c9622e0ed736fbd98b79db6acdbd76",
+  "provenance_sha256": "db2888af016a20ff3f4b7d04e61afbef2670b7857c40d329c23c3c1be2737588",
+  "driver_sha256": "6bcb2fd92419f15cb0a4d5808bdd127c8b664a7e3ba84a8dd833288891feed6f"
+}

@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "docker",
+    "build",
+    "--no-cache",
+    "--progress=plain",
+    "--file",
+    "/root/241880272/draft/work/e7-20261101-224933-recheck/cases/wrong-output/run/iter-01/Dockerfile",
+    "--iidfile",
+    "/root/241880272/draft/work/e7-20261101-224933-recheck/cases/wrong-output/run/iter-01/image-id.txt",
+    "/root/241880272/draft/work/e7-20261101-224933-recheck/cases/wrong-output/run/project"
+  ],
+  "cwd": "/root/241880272/draft/work/e7-20261101-224933-recheck/cases/wrong-output/run",
+  "started_utc": "2026-11-01T14:56:38.829415+00:00",
+  "timeout_seconds": 600,
+  "exit_code": 1,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-11-01T14:56:39.179618+00:00",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "a061016d13938275d532a4610905ce227b519be01acc6e2db5fbb5c2c3699d4c"
+}

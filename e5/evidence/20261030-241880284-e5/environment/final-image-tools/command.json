@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "docker",
+    "run",
+    "--rm",
+    "--network",
+    "none",
+    "sha256:83be11ffc4b8afa78156b3baef3e444cb0d551c4da314374bffc2a33d9659da1",
+    "sh",
+    "-c",
+    "gcc --version; make --version; dpkg-query -W build-essential gcc make libc6-dev; sha256sum /work/main.c /work/Makefile /work/hello; od -An -tx1 -N4 /work/hello"
+  ],
+  "cwd": "/root/241880284/e5-20261030-run01",
+  "started_utc": "2026-10-30T01:33:20.826093+00:00",
+  "timeout_seconds": 30,
+  "exit_code": 0,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-10-30T01:33:20.982803+00:00",
+  "stdout_sha256": "3e02393010694041b5dd0cafde1435f5766c6fb2c5b97a39531ccf72a2657ba7",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

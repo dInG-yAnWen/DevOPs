@@ -1,0 +1,19 @@
+{
+  "strategy": "context-driven",
+  "prompt_sha256": "ccfb1b021194acd0e8cd64d956afe645916dfd0fa08663d44c588cb28ea31217",
+  "model_input_sha256": "dcff5033f3187a35170ebe89cf2954b9364f435f201684e28187cac752f3cdb5",
+  "response_sha256": "50bdbbd1b28f66e5148ed3bef330e45ce4687d9b260525478bd395d2ffd14adf",
+  "candidate_sha256": "3af5dc924a2ac81f49289ef0503356ddb2ffa21510d9c71f296bf18e0937dd72",
+  "provider": "OpenAI",
+  "platform": "Codex subagent",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "xhigh",
+  "recorded_utc": "2026-10-30T01:22:21.523959+00:00",
+  "generation_date": "2026-10-30",
+  "generation_mode": "fresh response to the included full model-input.txt; fork_turns=none",
+  "task_name": "/root/candidate_context",
+  "human_edits": [],
+  "extraction": "Dockerfile code block extracted without editing; LF and final newline retained",
+  "role": "B14 E5 current model response; not supplied DeepSeek replay",
+  "ai_usage_record": "../../../docs/AI_USAGE.md"
+}

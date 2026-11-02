@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "git",
+    "var",
+    "GIT_AUTHOR_IDENT"
+  ],
+  "cwd": "/root/241880284/e6-20261030-run01",
+  "started_utc": "2026-10-30T05:37:00.484706+00:00",
+  "timeout_seconds": 30,
+  "exit_code": 0,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-10-30T05:37:00.485494+00:00",
+  "stdout_sha256": "1bf2ef5894912e2501d7a6447cadf610ac8868cc9d667d3eacc22d6f08083d7e",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

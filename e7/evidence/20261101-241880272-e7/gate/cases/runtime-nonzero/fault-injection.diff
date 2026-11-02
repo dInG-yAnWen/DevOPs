@@ -1,0 +1,6 @@
+--- original/fixture/main.c
++++ runtime-nonzero/fixture/main.c
+@@ -1,2 +1,2 @@
+ #include <stdio.h>
+-int main(void) { puts("hello E3"); return 0; }
++int main(void) { puts("hello E3"); return 23; }

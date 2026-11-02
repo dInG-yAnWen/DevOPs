@@ -1,0 +1,32 @@
+[
+  {
+    "metadata": "gate/cases/build-failed/run/run.json",
+    "absence_confirmed": true,
+    "container_name": "e6-draft-93b9b56194fa493796dfc35d9e81a910",
+    "already_finalized": true
+  },
+  {
+    "metadata": "gate/cases/runtime-nonzero/run/run.json",
+    "absence_confirmed": true,
+    "container_name": "e6-draft-8cad8e8875a54508819bfa9237821a2f",
+    "already_finalized": true
+  },
+  {
+    "metadata": "gate/cases/runtime-timeout/run/run.json",
+    "absence_confirmed": true,
+    "container_name": "e6-draft-f3d6fc36305e447cbde1270d9718b9ee",
+    "already_finalized": true
+  },
+  {
+    "metadata": "gate/cases/success/run/run.json",
+    "absence_confirmed": true,
+    "container_name": "e6-draft-0d1528f42ba84f2aac777d067edb7463",
+    "already_finalized": true
+  },
+  {
+    "metadata": "gate/cases/wrong-output/run/run.json",
+    "absence_confirmed": true,
+    "container_name": "e6-draft-9a6d6af0d8db4ce781773fdb9dd1fdc6",
+    "already_finalized": true
+  }
+]

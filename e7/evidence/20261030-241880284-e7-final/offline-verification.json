@@ -1,0 +1,67 @@
+{
+  "verified": true,
+  "passed": true,
+  "workflow_succeeded": true,
+  "status": "PASS",
+  "complete": true,
+  "cases": [
+    {
+      "case": "success",
+      "passed": true,
+      "expected_workflow_status": "SUCCEEDED",
+      "workflow_exit_code": 0,
+      "e6_verified": true,
+      "observed_workflow_status": "SUCCEEDED",
+      "reason": "EXPECTED_BEHAVIOR_VERIFIED"
+    },
+    {
+      "case": "wrong-output",
+      "passed": true,
+      "expected_workflow_status": "FAILED",
+      "workflow_exit_code": 1,
+      "e6_verified": true,
+      "observed_workflow_status": "FAILED",
+      "reason": "EXPECTED_BEHAVIOR_VERIFIED"
+    },
+    {
+      "case": "invalid-candidate",
+      "passed": true,
+      "expected_workflow_status": "PREFLIGHT_REJECTED",
+      "workflow_exit_code": 1,
+      "e6_verified": false,
+      "observed_workflow_status": "PREFLIGHT_REJECTED",
+      "reason": "INVALID_CMD_REJECTED_BEFORE_OUTPUT_AND_DOCKER"
+    },
+    {
+      "case": "build-failed",
+      "passed": true,
+      "expected_workflow_status": "FAILED",
+      "workflow_exit_code": 1,
+      "e6_verified": true,
+      "observed_workflow_status": "FAILED",
+      "reason": "EXPECTED_BEHAVIOR_VERIFIED"
+    },
+    {
+      "case": "runtime-timeout",
+      "passed": true,
+      "expected_workflow_status": "TIMED_OUT",
+      "workflow_exit_code": 1,
+      "e6_verified": true,
+      "observed_workflow_status": "TIMED_OUT",
+      "reason": "EXPECTED_BEHAVIOR_VERIFIED"
+    },
+    {
+      "case": "runtime-nonzero",
+      "passed": true,
+      "expected_workflow_status": "FAILED",
+      "workflow_exit_code": 1,
+      "e6_verified": true,
+      "observed_workflow_status": "FAILED",
+      "reason": "EXPECTED_BEHAVIOR_VERIFIED"
+    }
+  ],
+  "files_checked": 236,
+  "trace_id": "e7-g-2c89d4afc928489181de5b74f5871432",
+  "source_kind": "REPLAY",
+  "scope": "Offline saved evidence consistency; no Docker or model commands executed"
+}

@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "docker",
+    "image",
+    "inspect",
+    "sha256:37d496eb1efd4cae6eaf5822fb170b5c04d429f7c21e8437a7cf36b774eb35e2"
+  ],
+  "cwd": "/root/241880284/e7-20261030-run02",
+  "started_utc": "2026-10-30T06:18:03.188432+00:00",
+  "timeout_seconds": 30,
+  "exit_code": 0,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-10-30T06:18:03.217566+00:00",
+  "stdout_sha256": "e44dd914403057e4f8ebaae989366d8487e034ac5258c34db002f2037a20ea8b",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

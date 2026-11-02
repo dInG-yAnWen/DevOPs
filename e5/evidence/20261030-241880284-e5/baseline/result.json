@@ -1,0 +1,8 @@
+{
+  "status": "EXPECTED_MISSING_MAKE",
+  "expected_failure": true,
+  "build_executed": true,
+  "build_exit_code": 1,
+  "timed_out": false,
+  "launch_error": null
+}

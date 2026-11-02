@@ -1,0 +1,71 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 345B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for m.daocloud.io/docker.io/library/python@sha256:f82c96458eedc847b233e582eb31336f4954b39cae020b6dcf5b3ed0e5cbcd74
+#2 DONE 1.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 57B done
+#3 DONE 0.0s
+
+#4 [1/5] FROM m.daocloud.io/docker.io/library/python@sha256:f82c96458eedc847b233e582eb31336f4954b39cae020b6dcf5b3ed0e5cbcd74
+#4 resolve m.daocloud.io/docker.io/library/python@sha256:f82c96458eedc847b233e582eb31336f4954b39cae020b6dcf5b3ed0e5cbcd74 0.0s done
+#4 CACHED
+
+#5 [internal] load build context
+#5 transferring context: 54B done
+#5 DONE 0.0s
+
+#6 [2/5] RUN apt-get update &&     apt-get install -y --no-install-recommends gcc make libc6-dev &&     rm -rf /var/lib/apt/lists/*
+#6 0.574 Get:1 http://deb.debian.org/debian trixie InRelease [140 kB]
+#6 1.636 Get:2 http://deb.debian.org/debian trixie-updates InRelease [47.3 kB]
+#6 2.292 Get:3 http://deb.debian.org/debian-security trixie-security InRelease [43.4 kB]
+#6 2.808 Get:4 http://deb.debian.org/debian trixie/main amd64 Packages [9678 kB]
+#6 232.1 Get:5 http://deb.debian.org/debian trixie-updates/main amd64 Packages [720 B]
+#6 232.3 Get:6 http://deb.debian.org/debian-security trixie-security/main amd64 Packages [270 kB]
+#6 240.0 Fetched 10.2 MB in 4min 0s (42.4 kB/s)
+#6 240.0 Reading package lists...
+#6 240.4 Reading package lists...
+#6 240.8 Building dependency tree...
+#6 240.8 Reading state information...
+#6 241.0 The following additional packages will be installed:
+#6 241.0   binutils binutils-common binutils-x86-64-linux-gnu cpp cpp-14
+#6 241.0   cpp-14-x86-64-linux-gnu cpp-x86-64-linux-gnu gcc-14 gcc-14-x86-64-linux-gnu
+#6 241.0   gcc-x86-64-linux-gnu libasan8 libatomic1 libbinutils libc-bin libc-dev-bin
+#6 241.0   libc6 libcc1-0 libcrypt-dev libctf-nobfd0 libctf0 libgcc-14-dev libgomp1
+#6 241.0   libgprofng0 libhwasan0 libisl23 libitm1 libjansson4 liblsan0 libmpc3
+#6 241.0   libmpfr6 libquadmath0 libsframe1 libtsan2 libubsan1 linux-libc-dev
+#6 241.0   rpcsvc-proto
+#6 241.0 Suggested packages:
+#6 241.0   binutils-doc gprofng-gui binutils-gold cpp-doc gcc-14-locales cpp-14-doc
+#6 241.0   gcc-multilib manpages-dev autoconf automake libtool flex bison gdb gcc-doc
+#6 241.0   gcc-14-multilib gcc-14-doc gdb-x86-64-linux-gnu libc-devtools glibc-doc
+#6 241.0   make-doc
+#6 241.0 Recommended packages:
+#6 241.0   manpages manpages-dev
+#6 241.0 The following NEW packages will be installed:
+#6 241.0   binutils binutils-common binutils-x86-64-linux-gnu cpp cpp-14
+#6 241.0   cpp-14-x86-64-linux-gnu cpp-x86-64-linux-gnu gcc gcc-14
+#6 241.0   gcc-14-x86-64-linux-gnu gcc-x86-64-linux-gnu libasan8 libatomic1 libbinutils
+#6 241.0   libc-dev-bin libc6-dev libcc1-0 libcrypt-dev libctf-nobfd0 libctf0
+#6 241.0   libgcc-14-dev libgomp1 libgprofng0 libhwasan0 libisl23 libitm1 libjansson4
+#6 241.0   liblsan0 libmpc3 libmpfr6 libquadmath0 libsframe1 libtsan2 libubsan1
+#6 241.0   linux-libc-dev make rpcsvc-proto
+#6 241.0 The following packages will be upgraded:
+#6 241.0   libc-bin libc6
+#6 241.5 2 upgraded, 37 newly installed, 0 to remove and 24 not upgraded.
+#6 241.5 Need to get 61.1 MB of archives.
+#6 241.5 After this operation, 219 MB of additional disk space will be used.
+#6 241.5 Get:1 http://deb.debian.org/debian trixie/main amd64 libc6 amd64 2.41-12+deb13u4 [2847 kB]
+#6 341.7 Get:2 http://deb.debian.org/debian trixie/main amd64 libc-bin amd64 2.41-12+deb13u4 [638 kB]
+#6 375.0 Get:3 http://deb.debian.org/debian trixie/main amd64 libsframe1 amd64 2.44-3 [78.4 kB]
+#6 378.8 Get:4 http://deb.debian.org/debian trixie/main amd64 binutils-common amd64 2.44-3 [2509 kB]
+#6 490.7 Get:5 http://deb.debian.org/debian trixie/main amd64 libbinutils amd64 2.44-3 [534 kB]
+#6 518.3 Get:6 http://deb.debian.org/debian trixie/main amd64 libgprofng0 amd64 2.44-3 [808 kB]
+#6 550.8 Get:7 http://deb.debian.org/debian trixie/main amd64 libctf-nobfd0 amd64 2.44-3 [156 kB]
+#6 557.1 Get:8 http://deb.debian.org/debian trixie/main amd64 libctf0 amd64 2.44-3 [88.6 kB]
+#6 560.5 Get:9 http://deb.debian.org/debian trixie/main amd64 libjansson4 amd64 2.14-2+b3 [39.8 kB]
+#6 561.8 Get:10 http://deb.debian.org/debian trixie/main amd64 binutils-x86-64-linux-gnu amd64 2.44-3 [1014 kB]

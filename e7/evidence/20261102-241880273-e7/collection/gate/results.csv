@@ -1,0 +1,7 @@
+case,passed,expected_workflow_status,workflow_exit_code,e6_verified,observed_workflow_status,reason
+success,True,SUCCEEDED,0,True,SUCCEEDED,EXPECTED_BEHAVIOR_VERIFIED
+wrong-output,True,FAILED,1,True,FAILED,EXPECTED_BEHAVIOR_VERIFIED
+invalid-candidate,True,PREFLIGHT_REJECTED,1,False,PREFLIGHT_REJECTED,INVALID_CMD_REJECTED_BEFORE_OUTPUT_AND_DOCKER
+build-failed,True,FAILED,1,True,FAILED,EXPECTED_BEHAVIOR_VERIFIED
+runtime-timeout,True,TIMED_OUT,1,True,TIMED_OUT,EXPECTED_BEHAVIOR_VERIFIED
+runtime-nonzero,True,FAILED,1,True,FAILED,EXPECTED_BEHAVIOR_VERIFIED

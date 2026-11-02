@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "docker",
+    "container",
+    "inspect",
+    "e6-draft-016f2e5a66b24ab0a663b6cfc4eae514"
+  ],
+  "cwd": "/evidence/run",
+  "started_utc": "2026-10-30T05:38:36.655142+00:00",
+  "timeout_seconds": 30,
+  "exit_code": 1,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-10-30T05:38:36.664497+00:00",
+  "stdout_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "stderr_sha256": "63e19beedbbedf1bcda98a59e0b31931be7d8164076a4b1e2d4eba3e0a707e77"
+}

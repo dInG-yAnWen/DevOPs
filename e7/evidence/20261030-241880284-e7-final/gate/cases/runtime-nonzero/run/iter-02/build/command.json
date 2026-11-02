@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "docker",
+    "build",
+    "--no-cache",
+    "--progress=plain",
+    "--file",
+    "/evidence/gate/cases/runtime-nonzero/run/iter-02/Dockerfile",
+    "--iidfile",
+    "/evidence/gate/cases/runtime-nonzero/run/iter-02/image-id.txt",
+    "/evidence/gate/cases/runtime-nonzero/run/project"
+  ],
+  "cwd": "/evidence/gate/cases/runtime-nonzero/run",
+  "started_utc": "2026-10-30T06:25:58.801708+00:00",
+  "timeout_seconds": 600,
+  "exit_code": 0,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-10-30T06:28:18.440325+00:00",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "e655fe63acef1e1b2e373dd27f35103bc03cd16430a08194f7b8ee9e4b2802a5"
+}

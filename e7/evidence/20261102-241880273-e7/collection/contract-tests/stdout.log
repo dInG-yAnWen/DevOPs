@@ -1,0 +1,29 @@
+Schema backend: offline subset (only keywords used by this contract)
+PASS valid/draft_accepted.json
+PASS valid/draft_cancelled.json
+PASS valid/draft_failed.json
+PASS valid/draft_goal_unmet.json
+PASS valid/draft_queued.json
+PASS valid/draft_request.json
+PASS valid/draft_result.json
+PASS valid/draft_running.json
+PASS valid/draft_timed_out.json
+PASS valid/full_accepted.json
+PASS valid/full_request.json
+PASS valid/full_result.json
+PASS valid/incremental_accepted.json
+PASS valid/incremental_request.json
+PASS valid/incremental_result.json
+PASS valid/input_error.json
+PASS valid/repair_accepted.json
+PASS valid/repair_goal_unmet.json
+PASS valid/repair_request.json
+PASS valid/repair_result.json
+PASS rejected/baseline_configuration_mismatch.json
+PASS rejected/false_success.json
+PASS rejected/missing_baseline.json
+PASS rejected/repair_commit_mismatch.json
+PASS rejected/repair_contains_rd.json
+PASS rejected/short_commit.json
+PASS rejected/unknown_job_type.json
+PASS: 69 checks (schema=1, artifacts=19, valid=20, invalid=7, mutations=20, resolver=2)

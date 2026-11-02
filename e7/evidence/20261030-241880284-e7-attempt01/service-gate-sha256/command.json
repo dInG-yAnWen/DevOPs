@@ -1,0 +1,33 @@
+{
+  "argv": [
+    "docker",
+    "run",
+    "--rm",
+    "--name",
+    "b14-e7-collector-c8d213bc001042818af57ccd3163703d-service-gate-sha256",
+    "--network",
+    "none",
+    "--user",
+    "0:0",
+    "--env",
+    "HOME=/tmp",
+    "--cpus",
+    "1",
+    "--memory",
+    "512m",
+    "--pids-limit",
+    "128",
+    "sha256:aefb574130ea365f517cda1e84de52443c68f2039e574ca037790aa06252ca5f",
+    "sha256sum",
+    "/app/draft/gate.py"
+  ],
+  "cwd": "/root/241880284/e7-20261030-run01",
+  "started_utc": "2026-10-30T05:58:57.647108+00:00",
+  "timeout_seconds": 30,
+  "exit_code": 0,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-10-30T05:58:57.767598+00:00",
+  "stdout_sha256": "0d4fb09e1f44c7d1b6461e33a1762097dae0b5ec507229a91d1aa7333cad2e7b",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

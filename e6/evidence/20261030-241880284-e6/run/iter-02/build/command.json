@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "docker",
+    "build",
+    "--no-cache",
+    "--progress=plain",
+    "--file",
+    "/evidence/run/iter-02/Dockerfile",
+    "--iidfile",
+    "/evidence/run/iter-02/image-id.txt",
+    "/evidence/run/project"
+  ],
+  "cwd": "/evidence/run",
+  "started_utc": "2026-10-30T05:37:04.432522+00:00",
+  "timeout_seconds": 600,
+  "exit_code": 0,
+  "timed_out": false,
+  "launch_error": null,
+  "finished_utc": "2026-10-30T05:38:35.071779+00:00",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "593b077f5909fbfa6d7493c75ea1357b72669c0ecbcf5b16419eb84b09deca7b"
+}

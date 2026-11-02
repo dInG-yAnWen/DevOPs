@@ -1,0 +1,19 @@
+{
+  "name": "context-driven",
+  "created_utc": "2026-10-30T01:24:57.077231+00:00",
+  "dockerfile_sha256": "3af5dc924a2ac81f49289ef0503356ddb2ffa21510d9c71f296bf18e0937dd72",
+  "response_recorded": true,
+  "provenance_recorded": true,
+  "passed": false,
+  "build_exit_code": null,
+  "verify_exit_code": null,
+  "image_id": null,
+  "output_matches": false,
+  "validation": {
+    "valid": true,
+    "pinned_from": "m.daocloud.io/docker.io/library/python@sha256:f82c96458eedc847b233e582eb31336f4954b39cae020b6dcf5b3ed0e5cbcd74",
+    "policy": "Only dependency-install RUN instructions before WORKDIR may be added"
+  },
+  "status": "TIMED_OUT",
+  "launch_error": null
+}

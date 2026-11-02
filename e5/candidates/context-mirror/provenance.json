@@ -1,0 +1,18 @@
+{
+  "strategy": "environment-adaptation",
+  "generation_mode": "MANUAL_ENVIRONMENT_ADAPTATION",
+  "owner": "丁彦文 / 241880284 / B14",
+  "parent_candidate": "../../model-records/context-driven/Dockerfile",
+  "parent_sha256": "3af5dc924a2ac81f49289ef0503356ddb2ffa21510d9c71f296bf18e0937dd72",
+  "candidate_sha256": "e0a47332ae920e9372a583abd44a2d2841c9622e0ed736fbd98b79db6acdbd76",
+  "recorded_utc": "2026-10-30T01:26:51.157335+00:00",
+  "changes": [
+    "Replace deb.debian.org with mirrors.aliyun.com inside the build container only",
+    "Use IPv4 and bounded apt retries/timeouts",
+    "Retain pinned FROM, dependency package build-essential, project inputs, RUN make and CMD"
+  ],
+  "reason": "Default apt-get update stalled in the actual B14 cloud build; prior B14 E4 documentation records the same slow default Debian route. Original model candidates remain preserved; this candidate is not an untouched model response.",
+  "ai_usage_record": "../../../docs/AI_USAGE.md",
+  "parent_candidate_name": "context-driven",
+  "linkage_record": "Structured parent link completed during evidence finalization; source Dockerfile bytes unchanged."
+}
