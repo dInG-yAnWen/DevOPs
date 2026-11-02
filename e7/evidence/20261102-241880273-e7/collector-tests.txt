@@ -1,0 +1,12 @@
+test_dirty_source_blocks_build (test_collect_e7.CollectorChecks) ... ok
+test_forged_metadata_does_not_remove_child (test_collect_e7.CollectorChecks) ... ok
+test_oom_targets_recorded_child (test_collect_e7.CollectorChecks) ... ok
+test_success (test_collect_e7.CollectorChecks) ... ok
+test_timeout_targets_only_recorded_child (test_collect_e7.CollectorChecks) ... ok
+test_unit_failure_blocks_gate (test_collect_e7.CollectorChecks) ... ok
+test_wrong_oracle_unexpected_success_fails_collection (test_collect_e7.CollectorChecks) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.049s
+
+OK
