@@ -1,6 +1,6 @@
 import json, tempfile, unittest
 from pathlib import Path
-from lab import fixture,scan,patch,commit
+from lab import fixture,scan,patch,commit,validate
 
 class ProfileTests(unittest.TestCase):
     def setUp(self):
@@ -38,5 +38,52 @@ class ProfileTests(unittest.TestCase):
     def test_unsupported_configuration_rejected(self):
         (self.p/'Makefile').write_text((self.p/'Makefile').read_text().replace('-O0','-include unknown.h'))
         with self.assertRaisesRegex(ValueError,'UNSUPPORTED_FLAGS'):scan(self.p)
+
+
+class RepairValidationTests(unittest.TestCase):
+    def test_buildable_patch_with_remaining_missing_dependency_is_rejected(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            project = root / 'sample'
+            fixture(project)
+            helper = project / 'helper.c'
+            helper.write_text('#include "extra.h"\n' + helper.read_text())
+            commit(project, 'Add an undeclared header to helper.o')
+            before = (project / 'Makefile').read_bytes()
+
+            candidate = root / 'partial.patch'
+            candidate.write_text(
+                '--- a/Makefile\n'
+                '+++ b/Makefile\n'
+                '@@ -3,3 +3,3 @@\n'
+                ' \tgcc main.o helper.o -o app\n'
+                '-main.o: main.c unused.h\n'
+                '+main.o: main.c unused.h config.h\n'
+                ' \tgcc $(CFLAGS) -c main.c -o main.o\n'
+            )
+
+            evidence = root / 'validation'
+            result = validate(project, candidate, evidence)
+            self.assertEqual(result['checks'], {
+                'patch_applies': True,
+                'build': True,
+                'test': True,
+                'header_change': True,
+                'no_missing': False,
+            })
+            self.assertFalse(result['accepted'])
+            self.assertIsNone(result['error'])
+            self.assertTrue(result['rollback'])
+            self.assertTrue(result['source_unchanged'])
+            self.assertEqual((project / 'Makefile').read_bytes(), before)
+
+            recheck = json.loads((evidence / 'recheck.json').read_text())
+            missing = {
+                (finding['target'], finding['dependency'])
+                for finding in recheck['findings']
+                if finding['type'] == 'MISSING'
+            }
+            self.assertEqual(missing, {('helper.o', 'extra.h')})
+
 
 if __name__=='__main__':unittest.main()
