@@ -1,6 +1,6 @@
 import json, tempfile, unittest
 from pathlib import Path
-from lab import fixture,scan,patch,commit,validate
+from lab import fixture,scan,patch,commit,run,validate
 
 class ProfileTests(unittest.TestCase):
     def setUp(self):
@@ -41,6 +41,38 @@ class ProfileTests(unittest.TestCase):
 
 
 class RepairValidationTests(unittest.TestCase):
+    def test_rejects_patch_that_changes_a_build_input_outside_makefile(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            project = root / 'sample'
+            fixture(project)
+            makefile = project / 'Makefile'
+            helper = project / 'helper.c'
+            helper_without_include = helper.read_bytes()
+            original_helper = b'#include "extra.h"\n' + helper_without_include
+            helper.write_bytes(original_helper)
+            commit(project, 'Add an undeclared header to helper.o')
+            original_makefile = makefile.read_bytes()
+
+            makefile.write_bytes(original_makefile.replace(
+                b'main.o: main.c unused.h\n', b'main.o: main.c unused.h config.h\n'
+            ))
+            helper.write_bytes(helper_without_include)
+            candidate = root / 'multi-file.patch'
+            candidate.write_text(run(['git', 'diff', '--', 'Makefile', 'helper.c'], project))
+            makefile.write_bytes(original_makefile)
+            helper.write_bytes(original_helper)
+
+            evidence = root / 'validation'
+            result = validate(project, candidate, evidence)
+
+            self.assertFalse(result['accepted'])
+            self.assertEqual(result['error'], 'UNSUPPORTED_PATCH_SCOPE')
+            self.assertEqual(result['checks'], {'patch_applies': True})
+            self.assertTrue(result['rollback'])
+            self.assertEqual(makefile.read_bytes(), original_makefile)
+            self.assertEqual(helper.read_bytes(), original_helper)
+
     def test_buildable_patch_with_remaining_missing_dependency_is_rejected(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
