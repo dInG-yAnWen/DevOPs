@@ -1,5 +1,5 @@
 """E8-E10 teaching profile: explicit C/Make rules, GCC dependency observation."""
-import argparse, csv, difflib, json, re, shutil, subprocess, time
+import argparse, csv, difflib, hashlib, json, re, shutil, subprocess, time
 from pathlib import Path
 
 def save(p, data):
@@ -45,8 +45,13 @@ def declarations(p):
         graph[target]=sorted(set(dep.split()))
     return graph,variables.get('CFLAGS','')
 
+def input_fingerprints(p):
+    return {f.name: hashlib.sha256(f.read_bytes()).hexdigest()
+            for f in sorted(p.iterdir())
+            if f.is_file() and (f.suffix in ('.c', '.h') or f.name == 'Makefile')}
+
 def scan(p, old=None):
-    start=time.perf_counter(); declared,flags=declarations(p)
+    start=time.perf_counter(); declared,flags=declarations(p); inputs=input_fingerprints(p)
     if flags not in ['-O0','-O1','-O0 -DMODE=1']: raise ValueError('UNSUPPORTED_FLAGS')
     # Conservative invalidation: all local preprocessor lines, source set and recipes.
     files={x.name:x.read_text() for x in sorted(p.glob('*')) if x.suffix in ['.c','.h']}
@@ -68,13 +73,14 @@ def scan(p, old=None):
     current={ (f['type'],f['target'],f['dependency']) for f in findings}
     previous={ (f['type'],f['target'],f['dependency']) for f in old['findings']} if old else set()
     return {'schema_version':'e8e10-1','profile':'GCC_LOCAL_HEADERS_EXPLICIT_MAKE',
-            'commit':run(['git','rev-parse','HEAD'],p).strip(),'key':key,'actual':actual,'declared':declared,
+            'commit':run(['git','rev-parse','HEAD'],p).strip(),'input_sha256':inputs,'key':key,'actual':actual,'declared':declared,
             'findings':findings,'added':[list(x) for x in sorted(current-previous)],
             'resolved':[list(x) for x in sorted(previous-current)],'refreshed':refreshed,'reused':reused,
             'elapsed_s':time.perf_counter()-start}
 
 def patch(p,report):
     if report['commit']!=run(['git','rev-parse','HEAD'],p).strip(): raise ValueError('STALE_REPORT')
+    if report.get('input_sha256')!=input_fingerprints(p): raise ValueError('STALE_REPORT')
     original=(p/'Makefile').read_text(); changed=original; edits=[]
     for f in report['findings']:
         if f['type']!='MISSING': continue
