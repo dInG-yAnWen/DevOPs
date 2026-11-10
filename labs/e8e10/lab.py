@@ -109,8 +109,17 @@ def validate(p, patchfile, evidence, fail_test=False):
     commit(sandbox,'sandbox input')
     checks={}; error=None
     try:
-        run(['git','apply','--check',str(patchfile.resolve())],sandbox); checks['patch_applies']=True
-        run(['git','apply',str(patchfile.resolve())],sandbox)
+        candidate = str(patchfile.resolve())
+        run(['git', 'apply', '--index', '--check', candidate], sandbox)
+        checks['patch_applies'] = True
+        run(['git', 'apply', '--index', candidate], sandbox)
+        # Only the existing Makefile's contents are written back to the source.
+        changes = run(['git', 'diff', '--cached', '--raw', '--no-renames', '-z'], sandbox).split('\0')
+        if len(changes) != 3 or changes[1] != 'Makefile':
+            raise ValueError('UNSUPPORTED_PATCH_SCOPE')
+        old_mode, new_mode, _, _, status = changes[0][1:].split()
+        if status != 'M' or old_mode != new_mode or new_mode not in {'100644', '100755'}:
+            raise ValueError('UNSUPPORTED_PATCH_SCOPE')
         log=run(['make','clean'],sandbox)+run(['make','app'],sandbox);(evidence/'build.log').write_text(log);checks['build']=True
         output=run(['./app'],sandbox).strip(); checks['test']=output==('99' if fail_test else '1')
         # Real header-change build checks the originally broken incremental behavior.
