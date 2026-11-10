@@ -39,6 +39,13 @@ class ProfileTests(unittest.TestCase):
         (self.p/'Makefile').write_text((self.p/'Makefile').read_text().replace('-O0','-include unknown.h'))
         with self.assertRaisesRegex(ValueError,'UNSUPPORTED_FLAGS'):scan(self.p)
 
+    def test_same_commit_content_change_rejected(self):
+        r=scan(self.p); before=(self.p/'Makefile').read_bytes()
+        (self.p/'main.c').write_text((self.p/'main.c').read_text().replace('#include "config.h"\n','#define VALUE 1\n'))
+        fresh=scan(self.p)
+        self.assertEqual(fresh['actual']['main.o'],['main.c'])
+        with self.assertRaisesRegex(ValueError,'STALE_REPORT'):patch(self.p,r)
+        self.assertEqual((self.p/'Makefile').read_bytes(),before)
 
 class RepairValidationTests(unittest.TestCase):
     def test_rejects_patch_that_changes_a_build_input_outside_makefile(self):
