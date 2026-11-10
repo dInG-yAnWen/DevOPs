@@ -12,6 +12,44 @@ class ProfileTests(unittest.TestCase):
         self.assertEqual(r['actual']['main.o'],['config.h','main.c'])
         self.assertEqual({(f['type'],f['dependency']) for f in r['findings']},{('MISSING','config.h'),('REDUNDANT','unused.h')})
 
+    def test_repeated_explicit_rules_merge_and_produce_no_patch(self):
+        makefile=self.p/'Makefile'
+        original=makefile.read_text()
+        self.assertEqual(original.count('main.o: main.c unused.h\n'),1)
+        makefile.write_text(original.replace(
+            'main.o: main.c unused.h\n',
+            'main.o: main.c unused.h\nmain.o: config.h\n',
+        ))
+
+        report=scan(self.p)
+        self.assertEqual(report['declared']['main.o'],['config.h','main.c','unused.h'])
+        self.assertEqual(report['findings'],[
+            {'type':'REDUNDANT','target':'main.o','dependency':'unused.h'},
+        ])
+        before=makefile.read_bytes()
+        diff,plan=patch(self.p,report)
+        self.assertEqual(diff,'')
+        self.assertEqual(plan,[])
+        self.assertEqual(makefile.read_bytes(),before)
+
+    def test_repeated_rule_expands_variables_and_deduplicates_dependencies(self):
+        makefile=self.p/'Makefile'
+        original=makefile.read_text()
+        self.assertEqual(original.count('main.o: main.c unused.h\n'),1)
+        makefile.write_text(original.replace(
+            'main.o: main.c unused.h\n',
+            'EXTRA_HEADERS = config.h main.c\nmain.o: main.c unused.h\nmain.o: $(EXTRA_HEADERS)\n',
+        ))
+
+        report=scan(self.p)
+        self.assertEqual(report['declared']['main.o'],['config.h','main.c','unused.h'])
+        self.assertEqual(report['findings'],[
+            {'type':'REDUNDANT','target':'main.o','dependency':'unused.h'},
+        ])
+        diff,plan=patch(self.p,report)
+        self.assertEqual(diff,'')
+        self.assertEqual(plan,[])
+
     def test_unchanged_reuses_both_targets(self):
         r=scan(self.p,scan(self.p));self.assertEqual(r['reused'],['main.o','helper.o']);self.assertEqual(r['refreshed'],[])
 

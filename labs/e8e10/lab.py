@@ -36,13 +36,15 @@ def declarations(p):
     variables=dict(re.findall(r'^(\w+)\s*=\s*(.*)$',text,re.M))
     graph={}
     for target in ['main.o','helper.o']:
-        m=re.search(r'^'+re.escape(target)+r': ([^\n]*)$',text,re.M)
-        if not m: raise ValueError('UNSUPPORTED_RULE '+target)
-        dep=m[1]
-        for _ in range(8):
-            dep=re.sub(r'\$\((\w+)\)',lambda x:variables.get(x[1],x[0]),dep)
-        if '$' in dep or '%' in dep or '|' in dep: raise ValueError('UNSUPPORTED_DECLARATION')
-        graph[target]=sorted(set(dep.split()))
+        rules=re.findall(r'^'+re.escape(target)+r': ([^\n]*)$',text,re.M)
+        if not rules: raise ValueError('UNSUPPORTED_RULE '+target)
+        dependencies=set()
+        for dep in rules:
+            for _ in range(8):
+                dep=re.sub(r'\$\((\w+)\)',lambda x:variables.get(x[1],x[0]),dep)
+            if '$' in dep or '%' in dep or '|' in dep: raise ValueError('UNSUPPORTED_DECLARATION')
+            dependencies.update(dep.split())
+        graph[target]=sorted(dependencies)
     return graph,variables.get('CFLAGS','')
 
 def input_fingerprints(p):
@@ -181,6 +183,20 @@ def demo(stage,out,track):
                 q=out/style;fixture(q,style);r=scan(q);diff,edits=patch(q,r)
                 (out/(style+'.patch')).write_text(diff);save(out/(style+'-plan.json'),edits)
                 assert (q/'Makefile').read_text().find('config.h')<0
+            q=out/'multiple-rules';fixture(q,'direct')
+            makefile=q/'Makefile';original=makefile.read_text()
+            rule='main.o: main.c unused.h\n'
+            if original.count(rule)!=1: raise ValueError('UNEXPECTED_FIXTURE_RULE')
+            makefile.write_text(original.replace(rule,rule+'main.o: config.h\n'))
+            commit(q,'C1 add repeated explicit prerequisite')
+            report=scan(q);save(out/'multiple-rules-input.json',report)
+            before=makefile.read_bytes();diff,edits=patch(q,report)
+            (out/'multiple-rules.patch').write_text(diff);save(out/'multiple-rules-plan.json',edits)
+            assert report['findings']==[{'type':'REDUNDANT','target':'main.o','dependency':'unused.h'}]
+            assert diff=='' and edits==[]
+            unchanged=makefile.read_bytes()==before
+            assert unchanged
+            save(out/'multiple-rules-result.json',{'findings':report['findings'],'patch_empty':diff=='','plan':edits,'source_unchanged':unchanged})
         return
     rows=[]
     if track=='A':
