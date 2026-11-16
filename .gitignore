@@ -13,6 +13,7 @@ __pycache__/
 # E4 local credentials, generated evidence, caches and build output
 /.env
 /work/
+/data/
 /__pycache__/
 /**/*.pyc
 
