@@ -94,7 +94,10 @@ def walk(value):
 
 
 def validate_report(path, repo, cfg, md_only=False):
-    report = read_json(path)
+    return validate_report_payload(read_json(path), repo, cfg, md_only)
+
+
+def validate_report_payload(report, repo, cfg, md_only=False):
     schema_check(report, 'Report')
     require(report['repository'] == repo and report['configuration_id'] == cfg, 'Report repository/commit/configuration mismatch')
     ids = [f['finding_id'] for f in report['findings']]
