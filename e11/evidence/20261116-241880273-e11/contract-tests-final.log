@@ -1,0 +1,58 @@
+IMAGE=course-e11e12:241880273
+test_accept_current_report (test_contract.Contracts.test_accept_current_report) ... ok
+test_api_rejects_repo_outside_data (test_contract.Contracts.test_api_rejects_repo_outside_data) ... ok
+test_artifact_uses_relative_uri_and_content_hash (test_contract.Contracts.test_artifact_uses_relative_uri_and_content_hash) ... ok
+test_changed_artifact_is_rejected (test_contract.Contracts.test_changed_artifact_is_rejected) ... ok
+test_existing_evidence_not_overwritten (test_contract.Contracts.test_existing_evidence_not_overwritten) ... ok
+test_reject_failed_upstream (test_contract.Contracts.test_reject_failed_upstream) ... ok
+test_reject_old_commit (test_contract.Contracts.test_reject_old_commit) ... ok
+test_reject_schema (test_contract.Contracts.test_reject_schema) ... ok
+test_reject_wrong_artifact_kind (test_contract.Contracts.test_reject_wrong_artifact_kind) ... ok
+test_same_key_same_request_same_job (test_contract.Contracts.test_same_key_same_request_same_job) ... ok
+test_accepts_mirror_for_same_digest_pinned_base (test_draft_adapter.DraftMirrorAdapterTests.test_accepts_mirror_for_same_digest_pinned_base) ... ok
+test_rejects_a_different_base_tag_on_mirror (test_draft_adapter.DraftMirrorAdapterTests.test_rejects_a_different_base_tag_on_mirror) ... ok
+test_configuration_id_is_stable_and_sensitive (test_draft_image.DeliveryTests.test_configuration_id_is_stable_and_sensitive) ... ok
+test_existing_output_is_rejected (test_draft_image.DeliveryTests.test_existing_output_is_rejected) ... ok
+test_missing_input_is_rejected (test_draft_image.DeliveryTests.test_missing_input_is_rejected) ... ok
+test_output_mismatch_fails (test_draft_image.DeliveryTests.test_output_mismatch_fails) ... ok
+test_success_manifest_binds_all_fields (test_draft_image.DeliveryTests.test_success_manifest_binds_all_fields) ... ok
+test_archives_a14_failure_without_success_logs (test_pair14.Pair14Tests.test_archives_a14_failure_without_success_logs) ... ok
+test_loopback_e12_submit_download_recheck_and_idempotency (test_pair14.Pair14Tests.test_loopback_e12_submit_download_recheck_and_idempotency) ... 127.0.0.1 - - [16/Nov/2026 12:36:04] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [16/Nov/2026 12:36:04] "POST /v1/jobs HTTP/1.1" 202 -
+127.0.0.1 - - [16/Nov/2026 12:36:04] "POST /v1/jobs HTTP/1.1" 202 -
+127.0.0.1 - - [16/Nov/2026 12:36:04] "POST /v1/jobs HTTP/1.1" 409 -
+127.0.0.1 - - [16/Nov/2026 12:36:04] "GET /v1/jobs/job-5627aaf388474626b464a19f353d19be/files/candidate-manifest.json HTTP/1.1" 404 -
+127.0.0.1 - - [16/Nov/2026 12:36:04] "GET /v1/jobs/job-5627aaf388474626b464a19f353d19be/files/candidate-manifest.json HTTP/1.1" 200 -
+127.0.0.1 - - [16/Nov/2026 12:36:04] "GET /v1/jobs/job-5627aaf388474626b464a19f353d19be/files/candidate.patch HTTP/1.1" 200 -
+127.0.0.1 - - [16/Nov/2026 12:36:04] "GET /v1/jobs/job-5627aaf388474626b464a19f353d19be HTTP/1.1" 200 -
+127.0.0.1 - - [16/Nov/2026 12:36:04] "GET /v1/jobs/job-5627aaf388474626b464a19f353d19be HTTP/1.1" 200 -
+127.0.0.1 - - [16/Nov/2026 12:36:04] "GET /v1/jobs/job-5627aaf388474626b464a19f353d19be HTTP/1.1" 200 -
+127.0.0.1 - - [16/Nov/2026 12:36:04] "GET /v1/jobs/job-5627aaf388474626b464a19f353d19be HTTP/1.1" 200 -
+127.0.0.1 - - [16/Nov/2026 12:36:04] "GET /v1/jobs/job-5627aaf388474626b464a19f353d19be HTTP/1.1" 200 -
+127.0.0.1 - - [16/Nov/2026 12:36:04] "GET /v1/jobs/job-5627aaf388474626b464a19f353d19be HTTP/1.1" 200 -
+127.0.0.1 - - [16/Nov/2026 12:36:04] "GET /v1/jobs/job-5627aaf388474626b464a19f353d19be HTTP/1.1" 200 -
+127.0.0.1 - - [16/Nov/2026 12:36:04] "GET /v1/jobs/job-5627aaf388474626b464a19f353d19be HTTP/1.1" 200 -
+127.0.0.1 - - [16/Nov/2026 12:36:05] "GET /v1/jobs/job-5627aaf388474626b464a19f353d19be HTTP/1.1" 200 -
+127.0.0.1 - - [16/Nov/2026 12:36:05] "GET /v1/jobs/job-5627aaf388474626b464a19f353d19be HTTP/1.1" 200 -
+127.0.0.1 - - [16/Nov/2026 12:36:05] "GET /v1/jobs/job-5627aaf388474626b464a19f353d19be HTTP/1.1" 200 -
+127.0.0.1 - - [16/Nov/2026 12:36:05] "GET /v1/jobs/job-5627aaf388474626b464a19f353d19be HTTP/1.1" 200 -
+127.0.0.1 - - [16/Nov/2026 12:36:05] "GET /v1/jobs/job-5627aaf388474626b464a19f353d19be HTTP/1.1" 200 -
+127.0.0.1 - - [16/Nov/2026 12:36:05] "GET /v1/jobs/job-5627aaf388474626b464a19f353d19be HTTP/1.1" 200 -
+127.0.0.1 - - [16/Nov/2026 12:36:05] "GET /v1/jobs/job-5627aaf388474626b464a19f353d19be HTTP/1.1" 200 -
+127.0.0.1 - - [16/Nov/2026 12:36:05] "GET /v1/jobs/job-5627aaf388474626b464a19f353d19be HTTP/1.1" 200 -
+127.0.0.1 - - [16/Nov/2026 12:36:05] "GET /v1/jobs/job-5627aaf388474626b464a19f353d19be HTTP/1.1" 200 -
+127.0.0.1 - - [16/Nov/2026 12:36:05] "GET /v1/jobs/job-5627aaf388474626b464a19f353d19be HTTP/1.1" 200 -
+127.0.0.1 - - [16/Nov/2026 12:36:05] "GET /v1/jobs/job-5627aaf388474626b464a19f353d19be HTTP/1.1" 200 -
+127.0.0.1 - - [16/Nov/2026 12:36:05] "GET /v1/jobs/job-5627aaf388474626b464a19f353d19be HTTP/1.1" 200 -
+127.0.0.1 - - [16/Nov/2026 12:36:05] "GET /v1/jobs/job-5627aaf388474626b464a19f353d19be HTTP/1.1" 200 -
+127.0.0.1 - - [16/Nov/2026 12:36:05] "GET /v1/jobs/job-5627aaf388474626b464a19f353d19be/artifacts HTTP/1.1" 200 -
+127.0.0.1 - - [16/Nov/2026 12:36:05] "GET /v1/jobs/job-5627aaf388474626b464a19f353d19be/files/recheck.json HTTP/1.1" 200 -
+ok
+test_rejects_old_or_fixture_report (test_pair14.Pair14Tests.test_rejects_old_or_fixture_report) ... ok
+test_rejects_recheck_for_another_patch (test_pair14.Pair14Tests.test_rejects_recheck_for_another_patch) ... ok
+test_tampered_report_stops_before_patch (test_pair14.Pair14Tests.test_tampered_report_stops_before_patch) ... ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 1.722s
+
+OK
