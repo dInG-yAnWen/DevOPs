@@ -5,18 +5,21 @@ ARG DOCKER_CLI_IMAGE=docker:28.5.1-cli@sha256:9190b0613792e658a7783cf14b2d5ace59
 FROM ${DOCKER_CLI_IMAGE} AS docker-cli
 FROM ${BASE_IMAGE}
 
+ARG USE_TUNA_MIRRORS=1
 ENV LC_ALL=C.UTF-8 \
     TZ=UTC \
     PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
 # 固定基础镜像采用 Debian DEB822 源配置；保留发行版及签名校验。
-RUN sed -i \
+RUN if [ "$USE_TUNA_MIRRORS" = 1 ]; then \
+    sed -i \
       -e 's|https\?://deb.debian.org/debian-security|https://mirrors.tuna.tsinghua.edu.cn/debian-security|g' \
       -e 's|https\?://security.debian.org/debian-security|https://mirrors.tuna.tsinghua.edu.cn/debian-security|g' \
       -e 's|https\?://deb.debian.org/debian|https://mirrors.tuna.tsinghua.edu.cn/debian|g' \
-      /etc/apt/sources.list.d/debian.sources \
- && apt-get -o Acquire::ForceIPv4=true -o Acquire::Retries=3 update \
+      /etc/apt/sources.list.d/debian.sources; \
+    fi \
+ && apt-get -o Acquire::ForceIPv4=true -o Acquire::Retries=3 -o APT::Update::Error-Mode=any update \
  && apt-get -o Acquire::ForceIPv4=true -o Acquire::Retries=3 install -y --no-install-recommends gcc make libc6-dev strace git \
  && rm -rf /var/lib/apt/lists/* \
  && dpkg-query -W -f='${Package}=${Version}\n' gcc make libc6-dev strace git > /opt/toolchain.lock \
@@ -24,8 +27,10 @@ RUN sed -i \
  && echo "arch=$(dpkg --print-architecture)" >> /opt/toolchain.lock
 
 COPY requirements-dev.lock /tmp/requirements-dev.lock
-RUN python3 -m pip install \
-      --index-url https://pypi.tuna.tsinghua.edu.cn/simple \
+RUN pip_index=https://pypi.org/simple \
+ && if [ "$USE_TUNA_MIRRORS" = 1 ]; then pip_index=https://pypi.tuna.tsinghua.edu.cn/simple; fi \
+ && python3 -m pip install \
+      --index-url "$pip_index" \
       --timeout 60 --retries 3 \
       --no-cache-dir --require-hashes -r /tmp/requirements-dev.lock \
  && python3 -m pip freeze | sed 's/^/pip:/' >> /opt/toolchain.lock
