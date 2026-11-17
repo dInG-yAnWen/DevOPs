@@ -72,14 +72,13 @@ def normalized(findings):
 
 def execute(request, out, job_id=None):
     job_id = job_id or 'job-'+uuid.uuid4().hex
-    trace_id = 'trace-'+uuid.uuid4().hex
     if out.exists() and any(out.iterdir()):
         raise Failure('OUTPUT_EXISTS', 'Use a fresh output directory')
     out.mkdir(parents=True, exist_ok=True)
-    result = {'schema_version':'e11e12-1','job_id':job_id,'trace_id':trace_id,'status':'RUNNING','stages':[]}
+    result = {'schema_version':'e11e12-1','job_id':job_id,'trace_id':'trace-'+uuid.uuid4().hex,'status':'RUNNING','stages':[]}
     save(out/'request.json',request)
     def stage(name, commit, payload, files=(), status='SUCCEEDED'):
-        envelope = {'schema_version':'e11e12-1','job_id':job_id,'trace_id':trace_id,'kind':name,
+        envelope = {'schema_version':'e11e12-1','job_id':job_id,'trace_id':result['trace_id'],'kind':name,
                     'commit':commit,'status':status,'data':payload,
                     'artifacts':[artifact(p,out,job_id) for p in files]}
         save(out/(name+'.json'),envelope)
