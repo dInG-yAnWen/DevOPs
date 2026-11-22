@@ -1,5 +1,5 @@
 FROM m.daocloud.io/docker.io/library/python:3.13-slim
 WORKDIR /work
-COPY Makefile config.h helper.h helper.c main.c ./
+COPY Makefile config.h helper.h alert_policy.h helper.c main.c ./
 RUN make app
 CMD ["./app"]
