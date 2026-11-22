@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path[:0] = [str(ROOT / 'labs/e8e10'), str(ROOT / 'labs/e11e12/vendor'), '/app']
 from lab import scan, patch, validate
 from pair14 import run_pair14, write_json
+from live_report import preflight_fixed_report, bind_live_inputs
 
 class Failure(ValueError):
     def __init__(self, code, message):
@@ -50,13 +51,40 @@ def command(argv, cwd, log):
         raise Failure('COMMAND_FAILED', f'{argv[0]} failed; see {log.name}')
     return p.stdout.strip()
 
-def snapshot(repo, revision, dest, logs):
+def project_directory(snapshot_root, project_path='.'):
+    # Repository paths use portable, relative slash-separated names. Resolve
+    # again after checkout so a symlink cannot escape the isolated snapshot.
+    if (not isinstance(project_path, str) or not project_path or '\\' in project_path
+            or re.match(r'^[A-Za-z]:', project_path)):
+        raise Failure('INVALID_REQUEST', 'project_path must be a repository-relative path')
+    relative = Path(project_path)
+    if relative.is_absolute() or '..' in relative.parts or '.git' in relative.parts:
+        raise Failure('INVALID_REQUEST', 'project_path must stay inside the repository')
+    root = snapshot_root.resolve()
+    project = (root / relative).resolve()
+    if not project.is_relative_to(root):
+        raise Failure('INVALID_REQUEST', 'project_path escapes the repository snapshot')
+    return project
+
+
+def snapshot(repo, revision, dest, logs, project_path='.'):
+    project_directory(dest, project_path)
     sha = command(['git','rev-parse','--verify',revision+'^{commit}'], repo, logs/(dest.name+'-resolve.log'))
     command(['git','clone','--no-hardlinks','--no-checkout',str(repo),str(dest)], repo, logs/(dest.name+'-clone.log'))
+    relative = Path(project_path).as_posix()
+    if relative != '.':
+        # Use one anchored, escaped gitignore-style directory pattern. Cone
+        # mode would also check out unrelated files from ancestor directories.
+        pattern = '/' + re.sub(r'([*?\[\]])', r'\\\1', relative) + '/'
+        command(['git','sparse-checkout','set','--no-cone','--',pattern], dest,
+                logs/(dest.name+'-sparse.log'))
     command(['git','checkout','--detach',sha], dest, logs/(dest.name+'-checkout.log'))
+    project = project_directory(dest, project_path)
     # E8-E10 profile; fail early instead of silently ignoring other targets.
-    names = {p.name for p in dest.glob('*.c')}
-    if names != {'main.c','helper.c'} or not (dest/'config.h').is_file():
+    names = {p.name for p in project.glob('*.c')}
+    if (names != {'main.c','helper.c'} or not (project/'config.h').is_file()
+            or not (project/'Makefile').is_file()
+            or any(p.is_symlink() for p in project.rglob('*'))):
         raise Failure('UNSUPPORTED_PROJECT', 'Expected main.c/helper.c/config.h and explicit Make rules')
     return sha
 
@@ -95,10 +123,16 @@ def execute(request, out, job_id=None):
         repo=Path(request['repo']).resolve()
         if not repo.is_dir():
             raise Failure('INVALID_REQUEST','Repository missing')
-        base=out/'base-project'; target=out/'target-project'
-        base_sha=snapshot(repo,request['base'],base,out/'logs')
-        target_sha=snapshot(repo,request['target'],target,out/'logs')
+        prepared=preflight_fixed_report(request,out) if mode=='e11-b' else None
+        project_path=request.get('project_path','.')
+        base_root=out/'base-project'; target_root=out/'target-project'
+        base_sha=snapshot(repo,request['base'],base_root,out/'logs',project_path)
+        target_sha=snapshot(repo,request['target'],target_root,out/'logs',project_path)
+        base=project_directory(base_root,project_path)
+        target=project_directory(target_root,project_path)
         result.update(base_commit=base_sha,target_commit=target_sha)
+        if prepared is not None:
+            fixed_data,binding_files=bind_live_inputs(prepared,repo,target_sha,target,project_path,out)
         if mode in ('e11-b','e12'):
             from draft.autobuild import auto_build
             candidate=Path(request['candidate']).resolve()
@@ -124,15 +158,9 @@ def execute(request, out, job_id=None):
                 raise Failure('FINDINGS_MISMATCH','Incremental/full object-target findings differ')
             md_envelope=stage('incremental-check',target_sha,current,[out/'incremental-report.json',out/'target-full/findings.json'])
         else:
-            # E11-B still consumes a fixed MD input, separately from A's live output.
-            fixed=Path(request['fixed_report'])
-            envelope=json.loads(fixed.read_text(encoding='utf-8'))
-            check_envelope(envelope,target_sha,'fixed-md')
-            current=envelope['data']
-            if current.get('commit') != target_sha:
-                raise Failure('STALE_REPORT','Fixed report data commit mismatch')
-            save(out/'fixed-md-input.json',envelope)
-            md_envelope=stage('fixed-md',target_sha,current,[out/'fixed-md-input.json'])
+            # Preserve A's original bytes; any verified legacy input binding is B evidence.
+            current=fixed_data
+            md_envelope=stage('fixed-md',target_sha,current,[out/'fixed-md-input.json',*binding_files])
         if mode in ('e11-b','e12'):
             reference=result['stages'][-1]['artifact']
             md_envelope=load_artifact(out/(md_envelope['kind']+'.json'),reference['sha256'])
@@ -142,10 +170,12 @@ def execute(request, out, job_id=None):
             diff,edits=patch(target,current)
             if not diff:
                 raise Failure('NO_MISSING_DEPENDENCY','No MD to repair')
-            patchfile=out/'candidate.patch';patchfile.write_text(diff,encoding='utf-8')
+            patchfile=out/'candidate.patch';patchfile.write_bytes(diff.encode('utf-8'))
             save(out/'repair-plan.json',edits)
             stage('repair',target_sha,{'edits':edits,'input_report':artifact(out/(md_envelope['kind']+'.json'),out,job_id)},[patchfile,out/'repair-plan.json'])
-            verdict=validate(target,patchfile,out/'validation')
+            verdict=validate(target,patchfile,out/'validation',
+                             expected_output=request.get('expected_output','1'),
+                             header_probe=request.get('header_probe'))
             if not verdict['accepted']:
                 raise Failure('REPAIR_REJECTED',str(verdict))
             final=full(target,out/'final-full')

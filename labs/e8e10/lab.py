@@ -102,8 +102,10 @@ def patch(p,report):
     diff=''.join(difflib.unified_diff(original.splitlines(True),changed.splitlines(True),fromfile='a/Makefile',tofile='b/Makefile'))
     return diff,edits
 
-def validate(p, patchfile, evidence, fail_test=False):
+def validate(p, patchfile, evidence, fail_test=False, expected_output='1', header_probe=None):
     evidence.mkdir(parents=True); before=(p/'Makefile').read_bytes()
+    if any(item.is_symlink() for item in p.rglob('*')):
+        raise ValueError('UNSUPPORTED_PROJECT_SYMLINK')
     sandbox=evidence/'sandbox'; shutil.copytree(p,sandbox,ignore=shutil.ignore_patterns('.git','*.o','app'))
     run(['git','init','-b','main'],sandbox)
     run(['git','config','user.name','ValidationSandbox'],sandbox)
@@ -111,6 +113,29 @@ def validate(p, patchfile, evidence, fail_test=False):
     commit(sandbox,'sandbox input')
     checks={}; error=None
     try:
+        if not isinstance(expected_output, str):
+            raise ValueError('INVALID_EXPECTED_OUTPUT')
+        probe = header_probe if header_probe is not None else {
+            'file': 'config.h', 'before': '#define VALUE 1',
+            'after': '#define VALUE 2', 'expected_output': '2',
+        }
+        if (not isinstance(probe, dict)
+                or any(not isinstance(probe.get(k), str) or not probe[k]
+                       for k in ('file', 'before', 'after', 'expected_output'))
+                or probe['before'] == probe['after']):
+            raise ValueError('INVALID_HEADER_PROBE')
+        relative = Path(probe['file'])
+        if (relative.is_absolute() or '..' in relative.parts or '.git' in relative.parts
+                or '\\' in probe['file'] or re.match(r'^[A-Za-z]:', probe['file'])
+                or relative.suffix != '.h'):
+            raise ValueError('UNSAFE_HEADER_PROBE')
+        header = (sandbox / relative).resolve()
+        if not header.is_relative_to(sandbox.resolve()) or not header.is_file():
+            raise ValueError('UNSAFE_HEADER_PROBE')
+        header_before_bytes = header.read_bytes()
+        header_before = header_before_bytes.decode('utf-8')
+        if header_before.count(probe['before']) != 1:
+            raise ValueError('HEADER_PROBE_MISMATCH')
         candidate = str(patchfile.resolve())
         run(['git', 'apply', '--index', '--check', candidate], sandbox)
         checks['patch_applies'] = True
@@ -123,14 +148,25 @@ def validate(p, patchfile, evidence, fail_test=False):
         if status != 'M' or old_mode != new_mode or new_mode not in {'100644', '100755'}:
             raise ValueError('UNSUPPORTED_PATCH_SCOPE')
         log=run(['make','clean'],sandbox)+run(['make','app'],sandbox);(evidence/'build.log').write_text(log);checks['build']=True
-        output=run(['./app'],sandbox).strip(); checks['test']=output==('99' if fail_test else '1')
+        executable = sandbox/'app'
+        if not executable.is_file() and (sandbox/'app.exe').is_file():
+            executable = sandbox/'app.exe'
+        output=run([str(executable.resolve())],sandbox)
+        (evidence/'test.log').write_text(output)
+        checks['test']=output.strip()==('99' if fail_test else expected_output)
         # Real header-change build checks the originally broken incremental behavior.
-        time.sleep(1.05); (sandbox/'config.h').write_text('#define VALUE 2\n')
+        time.sleep(1.05)
+        header.write_bytes(header_before.replace(probe['before'], probe['after'], 1).encode('utf-8'))
         (evidence/'incremental.log').write_text(run(['make','app'],sandbox))
-        checks['header_change']=run(['./app'],sandbox).strip()=='2'
+        probe_output=run([str(executable.resolve())],sandbox)
+        (evidence/'header-probe.log').write_text(probe_output)
+        checks['header_change']=probe_output.strip()==probe['expected_output']
+        save(evidence/'header-probe.json',dict(probe, actual_output=probe_output.strip(),
+             before_sha256=hashlib.sha256(header_before_bytes).hexdigest(),
+             after_sha256=hashlib.sha256(header.read_bytes()).hexdigest()))
         recheck=scan(sandbox); save(evidence/'recheck.json',recheck)
         checks['no_missing']=not any(f['type']=='MISSING' for f in recheck['findings'])
-    except (ValueError,subprocess.TimeoutExpired) as ex: error=str(ex)
+    except (ValueError,OSError,subprocess.TimeoutExpired) as ex: error=str(ex)
     accepted=bool(checks) and all(checks.values()) and error is None
     # Source remains untouched until all checks pass. Evidence sandbox is retained.
     if accepted: (p/'Makefile').write_bytes((sandbox/'Makefile').read_bytes())

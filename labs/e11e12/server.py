@@ -28,7 +28,7 @@ class Store:
         if not isinstance(request,dict):raise ValueError('input must be a JSON object')
         if not isinstance(key,str) or not key or len(key)>128:raise ValueError('idempotency_key required, max 128 characters')
         if request.get('mode') not in ('e11-a','e11-b','e12'):raise ValueError('Unknown mode')
-        for field in ('repo','candidate','fixed_report','handoff'):
+        for field in ('repo','candidate','fixed_report','source_result','handoff'):
             if field in request:
                 path=Path(request[field]).resolve()
                 if not path.is_relative_to(self.data_root):raise ValueError(field+' must be under the data directory')
