@@ -3,9 +3,10 @@ import hashlib
 import json
 import os
 import sys
+import threading
 import time
 import traceback
-from http.server import BaseHTTPRequestHandler, HTTPServer
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -16,6 +17,7 @@ from draft.autobuild import auto_build
 from buildchecker.fullcheck import full_check
 
 ROLE = os.environ.get('E14_ROLE', '')
+RUN_LOCK = threading.Lock()
 
 
 def local(value, area='work'):
@@ -102,7 +104,10 @@ def run(data):
         if not verdict['accepted']:
             raise ValueError('Patch rejected: ' + str(verdict))
         return {'status': 'SUCCEEDED', 'patch': str(candidate),
-                'sha256': sha(candidate), 'validation': verdict}
+                'sha256': sha(candidate), 'validation': verdict,
+                'input_report': {'uri':str(report),'sha256':data['report_sha256'],
+                                 'commit':envelope['commit'],'job_id':envelope['job_id'],
+                                 'trace_id':envelope['trace_id']}}
     raise ValueError('Unknown role')
 
 
@@ -132,7 +137,10 @@ class Handler(BaseHTTPRequestHandler):
             if length < 1 or length > 100000:
                 raise ValueError('Invalid request size')
             data = json.loads(self.rfile.read(length))
-            result = run(data)
+            # Keep writes serial per role while allowing health requests to
+            # respond throughout a long Docker build or full-check.
+            with RUN_LOCK:
+                result = run(data)
             result.update(role=ROLE, job_id=data.get('job_id'), trace_id=data.get('trace_id'))
             print(json.dumps({'role': ROLE, 'job_id': data.get('job_id'),
                               'trace_id': data.get('trace_id'), 'status': 'SUCCEEDED',
@@ -152,4 +160,4 @@ class Handler(BaseHTTPRequestHandler):
 if __name__ == '__main__':
     if ROLE not in {'draft', 'buildchecker', 'echecker', 'mdfixer'}:
         raise SystemExit('Invalid E14_ROLE')
-    HTTPServer(('0.0.0.0', 8080), Handler).serve_forever()
+    ThreadingHTTPServer(('0.0.0.0', 8080), Handler).serve_forever()

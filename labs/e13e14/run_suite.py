@@ -29,8 +29,16 @@ def verify(out):
     report = out/'incremental/incremental-check.json'
     if hashlib.sha256(report.read_bytes()).hexdigest() != incremental['sha256']:
         raise ValueError('Transferred incremental report SHA mismatch')
+    consumed = repair['input_report']
+    if (consumed['uri'],consumed['sha256'],consumed['commit'],consumed['job_id'],consumed['trace_id']) != (
+            incremental['report'],incremental['sha256'],result['target_commit'],result['job_id'],result['trace_id']):
+        raise ValueError('MDFixer did not consume this task/target/report SHA')
     if not repair['validation']['accepted']:
         raise ValueError('Repair was rejected')
+    recheck = json.loads((out/'recheck.json').read_text(encoding='utf-8'))
+    if (recheck['commit']!=result['target_commit'] or recheck['data']['remaining_missing']!=0
+            or any(f['type']=='MISSING' for f in recheck['data']['result']['result']['findings'])):
+        raise ValueError('Final recheck target/findings do not prove the repair')
     for item in result['artifacts']:
         path = (out/item['uri']).resolve()
         if not path.is_relative_to(out.resolve()) or not path.is_file():
@@ -85,11 +93,19 @@ def run(requests, out, compose_project, image):
     recorded(compose+['images','--format','json'],out/'compose-images.json')
     recorded(['docker','image','inspect',image],out/'image-inspect.json')
     fault = None
+    process_reader = "import pathlib,json; print(json.dumps([p.read_bytes().replace(bytes([0]),b' ').decode(errors='replace') for p in pathlib.Path('/proc').glob('[0-9]*/cmdline') if p.exists()]))"
+    def runtime_snapshot(prefix):
+        recorded(['docker','ps','--no-trunc','--format','{{json .}}'],out/(prefix+'-containers.log'))
+        recorded(compose+['exec','-T','draft','python3','-c',process_reader],out/(prefix+'-draft-processes.json'))
     for name in ('fixed','a14','b14','fault-timeout','recovery'):
         case = {'name':name,'passed':False}
         try:
             request = json.loads((requests/(name+'.json')).read_text(encoding='utf-8'))
+            if name=='fault-timeout':
+                runtime_snapshot('fault-before')
             result = execute(request,out/name)
+            if name=='fault-timeout':
+                runtime_snapshot('fault-immediate-after')
             case.update(status=result['status'],job_id=result['job_id'],trace_id=result['trace_id'])
             if name == 'fault-timeout':
                 draft_result = json.loads((out/name/'draft-build/result.json').read_text(encoding='utf-8'))
@@ -113,7 +129,6 @@ def run(requests, out, compose_project, image):
     recorded(compose+['ps','--format','json'],out/'compose-after.log')
     recorded(['docker','ps','--no-trunc','--format','{{json .}}'],out/'running-containers-after.log')
     # Read the DRAFT container's process command lines without installing ps.
-    process_reader = "import pathlib,json; print(json.dumps([p.read_bytes().replace(bytes([0]),b' ').decode(errors='replace') for p in pathlib.Path('/proc').glob('[0-9]*/cmdline') if p.exists()]))"
     recorded(compose+['exec','-T','draft','python3','-c',process_reader],out/'draft-processes-after.json')
     scan_code = scan_logs([str(out)])
     summary.update(status='SUCCEEDED' if all(x['passed'] for x in summary['cases']) and scan_code==0 and not summary['evidence_errors'] else 'FAILED',
