@@ -1,0 +1,38 @@
+{
+  "archive": "学生发放包_20261116.zip",
+  "archive_sha256": "707cd09b37b69db0312fcef8292edac0c777b5a906bd1e82625bff53630481bc",
+  "files": {
+    ".github/workflows/e13e14.yml": {
+      "source": "DevOps_E13_E14_学生材料/实验包/.github/workflows/e13e14.yml",
+      "sha256": "4ac1abc5c1e0a7f8f059595c16e40ec3c2d3b1ce7fa82876ca3e0d07610b68c3"
+    },
+    "labs/e13e14/compose.yaml": {
+      "source": "DevOps_E13_E14_学生材料/实验包/compose.yaml",
+      "sha256": "78dc33830933a6ae8727b6631453a079450c5d097fe30dd748562971fac620a9"
+    },
+    "labs/e13e14/handoff_a_to_b.py": {
+      "source": "DevOps_E13_E14_学生材料/实验包/handoff_a_to_b.py",
+      "sha256": "42c3dae65cd22bd4cdd66617bf31050a694ed0b76c12ab9206ef9f3d32a02f6c"
+    },
+    "labs/e13e14/orchestrate.py": {
+      "source": "DevOps_E13_E14_学生材料/实验包/orchestrate.py",
+      "sha256": "d55433611a2d4467f3b6fa74cf5b964bd94dadf8c975bad340ae9350d2655a17"
+    },
+    "labs/e13e14/README.md": {
+      "source": "DevOps_E13_E14_学生材料/实验包/README.md",
+      "sha256": "548a60e27453aa4c4e03ca9ec266e08f4da56794057e3ee154503a07aa17924a"
+    },
+    "labs/e13e14/scan_runtime_logs.py": {
+      "source": "DevOps_E13_E14_学生材料/实验包/scan_runtime_logs.py",
+      "sha256": "1304657c1e51f1b4c2772fa7e104e04102e84a8be3d4277af708b8f519c45c34"
+    },
+    "labs/e13e14/service.py": {
+      "source": "DevOps_E13_E14_学生材料/实验包/service.py",
+      "sha256": "6f5a7847fd4f2b138eb5ecbe5b52694fa448bb46937add3e346ce1e3b7df8c63"
+    },
+    "labs/e13e14/tests/test_handoff.py": {
+      "source": "DevOps_E13_E14_学生材料/实验包/tests/test_handoff.py",
+      "sha256": "040c4779fe8e00cbe6031a64bb5eb618333e5bb211bac6f77e8ee9a7e1716067"
+    }
+  }
+}

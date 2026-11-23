@@ -239,10 +239,20 @@ class Pair14Tests(unittest.TestCase):
         while (state := get_json(path))['status'] in ('QUEUED', 'RUNNING') and time.monotonic() < deadline:
             time.sleep(0.05)
         self.assertEqual(state['status'], 'SUCCEEDED', state)
+        self.assertEqual(state['trace_id'], self.trace)
         result = get_json(path + '/artifacts')
         self.assertEqual(result['trace_id'], self.trace)
         self.assertEqual([stage['name'] for stage in result['stages']],
                          ['draft', 'full-check', 'incremental-check', 'repair', 'recheck'])
+        for stage in result['stages']:
+            with self.subTest(stage=stage['name']):
+                with opener.open(url + path + '/files/' + stage['name'] + '.json', timeout=5) as response:
+                    body = response.read()
+                    self.assertEqual(response.headers['X-Content-SHA256'], stage['artifact']['sha256'])
+                self.assertEqual(pair14.sha256(body), stage['artifact']['sha256'])
+                envelope = json.loads(body)
+                self.assertEqual(envelope['job_id'], job)
+                self.assertEqual(envelope['trace_id'], self.trace)
         rechecked = get_json(path + '/files/recheck.json')
         self.assertTrue(rechecked['data']['accepted'])
         self.assertEqual(rechecked['data']['remaining_missing'], 0)
