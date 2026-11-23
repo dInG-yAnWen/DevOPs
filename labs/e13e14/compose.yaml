@@ -3,9 +3,10 @@ x-common: &common
   image: ${E14_IMAGE:?set E14_IMAGE}
   pull_policy: never
   restart: unless-stopped
-  user: "0:0"
+  user: "${E14_UID:-0}:${E14_GID:-0}"
   working_dir: /course
-  environment:
+  environment: &runtime-environment
+    HOME: /tmp
     PYTHONPATH: /course/labs/e8e10:/course/labs/e11e12/vendor:/app
     PYTHONDONTWRITEBYTECODE: "1"
   volumes:
@@ -25,8 +26,8 @@ services:
   buildchecker:
     <<: *common
     environment:
+      <<: *runtime-environment
       E14_ROLE: buildchecker
-      PYTHONDONTWRITEBYTECODE: "1"
     command: ["python3", "labs/e13e14/service.py"]
     ports: ["127.0.0.1:${E14_BUILDCHECKER_PORT:-18081}:8080"]
     cap_add: ["SYS_PTRACE"]
@@ -34,16 +35,17 @@ services:
   echecker:
     <<: *common
     environment:
+      <<: *runtime-environment
       E14_ROLE: echecker
-      PYTHONDONTWRITEBYTECODE: "1"
     command: ["python3", "labs/e13e14/service.py"]
     ports: ["127.0.0.1:${E14_ECHECKER_PORT:-18082}:8080"]
 
   draft:
     <<: *common
     environment:
+      <<: *runtime-environment
       E14_ROLE: draft
-      PYTHONDONTWRITEBYTECODE: "1"
+    group_add: ["${E14_DOCKER_GID:-0}"]
     command: ["python3", "labs/e13e14/service.py"]
     ports: ["127.0.0.1:${E14_DRAFT_PORT:-18083}:8080"]
     volumes:
@@ -53,7 +55,7 @@ services:
   mdfixer:
     <<: *common
     environment:
+      <<: *runtime-environment
       E14_ROLE: mdfixer
-      PYTHONDONTWRITEBYTECODE: "1"
     command: ["python3", "labs/e13e14/service.py"]
     ports: ["127.0.0.1:${E14_MDFIXER_PORT:-18084}:8080"]

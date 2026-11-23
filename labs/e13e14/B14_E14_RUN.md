@@ -46,6 +46,8 @@ A14 项目提交固定为 `6723e99c0f155db19f655e8d3b47367dc7ed4d47` → `ce25b2
 
 ```bash
 export E14_ROOT="$PWD" E14_IMAGE=course-e11e12:241880284
+export E14_UID="$(id -u)" E14_GID="$(id -g)"
+export E14_DOCKER_GID="$(stat -c %g /var/run/docker.sock)"
 docker compose -f labs/e13e14/compose.yaml -p e14-241880284 config --quiet
 docker compose -f labs/e13e14/compose.yaml -p e14-241880284 up -d --wait
 mkdir -p work
