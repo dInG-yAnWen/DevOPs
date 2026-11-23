@@ -1,0 +1,107 @@
+{
+  "status": "VERIFIED",
+  "source": "e83c0781bad24a96fe681696a4ed5ff94d4843d7",
+  "tree": "e21217907b12d1134749fbd328919264e5e9907c",
+  "source_archive_sha256": "f681cb62762b9d663ea444dc3111fe2bb7f3d0771872ea3337e96d92360243f2",
+  "input_sha256": "0507a48fe7269b6b8ac16795fe98cf365fc0dfc1ae9273f2c504f9b4feed6d72",
+  "run_id": "submain01",
+  "runtime_image": "sha256:18b8fe0fbe75afa6a2db967ca5344cfcb9cc4172295105135a5a08239f0b5d95",
+  "started_at": "2026-11-23T14:41:28.230356+00:00",
+  "finished_at": "2026-11-23T14:41:41.724626+00:00",
+  "suite_files_verified": 790,
+  "cases": [
+    {
+      "job_id": "job-5289a7a796964a45ae6f78332f065ca9",
+      "trace_id": "trace-f63b4e8ce8f349239ad4a5608b2e2426",
+      "status": "SUCCEEDED",
+      "name": "fixed",
+      "artifact_count": 165,
+      "output": "1",
+      "header_probe": "2",
+      "remaining_missing": 0,
+      "findings": [
+        {
+          "type": "REDUNDANT",
+          "target": "main.o",
+          "dependency": "unused.h",
+          "evidence": [
+            {
+              "source": "make_database",
+              "artifact": "make-db.txt",
+              "line": 1054,
+              "declaration": "main.o: main.c unused.h config.h extra.h"
+            }
+          ],
+          "scope": "Not observed in this recipe job under this build configuration"
+        }
+      ],
+      "report_sha256": "97309ed94cc49a5aed91cfa460c238d096b9ace1ae567ddf8d5e14585d9d04b9",
+      "patch_sha256": "88074f66c291dcad1344c48f6a2b9ddd42d235d9d0415c85fb33310c5b7cb2af",
+      "candidate_image": "sha256:4ccd4df08420694fc81e3a68ae0bcf5c9a50dd8a1c0a5ff2812eb16c8a6c6f65",
+      "cached_layers": true
+    },
+    {
+      "job_id": "job-2bd7718f723642aeb607e0411eccdf74",
+      "trace_id": "trace-d5401b9f645b427f9a2b3624fb0b4e88",
+      "status": "SUCCEEDED",
+      "name": "a14",
+      "artifact_count": 177,
+      "output": "15",
+      "header_probe": "18",
+      "remaining_missing": 0,
+      "findings": [],
+      "report_sha256": "e56a5df6a2e169a85798afa98309b2fa09c3fe4a82c41e6cde0d5e176d09446b",
+      "patch_sha256": "6742c09c6391d223d845834f8f6b0d5d799309b3f261f53dd77d73b9e7ec15e5",
+      "candidate_image": "sha256:782ef0f0f947e71d68271728e33984889bbd8c1cc3ee7909e52dc84a837d63e0",
+      "cached_layers": true
+    },
+    {
+      "job_id": "job-cd8edc0beebf465d8ef3e04338054dd5",
+      "trace_id": "trace-8f904edc8cf845d5be5d8a56e527866c",
+      "status": "SUCCEEDED",
+      "name": "b14",
+      "artifact_count": 186,
+      "output": "1",
+      "header_probe": "2",
+      "remaining_missing": 0,
+      "findings": [],
+      "report_sha256": "6d8edc2e8c0ccaf403b77786c617b3a6a4a9156530ff7ae121b7da5ff637c479",
+      "patch_sha256": "087ea4e288897b0d78248f4423bfd6204ff954f331159f9f90724ba8bd3fa98e",
+      "candidate_image": "sha256:6ea6432b87431ac2f2ec4e647a276dafdd3a198663e2ba7dc04bcf032869e7a1",
+      "cached_layers": true
+    },
+    {
+      "job_id": "job-98cb716cb5924538aabd987abcaec4c1",
+      "trace_id": "trace-705988f3806e4298aa4f554e220b40d1",
+      "status": "TIMED_OUT",
+      "name": "fault-timeout",
+      "artifact_count": 46
+    },
+    {
+      "job_id": "job-f02fe48e9d3b42a8ae41a51c0da6172a",
+      "trace_id": "trace-ca91a4cbf1df47b0b8b762a0a933e56a",
+      "status": "SUCCEEDED",
+      "name": "recovery",
+      "artifact_count": 186,
+      "output": "1",
+      "header_probe": "2",
+      "remaining_missing": 0,
+      "findings": [],
+      "report_sha256": "9127c6585bdf3274b7efa6d1e7c59d0966a1e286686cbfeccb0038e2e29a0976",
+      "patch_sha256": "087ea4e288897b0d78248f4423bfd6204ff954f331159f9f90724ba8bd3fa98e",
+      "candidate_image": "sha256:6cdc7a558ba5f54d823b62a4d17df041c2e861c3578311c05f6b4703836f21e4",
+      "cached_layers": true
+    }
+  ],
+  "healthy_roles": [
+    "draft",
+    "buildchecker",
+    "echecker",
+    "mdfixer"
+  ],
+  "containers_at_timeout": 4,
+  "docker_clients_observed_after_timeout": 0,
+  "project_containers_after_teardown": 0,
+  "runtime_scan": "runtime log scan: text_files=744 hits=0 errors=0",
+  "source_snapshot_files": 826
+}

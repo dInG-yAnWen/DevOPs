@@ -64,11 +64,17 @@ jobs:
           mkdir -p work
           E14_ROOT="$PWD" E14_IMAGE=course-e11e12:999999999 docker compose -f labs/e13e14/compose.yaml -p e14-ci logs --no-color > work/ci-e14-services.log 2>&1 || true
           E14_ROOT="$PWD" E14_IMAGE=course-e11e12:999999999 docker compose -f labs/e13e14/compose.yaml -p e14-ci down
-      - name: Preserve evidence
+      - name: Prepare safe evidence upload
+        id: evidence
         if: always()
+        run: python3 labs/e13e14/prepare_ci_upload.py --work work --output work/ci-e14-upload --github-output "$GITHUB_OUTPUT"
+      - name: Preserve evidence
+        if: ${{ always() && steps.evidence.outputs.path != '' }}
         uses: actions/upload-artifact@v7.0.2
         with:
           name: e13e14-evidence-${{ github.run_id }}-${{ github.run_attempt }}
-          path: work/
-          if-no-files-found: warn
+          path: ${{ steps.evidence.outputs.path }}
+          # Only the reviewed staging allowlist may contain hidden files.
+          include-hidden-files: true
+          if-no-files-found: error
           retention-days: 14
