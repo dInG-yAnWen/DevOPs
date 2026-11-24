@@ -8,6 +8,7 @@
 发现疑似密钥时退出码为 1。输出只显示前 4 位，避免检查本身再泄露一次。
 """
 import argparse
+import ast
 import os
 import re
 import subprocess
@@ -28,13 +29,31 @@ def mask(s):
     return s[:4] + "***" if len(s) > 4 else "***"
 
 
+def is_regex_assignment(line, match):
+    """The generic assignment rule can capture re.compile(r before a pattern's quote."""
+    if match.group(1) != "re.compile(r":
+        return False
+    try:
+        statements = ast.parse(line[match.start():]).body
+    except (SyntaxError, ValueError):
+        return False
+    if not statements or not isinstance(statements[0], ast.Assign):
+        return False
+    expression = statements[0].value
+    return (isinstance(expression, ast.Call)
+            and isinstance(expression.func, ast.Attribute) and expression.func.attr == "compile"
+            and isinstance(expression.func.value, ast.Name) and expression.func.value.id == "re"
+            and len(expression.args) == 1 and isinstance(expression.args[0], ast.Constant)
+            and isinstance(expression.args[0].value, str))
+
+
 def scan_text(text, where):
     hits = []
     for n, line in enumerate(text.splitlines(), 1):
         for name, pat in PATTERNS:
             for m in pat.finditer(line):
                 value = m.group(m.lastindex or 0)
-                if name == "密钥赋值" and PLACEHOLDER.search(value):
+                if name == "密钥赋值" and (PLACEHOLDER.search(value) or is_regex_assignment(line, m)):
                     continue
                 hits.append(f"{where}:{n}  {name}  {mask(value)}")
     return hits
